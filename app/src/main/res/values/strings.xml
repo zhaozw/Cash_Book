@@ -1,3 +1,15 @@
 <resources>
   <string name="app_name">Cash_Books</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="qianbao_my">我的钱包</string>
+  <string name="my_more">更多</string>
+  <string name="home_mingxi">明细</string>
+  <string name="reports_my">我的报表</string>
+  <string name="qianbao_zhuanzhang">转账</string>
+
+
+  <string name="calendar_no_jilu">当前无记账记录</string>
+  <string name="calendar_jia">点击加号记一笔</string>
 </resources>
