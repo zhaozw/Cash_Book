@@ -16,7 +16,7 @@ import star.liuwen.com.cash_books.R;
  * Created by liuwen on 2016/12/28.
  */
 public class BaseFragment extends Fragment {
-    private RelativeLayout mTitleLayout;
+    private RelativeLayout mTitle;
 
     private View view;
     private LayoutInflater inflater;
@@ -37,9 +37,17 @@ public class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.inflater = inflater;
         this.container = container;
+//        mTitle = (RelativeLayout) getContentView().findViewById(R.id.titleBar);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+
+    public void setTitleBg(int resId) {
+        if (mTitle != null) {
+            mTitle.setBackgroundResource(resId);
+            mTitle.getBackground().setAlpha(255);// 不透明
+        }
+    }
 
     /**
      * 设置显示右侧返回按钮

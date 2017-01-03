@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#30B2E8</color>
-  <color name="colorPrimaryDark">#FFFFFF</color>
-  <color name="colorAccent">#FF4081</color>
-  <color name="blue">#30B2E8</color>
+    <color name="colorPrimary">#30B2E8</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="blue">#30B2E8</color>
 
-  <color name="comui_tab_text_color">#ff333333</color>
-  <color name="transparent">#00000000</color>
-  <color name="white">#FFFFFF</color>
+    <color name="comui_tab_text_color">#ff333333</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#f1f1f1</color>
+    <color name="xinyongka">#66DFBB</color>
+    <color name="chuxuka">#8FBCDF</color>
+    <color name="zhifubao">#C3C3C3</color>
+    <color name="jiechu">#DF486D</color>
+    <color name="jieru">#3599DB</color>
+
+
+    <color name="key_ok_color">#30B2E8</color>
+    <color name="key_ok_color_pressed">#30B2E8</color>
+
+    <color name="text_color_33">#333333</color>
+    <color name="text_color_66">#666666</color>
+    <color name="text_color_99">#999999</color>
 </resources>

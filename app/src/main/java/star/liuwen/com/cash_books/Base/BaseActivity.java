@@ -16,12 +16,14 @@ import star.liuwen.com.cash_books.Utils.ActivityKiller;
  * Created by liuwen on 2016/12/28.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    private RelativeLayout mTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(activityLayoutRes());
+        mTitle = (RelativeLayout) findViewById(R.id.titleBar);
         initView();
         ActivityKiller.getInstance().addActivity(this);
 
@@ -76,6 +78,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         title.setVisibility(View.VISIBLE);
         title.setText(txt);
+    }
+
+
+    public void setTitleBg(int resId) {
+        if (mTitle != null) {
+            mTitle.setBackgroundResource(resId);
+            mTitle.getBackground().setAlpha(255);// 不透明
+        }
     }
 
     /**

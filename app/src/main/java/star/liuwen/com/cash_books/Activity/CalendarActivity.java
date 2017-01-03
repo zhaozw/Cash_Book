@@ -1,19 +1,25 @@
 package star.liuwen.com.cash_books.Activity;
 
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
+import star.liuwen.com.cash_books.Utils.KeyboardUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2016/12/28.
  */
 public class CalendarActivity extends BaseActivity {
+
+    private EditText mEditText;
+
     @Override
     public int activityLayoutRes() {
         return R.layout.calendar_activity;
@@ -38,5 +44,7 @@ public class CalendarActivity extends BaseActivity {
                 ToastUtils.showToast(CalendarActivity.this, date);
             }
         });
+
+
     }
 }

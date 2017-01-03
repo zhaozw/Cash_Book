@@ -1,15 +1,28 @@
 <resources>
-  <string name="app_name">Cash_Books</string>
+    <string name="app_name">记账宝</string>
 
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
-  <string name="qianbao_my">我的钱包</string>
-  <string name="my_more">更多</string>
-  <string name="home_mingxi">明细</string>
-  <string name="reports_my">我的报表</string>
-  <string name="qianbao_zhuanzhang">转账</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="qianbao_my">我的钱包</string>
+    <string name="my_more">更多</string>
+    <string name="home_mingxi">明细</string>
+    <string name="reports_my">我的报表</string>
+    <string name="qianbao_zhuanzhang">转账</string>
 
+    <string name="calendar_no_jilu">%s当前无记账记录</string>
+    <string name="calendar_jia">0.00</string>
 
-  <string name="calendar_no_jilu">当前无记账记录</string>
-  <string name="calendar_jia">点击加号记一笔</string>
+    <string name="qianbao_yuer">余额</string>
+    <string name="qianbao_cash">现金</string>
+    <string name="qianbao_cash_yuer">现金余额</string>
+    <string name="qianbao_chuxuka">储蓄卡</string>
+    <string name="qianbao_chuxuka_yuer">储蓄卡余额</string>
+    <string name="qianbao_xinyka">信用卡</string>
+    <string name="qianbao_xinyka_yuer">信用卡余额</string>
+    <string name="qianbao_zhifb">支付宝</string>
+    <string name="qianbao_zhifb_yuer">网络账户余额</string>
+    <string name="qianbao_jiechu">借出</string>
+    <string name="qianbao_jiechu_yuer">别人借我的钱</string>
+    <string name="qianbao_jieru">借入</string>
+    <string name="qianbao_jieru_yuer">我欠别人的钱</string>
 </resources>
