@@ -50,5 +50,10 @@ public class DateTimeUtil {
 
     }
 
+
+    public static String getTime(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+        return format.format(date);
+    }
 }
 

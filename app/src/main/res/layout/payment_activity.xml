@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/background"
               android:orientation="vertical">
 
     <include layout="@layout/common_toolbar"/>
@@ -12,11 +13,12 @@
         android:layout_height="200dp"
         android:background="@color/blue">
 
-        <TextView
-            android:id="@+id/pay_txt_yuer"
+        <star.liuwen.com.cash_books.View.NumberAnimTextView
+            android:id="@+id/pay_txt_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:onClick="toYuer"
             android:padding="10dp"
             android:text="账户余额"
             android:textColor="@color/white"
@@ -26,13 +28,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toRightOf="@id/pay_txt_yuer"
+            android:layout_toRightOf="@+id/pay_txt_account"
             android:src="@mipmap/photo_picker_ic_tab_filter"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/pay_txt_yuer"
+            android:layout_below="@+id/pay_txt_account"
             android:layout_centerInParent="true"
             android:text="账户余额"
             android:textColor="@color/white"
@@ -48,26 +50,89 @@
             android:padding="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/pay_txt_year"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_weight="1"
+                android:drawableLeft="@mipmap/btg_icon_arrow_normal"
+                android:onClick="toData"
                 android:text="12月"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_16"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/pay_chu"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_weight="1"
                 android:text="流出：0.00"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_16"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/pay_ru"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_weight="1"
                 android:text="流入：0.00"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_16"/>
         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pay_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/pay_zhuanzhuang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:onClick="toZhuangZhang"
+                android:text="转账"
+                android:textColor="@color/xinyongka"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/no_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/no_picture"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="无流水记录"
+                    android:textColor="@color/line"
+                    android:textSize="@dimen/txt_17"/>
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </LinearLayout>
