@@ -1,7 +1,5 @@
 package star.liuwen.com.cash_books.Activity;
 
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
@@ -10,7 +8,6 @@ import cn.aigestudio.datepicker.views.DatePicker;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
-import star.liuwen.com.cash_books.Utils.KeyboardUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**

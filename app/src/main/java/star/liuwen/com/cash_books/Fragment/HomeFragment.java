@@ -75,8 +75,8 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mMap = new HashMap<String, Object>();
-                // 月-日
-                SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日");
+                // 年-月-日
+                SimpleDateFormat sdf = new SimpleDateFormat("yy年MM月dd日");
                 // 时-分
                 SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
                 mMap.put("day", sdf.format(new Date()));

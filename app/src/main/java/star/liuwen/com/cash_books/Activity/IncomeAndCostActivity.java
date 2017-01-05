@@ -1,88 +1,93 @@
 package star.liuwen.com.cash_books.Activity;
 
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import star.liuwen.com.cash_books.Adapter.FragmentAdapter;
 import star.liuwen.com.cash_books.Base.BaseActivity;
+import star.liuwen.com.cash_books.Fragment.ShouRuFragment;
+import star.liuwen.com.cash_books.Fragment.ZhiChuFragment;
 import star.liuwen.com.cash_books.R;
-import star.liuwen.com.cash_books.Utils.KeyboardUtil;
-import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2016/12/29.
  */
-public class IncomeAndCostActivity extends BaseActivity {
-    private EditText edMoney;
-    private TextView txtType, txtAccount, txtData, txtNote;
-    private LinearLayout lyShow, lySelect;
+public class IncomeAndCostActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+    private FragmentAdapter mFragmentAdapter;
+    private ShouRuFragment mShouRuFragment;
+    private ZhiChuFragment mZhiChuFragment;
+    private ViewPager mViewPager;
+    private TextView txtZhiChu, txtShouRu, tvZhanghu, tvDate;
 
 
     @Override
     public int activityLayoutRes() {
-        return R.layout.income_and_cost_activity;
+        return R.layout.icome_and_cost_activity;
     }
 
     @Override
     public void initView() {
-        txtType = (TextView) findViewById(R.id.calendar_txt_type);
-        txtAccount = (TextView) findViewById(R.id.calendar_txt_account);
-        txtData = (TextView) findViewById(R.id.calendar_txt_date);
-        txtNote = (TextView) findViewById(R.id.calendar_txt_beizhu);
-        lyShow = (LinearLayout) findViewById(R.id.ll_price);
-        lySelect = (LinearLayout) findViewById(R.id.ll_price_select);
-        final KeyboardUtil keyboardUtil = new KeyboardUtil(IncomeAndCostActivity.this, true);
-        KeyboardUtil.closeInputMethod(IncomeAndCostActivity.this);
-        edMoney = (EditText) findViewById(R.id.calendar_ed_money);
-        edMoney.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                keyboardUtil.attachTo(edMoney);
-            }
-        });
+        mViewPager = (ViewPager) findViewById(R.id.id_view_pager);
+        txtZhiChu = (TextView) findViewById(R.id.id_zhichu_tab);
+        txtShouRu = (TextView) findViewById(R.id.id_shouru_tab);
+        tvZhanghu = (TextView) findViewById(R.id.id_zhanghao__tab);
+        tvDate = (TextView) findViewById(R.id.id_data__tab);
 
-        keyboardUtil.setOnOkClick(new KeyboardUtil.OnOkClick() {
-            @Override
-            public void onOkClick() {
-                if (validate()) {
-                    lySelect.setVisibility(View.GONE);
-                }
-            }
-        });
+        mShouRuFragment = new ShouRuFragment();
+        mZhiChuFragment = new ZhiChuFragment();
+        mFragmentAdapter = new FragmentAdapter(getFragmentManager());
+        mFragmentAdapter.add(mZhiChuFragment, "支出");
+        mFragmentAdapter.add(mShouRuFragment, "收入");
+        mViewPager.setAdapter(mFragmentAdapter);
 
-
-        keyboardUtil.setOnCancelClick(new KeyboardUtil.onCancelClick() {
-            @Override
-            public void onCancellClick() {
-                lySelect.setVisibility(View.GONE);
-            }
-        });
-
-        lyShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lySelect.setVisibility(View.VISIBLE);
-            }
-        });
+        mViewPager.setOnPageChangeListener(this);
+        txtShouRu.setOnClickListener(this);
+        txtZhiChu.setOnClickListener(this);
     }
 
     @Override
-    public void onBackPressed() {
-        if (lySelect.getVisibility() == View.VISIBLE) {
-            lySelect.setVisibility(View.GONE);
-        } else {
-            super.onBackPressed();
+    public void onClick(View v) {
+        if (v == txtZhiChu) {
+            mViewPager.setCurrentItem(0);
+        } else if (v == txtShouRu) {
+            mViewPager.setCurrentItem(1);
+        } else if (v == tvZhanghu) {
+
+        } else if (v == tvDate) {
+
         }
     }
 
-
-    public boolean validate() {
-        if (!(txtAccount.getText().toString().equals("支付宝") || txtAccount.getText().toString().equals("信用卡") || txtAccount.getText().toString().equals("储蓄卡") || txtAccount.getText().toString().equals("现金"))) {
-            ToastUtils.showToast(IncomeAndCostActivity.this, "请选择账户类型");
-            return false;
-        }
-        return true;
+    public void onClose(View view) {
+        IncomeAndCostActivity.this.finish();
     }
+
+    public void onSure(View view) {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        switchTab(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    public void switchTab(int index) {
+        txtZhiChu.setTextColor(index == 0 ? getResources().getColor(R.color.white) : getResources().getColor(R.color.text_color_66));
+        txtZhiChu.setBackgroundResource(index == 0 ? R.drawable.btn_fullblue_left_shape : R.drawable.btn_lineblue_left_shape);
+        txtShouRu.setBackgroundResource(index == 0 ? R.drawable.btn_lineblue_right_shape : R.drawable.btn_fullblue_right_shape);
+        txtShouRu.setTextColor(index == 0 ? getResources().getColor(R.color.text_color_33) : getResources().getColor(R.color.white));
+    }
+
 
 }

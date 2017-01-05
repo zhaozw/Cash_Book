@@ -47,5 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickPublish(View v) {
         startActivity(new Intent(MainActivity.this, IncomeAndCostActivity.class));
+        overridePendingTransition(R.anim.anim_open, R.anim.anim_close);
     }
 }
