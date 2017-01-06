@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/layout_re"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/pop_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout_choose_zhanghu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:drawablePadding="20dp"
+                android:gravity="center"
+                android:text="选择账户"
+                android:textColor="@color/text_color_33"
+                android:textSize="@dimen/txt_17"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/base_horizontal_line">
+        </View>
+
+        <RelativeLayout
+            android:id="@+id/layout_choose_cash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/choose_cash_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/zongxiaofei"/>
+
+            <TextView
+                android:id="@+id/choose_cash_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/choose_cash_img"
+                android:text="现金"
+                android:textColor="@color/text_color_33"
+                android:textSize="@dimen/txt_17"/>
+
+            <TextView
+                android:id="@+id/layout_cash_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/choose_cash_txt"
+                android:text="余额：1200"
+                android:textColor="@color/text_color_99"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/base_horizontal_line">
+        </View>
+
+        <RelativeLayout
+            android:id="@+id/layout_choose_chuxuka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/choose_chuxuka_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/icon_add_1"/>
+
+            <TextView
+                android:id="@+id/choose_chuxuka_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/choose_chuxuka_img"
+                android:text="储蓄卡"
+                android:textColor="@color/text_color_33"
+                android:textSize="@dimen/txt_17"/>
+
+            <TextView
+                android:id="@+id/layout_chuxuKa_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/choose_chuxuka_txt"
+                android:text="余额：-500"
+                android:textColor="@color/text_color_99"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/base_horizontal_line">
+        </View>
+
+        <RelativeLayout
+            android:id="@+id/layout_choose_xinyka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/choose_xinyka_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/huankuan"/>
+
+            <TextView
+                android:id="@+id/choose_xinyka_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/choose_xinyka_img"
+                android:text="信用卡"
+                android:textColor="@color/text_color_33"
+                android:textSize="@dimen/txt_17"/>
+
+            <TextView
+                android:id="@+id/layout_xinyKa_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/choose_xinyka_txt"
+                android:text="余额：-80000"
+                android:textColor="@color/text_color_99"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/base_horizontal_line">
+        </View>
+
+        <RelativeLayout
+            android:id="@+id/layout_choose_zfb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/choose_zfb_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/zhifubao"/>
+
+            <TextView
+                android:id="@+id/choose_zfb_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/choose_zfb_img"
+                android:text="支付宝"
+                android:textColor="@color/text_color_33"
+                android:textSize="@dimen/txt_17"/>
+
+            <TextView
+                android:id="@+id/layout_zfb_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/choose_zfb_txt"
+                android:text="余额：7582"
+                android:textColor="@color/text_color_99"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

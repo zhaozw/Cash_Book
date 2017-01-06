@@ -28,6 +28,8 @@ import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Activity.CalendarActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.bean.HomeModel;
@@ -56,6 +58,7 @@ public class HomeFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), CalendarActivity.class));
             }
         });
+
         initView();
         initData();
         return getContentView();
@@ -65,6 +68,13 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView = (RecyclerView) getContentView().findViewById(R.id.f_h_recycler);
         mButton = (Button) getContentView().findViewById(R.id.f_h_bt);
 
+        RxBus.getInstance().toObserverableOnMainThread("AccountModel", new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                mButton.setText(o.toString());
+                ToastUtils.showToast(getActivity(), o+"");
+            }
+        });
 
         mList = new ArrayList<>();
         mAdapter = new HomeAdapter(mRecyclerView);

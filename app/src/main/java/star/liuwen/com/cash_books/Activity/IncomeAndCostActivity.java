@@ -18,7 +18,7 @@ public class IncomeAndCostActivity extends BaseActivity implements View.OnClickL
     private ShouRuFragment mShouRuFragment;
     private ZhiChuFragment mZhiChuFragment;
     private ViewPager mViewPager;
-    private TextView txtZhiChu, txtShouRu, tvZhanghu, tvDate;
+    private TextView txtZhiChu, txtShouRu;
 
 
     @Override
@@ -31,8 +31,7 @@ public class IncomeAndCostActivity extends BaseActivity implements View.OnClickL
         mViewPager = (ViewPager) findViewById(R.id.id_view_pager);
         txtZhiChu = (TextView) findViewById(R.id.id_zhichu_tab);
         txtShouRu = (TextView) findViewById(R.id.id_shouru_tab);
-        tvZhanghu = (TextView) findViewById(R.id.id_zhanghao__tab);
-        tvDate = (TextView) findViewById(R.id.id_data__tab);
+
 
         mShouRuFragment = new ShouRuFragment();
         mZhiChuFragment = new ZhiChuFragment();
@@ -52,19 +51,11 @@ public class IncomeAndCostActivity extends BaseActivity implements View.OnClickL
             mViewPager.setCurrentItem(0);
         } else if (v == txtShouRu) {
             mViewPager.setCurrentItem(1);
-        } else if (v == tvZhanghu) {
-
-        } else if (v == tvDate) {
-
         }
     }
 
     public void onClose(View view) {
         IncomeAndCostActivity.this.finish();
-    }
-
-    public void onSure(View view) {
-
     }
 
     @Override
