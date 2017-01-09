@@ -3,7 +3,6 @@ package star.liuwen.com.cash_books.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,39 +10,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Activity.CalendarActivity;
+import star.liuwen.com.cash_books.Adapter.HomeAdapter;
+import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
-import star.liuwen.com.cash_books.Utils.ToastUtils;
-import star.liuwen.com.cash_books.bean.HomeModel;
+import star.liuwen.com.cash_books.bean.AccountModel;
 
 /**
  * 明细
  */
 public class HomeFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
-    private Button mButton;
     private HomeAdapter mAdapter;
 
-    private List<Map<String, Object>> mList;
-    private Map<String, Object> mMap;
+    private List<Map<String, AccountModel>> mList;
+    private TextView tvShouRu, tvZhiChu;
 
 
     @Nullable
@@ -66,65 +60,38 @@ public class HomeFragment extends BaseFragment {
 
     private void initView() {
         mRecyclerView = (RecyclerView) getContentView().findViewById(R.id.f_h_recycler);
-        mButton = (Button) getContentView().findViewById(R.id.f_h_bt);
+
+        View headView = View.inflate(getActivity(), R.layout.layout_head_home, null);
+        tvShouRu = (TextView) headView.findViewById(R.id.home_shouru);
+        tvZhiChu = (TextView) headView.findViewById(R.id.home_zhichu);
 
         RxBus.getInstance().toObserverableOnMainThread("AccountModel", new RxBusResult() {
             @Override
             public void onRxBusResult(Object o) {
-                mButton.setText(o.toString());
-                ToastUtils.showToast(getActivity(), o+"");
+                mList = (List<Map<String, AccountModel>>) o;
+                mAdapter.addNewData(mList);
+                mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
             }
         });
 
         mList = new ArrayList<>();
         mAdapter = new HomeAdapter(mRecyclerView);
+        mAdapter.addHeaderView(headView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter.setData(mList);
-        mRecyclerView.setAdapter(mAdapter);
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMap = new HashMap<String, Object>();
-                // 年-月-日
-                SimpleDateFormat sdf = new SimpleDateFormat("yy年MM月dd日");
-                // 时-分
-                SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
-                mMap.put("day", sdf.format(new Date()));
-                mMap.put("time", sdf1.format(new Date()));
-                mMap.put("content", new HomeModel(176f, 324f));
-
-                mList.add(mMap);
-                mAdapter.notifyDataSetChanged();
-                Collections.reverse(mList);
-            }
-        });
-
+        if (App.accountMaps != null) {
+            mList = App.accountMaps;
+            mAdapter.addNewData(mList);
+            mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
+        } else {
+            mAdapter.setData(mList);
+            mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
+        }
     }
 
     private void initData() {
 
     }
 
-
-    public class HomeAdapter extends BGARecyclerViewAdapter<Map<String, Object>> {
-
-        public HomeAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.item_home);
-        }
-
-        @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, Map<String, Object> model) {
-
-            helper.setText(R.id.item_h__txt_data, model.get("day").toString());
-            helper.setText(R.id.item_h_txt_zhichu_time, model.get("time").toString());
-            HomeModel home = (HomeModel) model.get("content");
-            helper.setText(R.id.item_h_txt_shouru, home.getShouru() + ":收入");
-            helper.setText(R.id.item_h_txt_zhichu, "支出" + home.getZhichu());
-
-        }
-
-
-    }
 
 }
 

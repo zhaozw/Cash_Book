@@ -38,6 +38,8 @@ dependencies {
     compile 'org.greenrobot:greendao:3.1.1'
     //万能适配器
     compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
+    compile 'cn.bingoogolapple:bga-refreshlayout:1.0.7@aar'
+
 
     //日历选择器
     compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'

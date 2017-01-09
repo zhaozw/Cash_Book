@@ -28,6 +28,7 @@
         android:layout_marginRight="15dp"
         android:layout_toLeftOf="@id/itme_h__img_data"
         android:text="时间"
+        android:textColor="@color/text_color_33"
         android:textSize="12sp"/>
 
     <View
@@ -46,13 +47,13 @@
         android:layout_centerHorizontal="true"
         android:src="@mipmap/timeline_green"/>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/re_zhichu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_2"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/item_h__img_time"
-        android:orientation="vertical">
+        android:layout_toRightOf="@id/item_h__img_time">
 
         <TextView
             android:id="@+id/item_h_txt_zhichu_time"
@@ -62,39 +63,102 @@
             android:text="18:23:25"
             android:textSize="10sp"/>
 
+        <ImageView
+            android:id="@+id/item_h_image_zhichu"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/item_h_txt_zhichu_time"
+            android:src="@mipmap/maicai"/>
+
+        <TextView
+            android:id="@+id/item_h_txt_zhichu_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_h_txt_zhichu_time"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@id/item_h_image_zhichu"
+            android:padding="3dp"
+            android:text="支出："
+            android:textSize="@dimen/txr_14"/>
+
         <TextView
             android:id="@+id/item_h_txt_zhichu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="支出：00.00"
-            android:textSize="@dimen/txr_13"/>
-    </LinearLayout>
+            android:layout_below="@id/item_h_txt_zhichu_time"
+            android:layout_toRightOf="@id/item_h_txt_zhichu_type"
+            android:padding="3dp"
+            android:text="0.00"
+            android:textSize="@dimen/txr_14"/>
+
+        <TextView
+            android:id="@+id/item_h_txt_xiaofei_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_h_image_zhichu"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="2dp"
+            android:padding="3dp"
+            android:text="消费类型："
+            android:textSize="@dimen/txr_11"/>
+    </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/re_shouru"
+        android:layout_width="104dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_2"
-        android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@id/item_h__img_time"
-        android:gravity="right"
-        android:orientation="vertical">
+        android:layout_toLeftOf="@id/item_h__img_time">
 
         <TextView
             android:id="@+id/item_h_txt_shouru_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_margin="3dp"
             android:text="18:23:25"
             android:textSize="10sp"/>
+
+        <ImageView
+            android:id="@+id/item_h_image_shouru"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/item_h_txt_shouru_time"
+            android:layout_marginLeft="22dp"
+            android:src="@mipmap/maicai"/>
+
+        <TextView
+            android:id="@+id/item_h_txt_shouru_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_h_txt_shouru_time"
+            android:padding="2dp"
+            android:text="收入："
+            android:textSize="@dimen/txr_14"/>
 
         <TextView
             android:id="@+id/item_h_txt_shouru"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0.00 :收入"
-            android:textSize="@dimen/txr_13"/>
-    </LinearLayout>
+            android:layout_below="@id/item_h_txt_shouru_time"
+            android:layout_toRightOf="@id/item_h_txt_shouru_type"
+            android:padding="2dp"
+            android:text="0.00"
+            android:textSize="@dimen/txr_14"/>
+
+        <TextView
+            android:id="@+id/item_h_txt_chucun_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_h_txt_shouru_type"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="2dp"
+            android:padding="3dp"
+            android:text="存储类型："
+            android:textSize="@dimen/txr_11"/>
+    </RelativeLayout>
 
     <View
         android:id="@+id/view_3"

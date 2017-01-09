@@ -34,6 +34,7 @@ import cn.aigestudio.datepicker.views.DatePicker;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Enage.DataEnige;
 import star.liuwen.com.cash_books.R;
@@ -105,7 +106,9 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
         mList.add(new ZhiChuModel(R.mipmap.maicai, "买菜"));
         mList.add(new ZhiChuModel(R.mipmap.zaocan, "早餐"));
         mList.add(new ZhiChuModel(R.mipmap.zhongfan, "中饭"));
+        mList.add(new ZhiChuModel(R.mipmap.wanfan, "晚饭"));
         mList.add(new ZhiChuModel(R.mipmap.xiaochi, "小吃"));
+        mList.add(new ZhiChuModel(R.mipmap.wanggou, "网购"));
         mList.add(new ZhiChuModel(R.mipmap.naifen, "奶粉"));
         mList.add(new ZhiChuModel(R.mipmap.jiushui, "酒水"));
         mList.add(new ZhiChuModel(R.mipmap.lingshi, "零食"));
@@ -113,6 +116,10 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
         mList.add(new ZhiChuModel(R.mipmap.xiezi, "鞋子"));
         mList.add(new ZhiChuModel(R.mipmap.yaopinfei, "医药费"));
         mList.add(new ZhiChuModel(R.mipmap.yifu, "衣服"));
+        mList.add(new ZhiChuModel(R.mipmap.icon_zhichu_type_taobao, "淘宝"));
+        mList.add(new ZhiChuModel(R.mipmap.tingchefei, "停车"));
+        mList.add(new ZhiChuModel(R.mipmap.majiang, "麻将"));
+        mList.add(new ZhiChuModel(R.mipmap.icon_add_12, "结婚礼金"));
         mAdapter.setData(mList);
         mAdapter.addLastItem(new ZhiChuModel(R.mipmap.icon_add, "更多"));
         mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
@@ -184,8 +191,9 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
         if (tvData.getText().toString().equals("日期")) {
             ToastUtils.showToast(getActivity(), "请选择日期");
         }
-        mMap.put("AccountModel", new AccountModel(AccountType, AccountData, mEdName, AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec()));
+        mMap.put("AccountModel", new AccountModel(AccountType, AccountData, mEdName, AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.zhiChu));
         homListData.add(mMap);
+        App.accountMaps = homListData;
         RxBus.getInstance().post("AccountModel", homListData);
         getActivity().finish();
     }
@@ -202,11 +210,11 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
                 break;
             case 2:
                 tvZhanghu.setText("信用卡");
-                AccountType = "储蓄卡";
+                AccountType = "信用卡";
                 break;
             case 3:
                 tvZhanghu.setText("支付宝");
-                AccountType = "储蓄卡";
+                AccountType = "支付宝";
                 break;
             default:
         }
@@ -283,14 +291,9 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
 
         @Override
         protected void fillData(BGAViewHolderHelper helper, int position, ZhiChuModel model) {
-            if (mList == null || position == mList.size()) {
-                helper.setImageResource(R.id.item_imag, R.mipmap.icon_add);
-                helper.setText(R.id.item_name, "添加");
-            } else {
-                helper.setImageResource(R.id.item_imag, model.getUrl());
-                helper.setText(R.id.item_name, model.getName());
-            }
+            helper.setImageResource(R.id.item_imag, model.getUrl());
+            helper.setText(R.id.item_name, model.getName());
         }
     }
-
 }
+

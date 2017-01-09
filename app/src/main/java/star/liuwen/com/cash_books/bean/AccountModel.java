@@ -12,18 +12,24 @@ public class AccountModel {
     private String ConsumeType;
     private int url;
     private String timeMinSec;
+    public AccountType mAccountType;
 
 
     public AccountModel() {
     }
 
-    public AccountModel(String accountType, String data, String money, String consumeType, int url, String timeMinSec) {
+    public enum AccountType {
+        zhiChu, shouRu;
+    }
+
+    public AccountModel(String accountType, String data, String money, String consumeType, int url, String timeMinSec, AccountModel.AccountType accountType1) {
         AccountType = accountType;
         Data = data;
         Money = money;
         ConsumeType = consumeType;
         this.url = url;
         this.timeMinSec = timeMinSec;
+        mAccountType = accountType1;
     }
 
     public Long getId() {
