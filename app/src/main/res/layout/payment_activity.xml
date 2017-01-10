@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:fitsSystemWindows="true"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/background"
@@ -22,7 +23,7 @@
             android:padding="10dp"
             android:text="账户余额"
             android:textColor="@color/white"
-            android:textSize="22sp"/>
+            android:textSize="23sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -37,13 +38,13 @@
             android:layout_below="@+id/pay_txt_account"
             android:layout_centerInParent="true"
             android:text="账户余额"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color_bg"
             android:textSize="@dimen/txr_13"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="30dp"
             android:gravity="bottom"
             android:orientation="horizontal"

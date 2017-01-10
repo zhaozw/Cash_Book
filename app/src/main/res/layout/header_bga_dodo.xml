@@ -37,4 +37,5 @@
         android:text="下拉同步中"
         android:textColor="#777"
         android:textSize="12sp"/>
+
 </LinearLayout>

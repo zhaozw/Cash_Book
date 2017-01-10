@@ -14,6 +14,12 @@ public class App extends Application {
 
     public static int position;//账户position;
     public static List<Map<String, AccountModel>> accountMaps;
+    public static boolean isBgCash = true;
+    public static boolean isBgCXK = true;
+    public static boolean isBgXYK = true;
+    public static boolean isBgZFB = true;
+    public static boolean isBgJC = true;
+    public static boolean isBgJR = true;
 
 
     @Override

@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@color/blue"
+            app:cardBackgroundColor="@color/xianjian"
             app:cardCornerRadius="5dp">
 
             <RelativeLayout
@@ -71,7 +71,7 @@
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/zongxiaofei"/>
+                    android:src="@mipmap/xianjin"/>
 
                 <TextView
                     android:id="@+id/qb_txt_cash"
@@ -82,9 +82,10 @@
                     android:layout_toRightOf="@id/qb_image_cash"
                     android:text="@string/qianbao_cash"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_13"/>
+                    android:textSize="@dimen/txr_15"/>
 
                 <TextView
+
                     android:id="@+id/qb_txt_cash_yuer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,7 +94,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@id/qb_image_cash"
                     android:text="@string/qianbao_cash_yuer"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_bg"
                     android:textSize="@dimen/txr_13"/>
 
                 <TextView
@@ -142,7 +143,7 @@
                     android:layout_toRightOf="@id/qb_image_chuxuka"
                     android:text="@string/qianbao_chuxuka"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_13"/>
+                    android:textSize="@dimen/txr_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_chuxuka_yuer"
@@ -153,7 +154,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@id/qb_image_chuxuka"
                     android:text="@string/qianbao_chuxuka_yuer"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_bg"
                     android:textSize="@dimen/txr_13"/>
 
                 <TextView
@@ -202,7 +203,7 @@
                     android:layout_toRightOf="@id/qb_image_xinyka"
                     android:text="@string/qianbao_xinyka"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_13"/>
+                    android:textSize="@dimen/txr_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_xinyka_yuer"
@@ -213,7 +214,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@id/qb_image_xinyka"
                     android:text="@string/qianbao_xinyka_yuer"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_bg"
                     android:textSize="@dimen/txr_13"/>
 
                 <TextView
@@ -251,7 +252,7 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:src="@mipmap/wangluozhanghu"/>
+                    android:src="@mipmap/zhifubao"/>
 
                 <TextView
                     android:id="@+id/qb_txt_zhifubao"
@@ -262,7 +263,7 @@
                     android:layout_toRightOf="@id/qb_image_zhifubao"
                     android:text="@string/qianbao_zhifb"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_13"/>
+                    android:textSize="@dimen/txr_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_zhifubao_yuer"
@@ -273,7 +274,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@id/qb_image_zhifubao"
                     android:text="@string/qianbao_zhifb_yuer"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_bg"
                     android:textSize="@dimen/txr_13"/>
 
                 <TextView
@@ -322,7 +323,7 @@
                     android:layout_toRightOf="@id/qb_image_jiechu"
                     android:text="@string/qianbao_jiechu"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_13"/>
+                    android:textSize="@dimen/txr_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_jiechu_yuer"
@@ -332,8 +333,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@id/qb_image_jiechu"
-                    android:text="@string/qianbao_cash_yuer"
-                    android:textColor="@color/white"
+                    android:text="@string/qianbao_jiechu_yuer"
+                    android:textColor="@color/text_color_bg"
                     android:textSize="@dimen/txr_13"/>
 
                 <TextView
@@ -371,7 +372,7 @@
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/icon_youqingzanzhu"/>
+                    android:src="@mipmap/tuikuan"/>
 
                 <TextView
                     android:id="@+id/qb_txt_jieru"
@@ -382,7 +383,7 @@
                     android:layout_toRightOf="@id/qb_image_jieru"
                     android:text="@string/qianbao_jieru"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_13"/>
+                    android:textSize="@dimen/txr_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_jieru_yuer"
@@ -393,7 +394,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@id/qb_image_jieru"
                     android:text="@string/qianbao_jieru_yuer"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_bg"
                     android:textSize="@dimen/txr_13"/>
 
                 <TextView

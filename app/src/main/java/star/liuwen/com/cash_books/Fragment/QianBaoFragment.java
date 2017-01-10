@@ -7,13 +7,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import star.liuwen.com.cash_books.Activity.PaymentActivity;
+import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
+import star.liuwen.com.cash_books.View.CustomPopWindow;
 
 /**
  * 钱包页面
@@ -21,7 +26,9 @@ import star.liuwen.com.cash_books.Utils.ToastUtils;
 public class QianBaoFragment extends BaseFragment implements View.OnClickListener {
     private RelativeLayout mRyYuer, mRyCash, mRyChuxuka, mRyxinyKa, mRyzhifb, mRyjiechu, mRyjieru;
     private TextView tvYuer, tvCash, tvChuxuka, tvXinyKa, tvzhifb, tvjiechu, tvjieru;
-
+    private CustomPopWindow mCustomPopWindow;
+    private ImageView imageCash, imageCxk, imageXYk, imageZfb, imageJC, imageJR;
+    private int position;
 
     @Nullable
     @Override
@@ -76,7 +83,7 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
         Intent intent = new Intent(getActivity(), PaymentActivity.class);
         switch (v.getId()) {
             case R.id.qb_ry_yuer:
-                ToastUtils.showToast(getActivity(), "点击了余额");
+                showPopWindow();
                 break;
             case R.id.qb_ry_cash:
                 intent.putExtra("666", "cash");
@@ -101,5 +108,111 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
                 ToastUtils.showToast(getActivity(), "点击了借入");
                 break;
         }
+    }
+
+    private void showPopWindow() {
+        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.pop_menu, null);
+        //处理popWindow 显示内容
+        handleLogic(contentView);
+
+        imageCash = (ImageView) contentView.findViewById(R.id.image_1);
+        imageCxk = (ImageView) contentView.findViewById(R.id.image_2);
+        imageXYk = (ImageView) contentView.findViewById(R.id.image_3);
+        imageZfb = (ImageView) contentView.findViewById(R.id.image_4);
+        imageJC = (ImageView) contentView.findViewById(R.id.image_5);
+        imageJR = (ImageView) contentView.findViewById(R.id.image_6);
+
+        imageCash.setImageResource(App.isBgCash ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageCxk.setImageResource(App.isBgCXK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageXYk.setImageResource(App.isBgXYK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageZfb.setImageResource(App.isBgZFB ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageJC.setImageResource(App.isBgJC ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageJR.setImageResource(App.isBgJR ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+
+        //创建并显示popWindow
+        mCustomPopWindow = new CustomPopWindow.PopupWindowBuilder(getActivity())
+                .setView(contentView)
+                .create()
+                .showAsDropDown(mRyYuer, 0, 20);
+    }
+
+    /**
+     * 处理弹出显示内容、点击事件等逻辑
+     *
+     * @param contentView
+     */
+    private void handleLogic(View contentView) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.menu1:
+                        position = 1;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu2:
+                        position = 2;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu3:
+                        setPopWindowBG(position);
+                        position = 3;
+                        break;
+                    case R.id.menu4:
+                        position = 4;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu5:
+                        position = 5;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu6:
+                        position = 6;
+                        setPopWindowBG(position);
+                }
+            }
+        };
+        contentView.findViewById(R.id.menu1).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu2).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu3).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu4).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu5).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu6).setOnClickListener(listener);
+    }
+
+    public void setPopWindowBG(int position) {
+        switch (position) {
+            case 1:
+                imageCash.setImageResource(!App.isBgCash ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgCash = !App.isBgCash;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgCash, App.isBgCash);
+                break;
+            case 2:
+                imageCxk.setImageResource(!App.isBgCXK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgCXK = !App.isBgCXK;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgCXK, App.isBgCXK);
+                break;
+            case 3:
+                imageXYk.setImageResource(!App.isBgXYK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgXYK = !App.isBgXYK;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgXYK, App.isBgXYK);
+                break;
+            case 4:
+                imageZfb.setImageResource(!App.isBgZFB ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgZFB = !App.isBgZFB;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgZFB, App.isBgZFB);
+                break;
+            case 5:
+                imageJC.setImageResource(!App.isBgJC ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgJC = !App.isBgJC;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgJC, App.isBgJC);
+                break;
+            case 6:
+                imageJR.setImageResource(!App.isBgJR ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgJR = !App.isBgJR;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgJR, App.isBgJR);
+                break;
+        }
+
     }
 }

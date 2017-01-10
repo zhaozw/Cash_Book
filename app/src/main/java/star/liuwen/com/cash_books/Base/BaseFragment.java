@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 
 /**
  * Created by liuwen on 2016/12/28.
@@ -31,6 +32,7 @@ public class BaseFragment extends Fragment {
     public View getContentView() {
         return this.view;
     }
+
 
     @Nullable
     @Override

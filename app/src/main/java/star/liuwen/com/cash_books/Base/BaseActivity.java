@@ -17,6 +17,8 @@ import star.liuwen.com.cash_books.Utils.ActivityKiller;
  */
 public abstract class BaseActivity extends AppCompatActivity {
     private RelativeLayout mTitle;
+    private TextView title, rightTxt;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +26,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(activityLayoutRes());
         mTitle = (RelativeLayout) findViewById(R.id.titleBar);
+        title = (TextView) findViewById(R.id.title);
+        rightTxt = (TextView) findViewById(R.id.toolbar_righ_tv);
         initView();
         ActivityKiller.getInstance().addActivity(this);
 
@@ -54,10 +58,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void setBackView() {
         View backView = findViewById(R.id.back_view);
+        ImageView imageLeft = (ImageView) findViewById(R.id.toolbar_left_iv);
+
         if (backView == null) {
             return;
         }
-        backView.setVisibility(View.VISIBLE);
+        if (imageLeft != null) {
+            imageLeft.setVisibility(View.VISIBLE);
+        }
         backView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
 
     /**
      * 设置显示标题
@@ -80,6 +89,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         title.setText(txt);
     }
 
+    public void setLeftText(String text) {
+        TextView leftText = (TextView) findViewById(R.id.toolbar_left_tv);
+        if (leftText != null) {
+            leftText.setVisibility(View.VISIBLE);
+            leftText.setText(text);
+        }
+    }
+
+    public void setLeftTextColor(int resId) {
+        TextView leftText = (TextView) findViewById(R.id.toolbar_left_tv);
+        if (leftText != null) {
+            leftText.setVisibility(View.VISIBLE);
+            leftText.setTextColor(resId);
+        }
+    }
 
     public void setTitleBg(int resId) {
         if (mTitle != null) {
@@ -87,6 +111,20 @@ public abstract class BaseActivity extends AppCompatActivity {
             mTitle.getBackground().setAlpha(255);// 不透明
         }
     }
+
+    public void setTitlesColor(int resId) {
+        if (title != null) {
+            title.setTextColor(resId);
+        }
+    }
+
+
+    public void setRightTxtColor(int resId) {
+        if (rightTxt != null) {
+            rightTxt.setTextColor(resId);
+        }
+    }
+
 
     /**
      * 只显示右侧文字以及点击事件

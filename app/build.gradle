@@ -39,6 +39,7 @@ dependencies {
     //万能适配器
     compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
     compile 'cn.bingoogolapple:bga-refreshlayout:1.0.7@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
 
 
     //日历选择器
