@@ -33,4 +33,6 @@
     <string name="edit_credit_limit">编辑信用卡额度</string>
     <string name="edit_debt">编辑信用卡欠款</string>
     <string name="save">保存</string>
+
+    <string name="no_setting">未设置</string>
 </resources>

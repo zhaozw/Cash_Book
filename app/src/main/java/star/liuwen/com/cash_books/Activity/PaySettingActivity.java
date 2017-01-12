@@ -1,12 +1,15 @@
 package star.liuwen.com.cash_books.Activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
 
 /**
  * Created by liuwen on 2017/1/10.
@@ -26,6 +29,7 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         setTitle(getString(R.string.pay_setting));
         setBackView();
         setLeftText(getString(R.string.back));
+        setLeftImage(R.mipmap.fanhui_lan);
 
         reBank = (RelativeLayout) findViewById(R.id.re_setting_bank);
         reAccount = (RelativeLayout) findViewById(R.id.re_setting_account);
@@ -50,7 +54,20 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         reCreditLimit.setOnClickListener(this);
         reDebt.setOnClickListener(this);
         reDebtData.setOnClickListener(this);
+
+        if (App.cardModel != null) {
+            txtAccount.setText(App.cardModel.getAccountName());
+            txtCreditLimit.setText(App.cardModel.getCardLimit());
+            txtMoney.setText(App.cardModel.getMoney());
+            txtDebt.setText(App.cardModel.getDept());
+        } else {
+            txtAccount.setText(getString(R.string.no_setting));
+            txtCreditLimit.setText(getString(R.string.no_setting));
+            txtMoney.setText(getString(R.string.no_setting));
+            txtDebt.setText(getString(R.string.no_setting));
+        }
     }
+
 
     @Override
     public void onClick(View v) {
@@ -59,18 +76,50 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
 
         } else if (v == reAccount) {
             intent.putExtra("888", "AccountName");
-            startActivity(intent);
+            startActivityForResult(intent, ACCOUNT);
         } else if (v == reMoney) {
             intent.putExtra("888", "AccountMoney");
-            startActivity(intent);
+            startActivityForResult(intent, MONEY);
         } else if (v == reCreditLimit) {
             intent.putExtra("888", "CreditLimit");
-            startActivity(intent);
+            startActivityForResult(intent, CreditLimit);
         } else if (v == reDebt) {
             intent.putExtra("888", "Debt");
-            startActivity(intent);
+            startActivityForResult(intent, Debt);
         } else if (v == reDebtData) {
 
         }
+    }
+
+
+    private static final int ACCOUNT = 101;
+    private static final int MONEY = 102;
+    private static final int CreditLimit = 103;
+    private static final int Debt = 104;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
+        switch (requestCode) {
+            case ACCOUNT:
+                txtAccount.setText(data.getExtras().getString("textInput"));
+                RxBus.getInstance().post("account", data.getExtras().getString("textInput"));
+                break;
+            case MONEY:
+                txtMoney.setText(data.getExtras().getString("textInput"));
+                break;
+            case CreditLimit:
+                txtCreditLimit.setText(data.getExtras().getString("textInput"));
+                break;
+            case Debt:
+                txtDebt.setText(data.getExtras().getString("textInput"));
+                break;
+            default:
+                break;
+        }
+
     }
 }

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -46,6 +47,9 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     private DefineBAGRefreshWithLoadView mDefineBAGRefreshWithLoadView = null;
     private BGARefreshLayout mBGARefreshLayout;
 
+    private ViewStub mViewStub;
+    private View headView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +76,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
         mDefineBAGRefreshWithLoadView = new DefineBAGRefreshWithLoadView(getActivity(), true, true);
         //设置刷新样式
         mBGARefreshLayout.setRefreshViewHolder(mDefineBAGRefreshWithLoadView);
+
         mDefineBAGRefreshWithLoadView.setRefreshingText("同步账单中...");
         mDefineBAGRefreshWithLoadView.setPullDownRefreshText("同步账单中...");
         mDefineBAGRefreshWithLoadView.setReleaseRefreshText("下拉同步账单中...");
@@ -87,11 +92,13 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     }
 
     private void initView() {
+
+        mViewStub = (ViewStub) getContentView().findViewById(R.id.view_stub);
         mRecyclerView = (RecyclerView) getContentView().findViewById(R.id.f_h_recycler);
         mBGARefreshLayout = (BGARefreshLayout) getContentView().findViewById(R.id.define_bga_refresh_with_load);   //设置刷新和加载监听
         mBGARefreshLayout.setDelegate(this);
 
-        View headView = View.inflate(getActivity(), R.layout.layout_head_home, null);
+        headView = View.inflate(getActivity(), R.layout.layout_head_home, null);
         tvShouRu = (TextView) headView.findViewById(R.id.home_shouru);
         tvZhiChu = (TextView) headView.findViewById(R.id.zhichu_name);
 
@@ -104,9 +111,15 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
             mAdapter.addNewData(mList);
             mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
         } else {
+            mViewStub.inflate();
+            headView.setVisibility(View.GONE);
+            mBGARefreshLayout.setVisibility(View.GONE);
             mAdapter.setData(mList);
             mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
+
         }
+
+
     }
 
     private void initData() {
@@ -117,6 +130,10 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
                 mList = (List<Map<String, AccountModel>>) o;
                 mAdapter.addNewData(mList);
                 mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
+                mViewStub.setVisibility(View.GONE);
+                headView.setVisibility(View.VISIBLE);
+                mBGARefreshLayout.setVisibility(View.VISIBLE);
+
             }
         });
 

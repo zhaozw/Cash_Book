@@ -13,6 +13,6 @@ public class Config {
     public final static String isBgZFB = "isBgZFB";
     public final static String isBgJC = "isBgJC";
     public final static String isBgJR = "isBgJR";
-
+    
 
 }

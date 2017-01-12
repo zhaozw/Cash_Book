@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import star.liuwen.com.cash_books.bean.AccountModel;
+import star.liuwen.com.cash_books.bean.CreditCardModel;
 
 /**
  * Created by liuwen on 2017/1/6.
@@ -20,6 +21,9 @@ public class App extends Application {
     public static boolean isBgZFB = true;
     public static boolean isBgJC = true;
     public static boolean isBgJR = true;
+    public static List<CreditCardModel> creditLists;
+
+    public static CreditCardModel cardModel;
 
 
     @Override

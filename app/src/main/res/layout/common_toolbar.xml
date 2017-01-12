@@ -17,9 +17,10 @@
 
         <ImageView
             android:id="@+id/toolbar_left_iv"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:src="@mipmap/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/button_back_white"
             android:visibility="gone"
             />
 
@@ -63,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:orientation="horizontal"
         android:paddingRight="10dp">
 

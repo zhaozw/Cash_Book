@@ -1,17 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:fitsSystemWindows="true"
-              android:background="@color/white"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical">
 
     <include layout="@layout/common_toolbar"/>
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/define_bga_refresh_with_load"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleBar">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/f_h_recycler"
@@ -19,8 +20,15 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="5dp"
-            tools:listitem="@layout/item_home"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            tools:listitem="@layout/item_home">
         </android.support.v7.widget.RecyclerView>
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
-</LinearLayout>
+
+    <ViewStub
+        android:layout_marginTop="30dp"
+        android:id="@+id/view_stub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_nodata"/>
+</RelativeLayout>

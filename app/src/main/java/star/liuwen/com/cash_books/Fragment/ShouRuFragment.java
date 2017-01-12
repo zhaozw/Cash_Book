@@ -31,9 +31,11 @@ import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.bean.AccountModel;
 import star.liuwen.com.cash_books.bean.ZhiChuModel;
@@ -78,11 +80,11 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
         tvZhanghu.setOnClickListener(this);
         tvSure.setOnClickListener(this);
 
+
         View headView = View.inflate(getActivity(), R.layout.zhichu_shouru_head, null);
         edName = (EditText) headView.findViewById(R.id.zhichu_name);
         imageName = (ImageView) headView.findViewById(R.id.imag_name);
         txtName = (TextView) headView.findViewById(R.id.txt_name);
-
 
         mAdapter = new ShouRuAdapter(mRecyclerView);
         mAdapter.addHeaderView(headView);
@@ -169,10 +171,13 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
             return;
         }
 
-        if (tvData.getText().toString().equals("日期")) {
+        if (tvData.getText().toString().equals("选择日期")) {
             ToastUtils.showToast(getActivity(), "请选择日期");
         }
+
         mMap.put("AccountModel", new AccountModel(AccountType, AccountData, mEdName, AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.shouRu));
+
+
         homListData.add(mMap);
         App.accountMaps = homListData;
         RxBus.getInstance().post("AccountModel", homListData);

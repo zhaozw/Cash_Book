@@ -74,6 +74,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
+    public void setLeftImage(int resId) {
+        ImageView imageLeft = (ImageView) findViewById(R.id.toolbar_left_iv);
+        if (imageLeft != null) {
+            imageLeft.setImageResource(resId);
+        }
+    }
+
 
     /**
      * 设置显示标题
