@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.HashMap;
+
 import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.R;
@@ -19,6 +21,8 @@ import star.liuwen.com.cash_books.bean.CreditCardModel;
 public class UpDateAccountCommonActivity extends BaseActivity {
     private EditText mEditText;
     private int position;
+    private String AccountValues;
+
 
     @Override
     public int activityLayoutRes() {
@@ -39,6 +43,7 @@ public class UpDateAccountCommonActivity extends BaseActivity {
         });
 
         String values = getIntent().getStringExtra("888");
+        AccountValues = getIntent().getStringExtra("Account");
         if (values.equals("AccountName")) {
             setTitle(getString(R.string.edit_account_name));
             mEditText.setHint("请输入修改名称");

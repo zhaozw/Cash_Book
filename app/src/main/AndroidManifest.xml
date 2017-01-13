@@ -26,6 +26,12 @@
         <activity android:name=".Activity.PaySettingActivity"/>
         <!--修改的通用界面-->
         <activity android:name=".Activity.UpDateAccountCommonActivity"/>
+        <!--存钱和账单总结的通用页面-->
+        <activity android:name=".Activity.SaveMoneyActivity"/>
+        <!--存钱计划-->
+        <activity android:name=".Activity.PlanSaveMoneyActivity"/>
+        <!--整理消费账单-->
+        <activity android:name=".Activity.FixXiaofeiCheckActivity"/>
     </application>
 
 </manifest>

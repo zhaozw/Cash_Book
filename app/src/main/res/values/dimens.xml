@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="txt_16">16sp</dimen>
-    <dimen name="txr_15">15sp</dimen>
+    <dimen name="txt_15">15sp</dimen>
     <dimen name="txt_17">17sp</dimen>
     <dimen name="txt_18">18sp</dimen>
     <dimen name="txt_19">19sp</dimen>

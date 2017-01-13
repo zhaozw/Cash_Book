@@ -86,19 +86,19 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
                 showPopWindow();
                 break;
             case R.id.qb_ry_cash:
-                intent.putExtra("666", "cash");
+                intent.putExtra("paySetting", "cash");
                 startActivity(intent);
                 break;
             case R.id.qb_ry_chuxuka:
-                intent.putExtra("666", "chuxuka");
+                intent.putExtra("paySetting", "chuxuka");
                 startActivity(intent);
                 break;
             case R.id.qb_ry_xinyka:
-                intent.putExtra("666", "xinyaka");
+                intent.putExtra("paySetting", "xinyaka");
                 startActivity(intent);
                 break;
             case R.id.qb_ry_zhifubao:
-                intent.putExtra("666", "zhifubao");
+                intent.putExtra("paySetting", "zhifubao");
                 startActivity(intent);
                 break;
             case R.id.qb_ry_jiechu:

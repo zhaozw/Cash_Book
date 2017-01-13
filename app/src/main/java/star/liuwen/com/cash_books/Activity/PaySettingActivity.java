@@ -10,6 +10,8 @@ import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
+import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2017/1/10.
@@ -17,6 +19,7 @@ import star.liuwen.com.cash_books.RxBus.RxBus;
 public class PaySettingActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout reBank, reAccount, reType, reMoney, reCreditLimit, reDebt, reDebtData;
     private TextView txtBank, txtAccount, txtType, txtMoney, txtCreditLimit, txtDebt, txtDebtData;
+    private String AccountValues;
 
 
     @Override
@@ -55,6 +58,26 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         reDebt.setOnClickListener(this);
         reDebtData.setOnClickListener(this);
 
+        AccountValues = getIntent().getStringExtra("666");
+        if (AccountValues.equals("cash")) {
+            reBank.setVisibility(View.GONE);
+            setAccountVisible();
+            txtType.setText(getString(R.string.qianbao_cash));
+        } else if (AccountValues.equals("zfb")) {
+            reBank.setVisibility(View.GONE);
+            setAccountVisible();
+            txtType.setText(getString(R.string.qianbao_zhifb));
+        } else if (AccountValues.equals("xyk")) {
+            reBank.setVisibility(View.VISIBLE);
+            reCreditLimit.setVisibility(View.VISIBLE);
+            reDebt.setVisibility(View.VISIBLE);
+            reDebt.setVisibility(View.VISIBLE);
+            txtType.setText(getString(R.string.qianbao_xinyka));
+        } else if (AccountValues.equals("cxk")) {
+            setAccountVisible();
+            txtType.setText(getString(R.string.qianbao_chuxuka));
+        }
+
         if (App.cardModel != null) {
             txtAccount.setText(App.cardModel.getAccountName());
             txtCreditLimit.setText(App.cardModel.getCardLimit());
@@ -66,12 +89,14 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
             txtMoney.setText(getString(R.string.no_setting));
             txtDebt.setText(getString(R.string.no_setting));
         }
+
     }
 
 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(PaySettingActivity.this, UpDateAccountCommonActivity.class);
+        intent.putExtra("Account", AccountValues);
         if (v == reBank) {
 
         } else if (v == reAccount) {
@@ -91,6 +116,11 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    public void setAccountVisible() {
+        reCreditLimit.setVisibility(View.GONE);
+        reDebt.setVisibility(View.GONE);
+        reDebt.setVisibility(View.GONE);
+    }
 
     private static final int ACCOUNT = 101;
     private static final int MONEY = 102;
@@ -106,7 +136,6 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         switch (requestCode) {
             case ACCOUNT:
                 txtAccount.setText(data.getExtras().getString("textInput"));
-                RxBus.getInstance().post("account", data.getExtras().getString("textInput"));
                 break;
             case MONEY:
                 txtMoney.setText(data.getExtras().getString("textInput"));

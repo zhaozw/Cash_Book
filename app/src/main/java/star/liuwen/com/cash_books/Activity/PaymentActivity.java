@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -28,10 +29,12 @@ import star.liuwen.com.cash_books.View.NumberAnimTextView;
  * Created by liuwen on 2016/12/30.
  */
 public class PaymentActivity extends BaseActivity {
-    private RelativeLayout mRyBg, mRyNoData;
+    private RelativeLayout mRyBg;
     private TimePickerView pvTime;
     private TextView tvYear, tvZhuangZhang, tvChu, tvRu;
     private NumberAnimTextView tvAccount;
+    private String AccountSetting;
+    private ViewStub mViewStub;
 
 
     Handler handler = new Handler() {
@@ -53,15 +56,16 @@ public class PaymentActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
-        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mRyBg = (RelativeLayout) findViewById(R.id.pay_ry);
-        mRyNoData = (RelativeLayout) findViewById(R.id.no_pic);
+        mViewStub = (ViewStub) findViewById(R.id.view_stub);
+        mViewStub.inflate();
 
         setRightText(getString(R.string.pay_setting), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PaymentActivity.this, PaySettingActivity.class));
+                Intent intent = new Intent(PaymentActivity.this, PaySettingActivity.class);
+                intent.putExtra("666", AccountSetting);
+                startActivity(intent);
             }
         });
 
@@ -72,31 +76,35 @@ public class PaymentActivity extends BaseActivity {
         tvRu = (TextView) findViewById(R.id.pay_ru);
 
 
-        String value = getIntent().getStringExtra("666");
+        String value = getIntent().getStringExtra("paySetting");
 
         if (value.equals("zhifubao")) {
             mRyBg.setBackgroundColor(this.getResources().getColor(R.color.zhifubao));
             setTitleBg(R.color.zhifubao);
             StatusBarUtils.setWindowStatusBarColor(PaymentActivity.this, R.color.zhifubao);
             setTitle("支付宝");
+            AccountSetting = "zfb";
             setTexTSizeAndColor();
         } else if (value.equals("xinyaka")) {
             mRyBg.setBackgroundColor(this.getResources().getColor(R.color.xinyongka));
             setTitleBg(R.color.xinyongka);
             StatusBarUtils.setWindowStatusBarColor(PaymentActivity.this, R.color.xinyongka);
             setTitle("信用卡");
+            AccountSetting = "xyk";
             setTexTSizeAndColor();
         } else if (value.equals("cash")) {
             mRyBg.setBackgroundColor(this.getResources().getColor(R.color.xianjian));
             setTitleBg(R.color.xianjian);
             StatusBarUtils.setWindowStatusBarColor(PaymentActivity.this, R.color.xianjian);
             setTitle("现金");
+            AccountSetting = "cash";
             setTexTSizeAndColor();
         } else if (value.equals("chuxuka")) {
             mRyBg.setBackgroundColor(this.getResources().getColor(R.color.chuxuka));
             StatusBarUtils.setWindowStatusBarColor(PaymentActivity.this, R.color.chuxuka);
             setTitleBg(R.color.chuxuka);
             setTitle("储蓄卡");
+            AccountSetting = "cxk";
             setTexTSizeAndColor();
         }
         setBackView();

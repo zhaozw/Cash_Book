@@ -82,7 +82,7 @@
                     android:layout_toRightOf="@id/qb_image_cash"
                     android:text="@string/qianbao_cash"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_15"/>
+                    android:textSize="@dimen/txt_15"/>
 
                 <TextView
 
@@ -143,7 +143,7 @@
                     android:layout_toRightOf="@id/qb_image_chuxuka"
                     android:text="@string/qianbao_chuxuka"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_15"/>
+                    android:textSize="@dimen/txt_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_chuxuka_yuer"
@@ -203,7 +203,7 @@
                     android:layout_toRightOf="@id/qb_image_xinyka"
                     android:text="@string/qianbao_xinyka"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_15"/>
+                    android:textSize="@dimen/txt_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_xinyka_yuer"
@@ -263,7 +263,7 @@
                     android:layout_toRightOf="@id/qb_image_zhifubao"
                     android:text="@string/qianbao_zhifb"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_15"/>
+                    android:textSize="@dimen/txt_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_zhifubao_yuer"
@@ -323,7 +323,7 @@
                     android:layout_toRightOf="@id/qb_image_jiechu"
                     android:text="@string/qianbao_jiechu"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_15"/>
+                    android:textSize="@dimen/txt_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_jiechu_yuer"
@@ -383,7 +383,7 @@
                     android:layout_toRightOf="@id/qb_image_jieru"
                     android:text="@string/qianbao_jieru"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/txr_15"/>
+                    android:textSize="@dimen/txt_15"/>
 
                 <TextView
                     android:id="@+id/qb_txt_jieru_yuer"

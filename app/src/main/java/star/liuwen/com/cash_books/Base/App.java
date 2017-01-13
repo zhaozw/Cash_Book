@@ -2,6 +2,7 @@ package star.liuwen.com.cash_books.Base;
 
 import android.app.Application;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +22,9 @@ public class App extends Application {
     public static boolean isBgZFB = true;
     public static boolean isBgJC = true;
     public static boolean isBgJR = true;
-    public static List<CreditCardModel> creditLists;
 
     public static CreditCardModel cardModel;
+    public static HashMap<String, CreditCardModel> maps;
 
 
     @Override
