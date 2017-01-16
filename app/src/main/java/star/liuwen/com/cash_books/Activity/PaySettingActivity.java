@@ -98,7 +98,7 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         Intent intent = new Intent(PaySettingActivity.this, UpDateAccountCommonActivity.class);
         intent.putExtra("Account", AccountValues);
         if (v == reBank) {
-
+            startActivityForResult(new Intent(PaySettingActivity.this, ChoiceIssuingBankActivity.class), ChoiceIssuingBank);
         } else if (v == reAccount) {
             intent.putExtra("888", "AccountName");
             startActivityForResult(intent, ACCOUNT);
@@ -126,6 +126,7 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
     private static final int MONEY = 102;
     private static final int CreditLimit = 103;
     private static final int Debt = 104;
+    private static final int ChoiceIssuingBank = 105;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -146,6 +147,8 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
             case Debt:
                 txtDebt.setText(data.getExtras().getString("textInput"));
                 break;
+            case ChoiceIssuingBank:
+                txtBank.setText(data.getExtras().getString("bank"));
             default:
                 break;
         }

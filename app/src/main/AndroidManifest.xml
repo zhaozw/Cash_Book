@@ -32,6 +32,8 @@
         <activity android:name=".Activity.PlanSaveMoneyActivity"/>
         <!--整理消费账单-->
         <activity android:name=".Activity.FixXiaofeiCheckActivity"/>
+        <!--选择发卡行-->
+        <activity android:name=".Activity.ChoiceIssuingBankActivity"/>
     </application>
 
 </manifest>

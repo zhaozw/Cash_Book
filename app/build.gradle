@@ -38,7 +38,7 @@ dependencies {
     //greendao3
     compile 'org.greenrobot:greendao:3.1.1'
     //万能适配器
-    compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
+    compile 'cn.bingoogolapple:bga-adapter:1.1.8@aar'
     compile 'cn.bingoogolapple:bga-refreshlayout:1.0.7@aar'
     compile 'com.nineoldandroids:library:2.4.0'
 
@@ -50,7 +50,5 @@ dependencies {
     //rxBus;
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
-    //圆形图标
-    compile 'de.hdodenhof:circleimageview:2.1.0'
 
 }
