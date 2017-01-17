@@ -127,8 +127,8 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onRVItemClick(ViewGroup parent, View itemView, int position) {
 
-                if (mList.size() == position) {
-                    ToastUtils.showToast(getActivity(), "更多");
+                if (mAdapter.getItemCount() - 1 == position) {
+                    ToastUtils.showToast(getActivity(), "该功能正在完善中");
                 } else {
                     txtName.setText(mList.get(position).getName());
                     imageName.setImageResource(mList.get(position).getUrl());
@@ -145,7 +145,6 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
 
 
     }
-
 
 
     @Override

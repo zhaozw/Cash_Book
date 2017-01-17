@@ -11,4 +11,6 @@ public class IndexModel {
     public IndexModel(String name) {
         this.name = name;
     }
+
+
 }

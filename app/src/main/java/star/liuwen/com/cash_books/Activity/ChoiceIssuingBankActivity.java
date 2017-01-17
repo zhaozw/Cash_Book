@@ -1,6 +1,7 @@
 package star.liuwen.com.cash_books.Activity;
 
 import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,6 +14,7 @@ import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewScrollHelper;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Adapter.ChoiceIssuingBankAdapter;
+import star.liuwen.com.cash_books.Adapter.headBankAdapter;
 import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.Enage.DataEnige;
@@ -25,12 +27,14 @@ import star.liuwen.com.cash_books.widget.IndexView;
  * Created by liuwen on 2017/1/16.
  */
 public class ChoiceIssuingBankActivity extends BaseActivity {
-    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView, headRecyclerView;
     private IndexView mIndexView;
     private TextView mTextView;
     private ChoiceIssuingBankAdapter mAdapter;
     private BGARecyclerViewScrollHelper mRecyclerViewScrollHelper;
     private LinearLayoutManager mLayoutManager;
+
+    private headBankAdapter mHeadBankAdapter;
 
     @Override
     public int activityLayoutRes() {
@@ -50,6 +54,29 @@ public class ChoiceIssuingBankActivity extends BaseActivity {
         mTextView = (TextView) findViewById(R.id.choice_txt_tip);
 
         mAdapter = new ChoiceIssuingBankAdapter(mRecyclerView);
+
+        View headView = View.inflate(this, R.layout.layout_choice_bank_head, null);
+        headRecyclerView = (RecyclerView) headView.findViewById(R.id.choice_head_bank_recycler_view);
+        TextView headText = (TextView) headView.findViewById(R.id.tv_item_choice_issuing_bank);
+        mHeadBankAdapter = new headBankAdapter(headRecyclerView);
+        GridLayoutManager manager = new GridLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false);
+        headRecyclerView.setLayoutManager(manager);
+        mHeadBankAdapter.setData(DataEnige.getHeadBankData());
+        headRecyclerView.setAdapter(mHeadBankAdapter);
+
+        mHeadBankAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+            @Override
+            public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                //  App.cardModel.setBank(mAdapter.getItem(position).name);
+                Intent intent = new Intent();
+                intent.putExtra("bank", mHeadBankAdapter.getItem(position).name);
+                setResult(0, intent);
+                finish();
+            }
+        });
+
+        mAdapter.addHeaderView(headView);
+
         mAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
             @Override
             public void onRVItemClick(ViewGroup parent, View itemView, int position) {
@@ -58,7 +85,6 @@ public class ChoiceIssuingBankActivity extends BaseActivity {
                 intent.putExtra("bank", mAdapter.getItem(position).name);
                 setResult(0, intent);
                 finish();
-
             }
         });
 
@@ -88,7 +114,11 @@ public class ChoiceIssuingBankActivity extends BaseActivity {
 
                     @Override
                     protected String getCategoryName(int position) {
-                        return mAdapter.getItem(position).topc;
+                        if (position == 0) {
+                            return "常用";
+                        } else {
+                            return mAdapter.getItem(position).topc;
+                        }
                     }
 
                     @Override
@@ -101,8 +131,7 @@ public class ChoiceIssuingBankActivity extends BaseActivity {
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter.setData(DataEnige.getXykData());
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
     }
-
 
 }

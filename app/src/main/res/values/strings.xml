@@ -42,6 +42,9 @@
     <string name="me_setting">自定义</string>
     <string name="new_save_money_target">新建存钱计划</string>
     <string name="no_setting">未设置</string>
+    <string name="chong_dong_xiaofei">标记冲动消费</string>
 
+    <string name="remind">记账提醒</string>
+    <string name="finish">完成</string>
     <string name="lx">生活不止眼前的苟且，还有远方的诗和田野</string>
 </resources>

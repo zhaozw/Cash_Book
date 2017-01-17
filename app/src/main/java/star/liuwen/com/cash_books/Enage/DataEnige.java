@@ -107,4 +107,25 @@ public class DataEnige {
         return data;
 
     }
+
+
+    public static List<IndexModel> getHeadBankData() {
+        List<IndexModel> list = new ArrayList<>();
+        list.add(new IndexModel("工商银行"));
+        list.add(new IndexModel("建设银行"));
+        list.add(new IndexModel("交通银行"));
+        list.add(new IndexModel("农业银行"));
+        list.add(new IndexModel("中国银行"));
+        list.add(new IndexModel("招商银行"));
+        list.add(new IndexModel("邮政储蓄"));
+        list.add(new IndexModel("民生银行"));
+        list.add(new IndexModel("兴业银行"));
+        list.add(new IndexModel("中信银行"));
+        list.add(new IndexModel("浦发银行"));
+        list.add(new IndexModel("平安银行"));
+        list.add(new IndexModel("广发银行"));
+        list.add(new IndexModel("光大银行"));
+        list.add(new IndexModel("其他"));
+        return list;
+    }
 }

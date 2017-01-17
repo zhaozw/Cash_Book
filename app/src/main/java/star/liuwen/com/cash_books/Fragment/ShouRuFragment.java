@@ -89,7 +89,7 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
         mAdapter = new ShouRuAdapter(mRecyclerView);
         mAdapter.addHeaderView(headView);
 
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), 5, LinearLayoutManager.VERTICAL, false);
+        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 5, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
         mList = new ArrayList<>();
         mList.add(new ZhiChuModel(R.mipmap.icon_shouru_type_gongzi, "工资"));
@@ -111,8 +111,8 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onRVItemClick(ViewGroup parent, View itemView, int position) {
 
-                if (mList.size() == position) {
-                    ToastUtils.showToast(getActivity(), "更多");
+                if (mAdapter.getItemCount() - 1 == position) {
+                    ToastUtils.showToast(getActivity(), "改功能正在完善中");
                 } else {
                     txtName.setText(mList.get(position).getName());
                     imageName.setImageResource(mList.get(position).getUrl());

@@ -26,6 +26,8 @@ public class App extends Application {
     public static CreditCardModel cardModel;
     public static HashMap<String, CreditCardModel> maps;
 
+    public static boolean isRemindPush = false;
+
 
     @Override
     public void onCreate() {

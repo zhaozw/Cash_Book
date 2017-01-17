@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import star.liuwen.com.cash_books.Activity.RemindActivity;
 import star.liuwen.com.cash_books.Activity.SaveMoneyActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.R;
@@ -40,7 +41,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         reHf = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_huanfu);
         reZd = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_zhangdan);
         reDaoData = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_daochushuju);
-        reTx = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_userInfo);
+        reTx = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_tixing);
         reSuggest = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_suggest);
         reSetting = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_setting);
         reAbout = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_about_us);
@@ -81,7 +82,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         } else if (v == reDaoData) {
 
         } else if (v == reTx) {
-
+            startActivity(new Intent(getActivity(), RemindActivity.class));
         } else if (v == reSuggest) {
 
         } else if (v == reSetting) {
