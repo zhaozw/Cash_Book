@@ -22,6 +22,8 @@ public class AccountModel {
         zhiChu, shouRu;
     }
 
+
+
     public AccountModel(String accountType, String data, String money, String consumeType, int url, String timeMinSec, AccountModel.AccountType accountType1) {
         AccountType = accountType;
         Data = data;

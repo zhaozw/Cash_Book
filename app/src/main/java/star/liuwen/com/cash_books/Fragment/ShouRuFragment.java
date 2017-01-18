@@ -1,5 +1,6 @@
 package star.liuwen.com.cash_books.Fragment;
 
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,18 +29,23 @@ import java.util.Map;
 
 import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
+import cn.bingoogolapple.androidcommon.adapter.BGAAdapterViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.cash_books.Adapter.PopWindowAdapter;
+import star.liuwen.com.cash_books.Adapter.ZhiChuAdapter;
 import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
+import star.liuwen.com.cash_books.Enage.DataEnige;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.bean.AccountModel;
+import star.liuwen.com.cash_books.bean.ChoiceAccount;
 import star.liuwen.com.cash_books.bean.ZhiChuModel;
 
 /**
@@ -47,17 +55,17 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
 
     private List<ZhiChuModel> mList;
     private RecyclerView mRecyclerView;
-    private ShouRuAdapter mAdapter;
+    private ZhiChuAdapter mAdapter;
     private EditText edName;
     private ImageView imageName;
-    private TextView txtName, tvData, tvZhanghu, tvSure, tvCashY, tvChukaY, tvXinYkaY, tvZfbY;
-    private RelativeLayout ryCash, ryChuxuKa, ryXinyk, ryZfb;
+    private TextView txtName, tvData, tvZhanghu, tvSure;
     private int position, AccountUrl;
     private PopupWindow window;
     private List<Map<String, AccountModel>> homListData;
     private HashMap<String, AccountModel> mMap;
     private String AccountType, AccountData, AccountConsumeType;
-    ;
+    private ListView mListView;
+    private PopWindowAdapter mPopWindowAdapter;
 
 
     @Nullable
@@ -86,7 +94,7 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
         imageName = (ImageView) headView.findViewById(R.id.imag_name);
         txtName = (TextView) headView.findViewById(R.id.txt_name);
 
-        mAdapter = new ShouRuAdapter(mRecyclerView);
+        mAdapter = new ZhiChuAdapter(mRecyclerView);
         mAdapter.addHeaderView(headView);
 
         final GridLayoutManager manager = new GridLayoutManager(getActivity(), 5, LinearLayoutManager.VERTICAL, false);
@@ -135,26 +143,16 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
 
         } else if (v == tvZhanghu) {
             showZhanghu();
+            if (window.isShowing()) {
+                window.dismiss();
+            } else {
+                window.showAtLocation(tvZhanghu, Gravity.BOTTOM, 0, 0);
+                backgroundAlpha(0.5f);
+            }
         } else if (v == tvData) {
             showData();
         } else if (v == tvSure) {
             doSure();
-        } else if (v == ryCash) {
-            position = 0;
-            setZhanghuText(position);
-            window.dismiss();
-        } else if (v == ryChuxuKa) {
-            position = 1;
-            setZhanghuText(position);
-            window.dismiss();
-        } else if (v == ryXinyk) {
-            position = 2;
-            setZhanghuText(position);
-            window.dismiss();
-        } else if (v == ryZfb) {
-            position = 3;
-            setZhanghuText(position);
-            window.dismiss();
         }
     }
 
@@ -184,68 +182,48 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
         getActivity().finish();
     }
 
-    public void setZhanghuText(int position) {
-        switch (position) {
-            case 0:
-                tvZhanghu.setText("现金");
-                AccountType = "现金";
-                break;
-            case 1:
-                tvZhanghu.setText("储蓄卡");
-                AccountType = "储蓄卡";
-                break;
-            case 2:
-                tvZhanghu.setText("信用卡");
-                AccountType = "信用卡";
-                break;
-            case 3:
-                tvZhanghu.setText("支付宝");
-                AccountType = "支付宝";
-                break;
-            default:
-        }
-    }
-
 
     private void showZhanghu() {
         View popView = View.inflate(getActivity(), R.layout.pop_zhanghu_dialog, null);
-        RelativeLayout re = (RelativeLayout) popView.findViewById(R.id.layout_re);
+        mListView = (ListView) popView.findViewById(R.id.lv_popup_list);
+        window = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        window = new PopupWindow(popView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-
-        window.setBackgroundDrawable(new BitmapDrawable());
+        mPopWindowAdapter = new PopWindowAdapter(getActivity(), R.layout.item_pop_account);
+        mPopWindowAdapter.setData(DataEnige.getShouRuData());
+        mListView.setAdapter(mPopWindowAdapter);
         window.setFocusable(true);
-        window.setOutsideTouchable(true);
-
-        //设置点击屏幕外PopWindon消失
-        re.setOnClickListener(new View.OnClickListener() {
+        window.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                if (window.isShowing()) {
-                    window.dismiss();
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                window.dismiss();
+                AccountType = mPopWindowAdapter.getItem(position).getAccountName();
+                tvZhanghu.setText(AccountType);
             }
         });
 
-        window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        window.showAtLocation(tvZhanghu, Gravity.BOTTOM, 0, 0);
+        window.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.pop_bg));
+        window.setOutsideTouchable(true);
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
 
-        ryCash = (RelativeLayout) popView.findViewById(R.id.layout_choose_cash);
-        ryChuxuKa = (RelativeLayout) popView.findViewById(R.id.layout_choose_chuxuka);
-        ryXinyk = (RelativeLayout) popView.findViewById(R.id.layout_choose_xinyka);
-        ryZfb = (RelativeLayout) popView.findViewById(R.id.layout_choose_zfb);
+    }
 
-        tvCashY = (TextView) popView.findViewById(R.id.layout_cash_y);
-        tvChukaY = (TextView) popView.findViewById(R.id.layout_chuxuKa_y);
-        tvXinYkaY = (TextView) popView.findViewById(R.id.layout_xinyKa_y);
-        tvZfbY = (TextView) popView.findViewById(R.id.layout_zfb_y);
-
-
-        ryCash.setOnClickListener(this);
-        ryChuxuKa.setOnClickListener(this);
-        ryXinyk.setOnClickListener(this);
-        ryZfb.setOnClickListener(this);
-
+    /**
+     * 设置添加屏幕的背景透明
+     *
+     * @param bgAlpha
+     */
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getActivity().getWindow().setAttributes(lp);
     }
 
 
@@ -267,19 +245,5 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setContentView(picker, params);
         dialog.getWindow().setGravity(Gravity.CENTER);
-    }
-
-
-    public class ShouRuAdapter extends BGARecyclerViewAdapter<ZhiChuModel> {
-
-        public ShouRuAdapter(RecyclerView recyclerView) {
-            super(recyclerView, R.layout.item_zhichu_fragment);
-        }
-
-        @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, ZhiChuModel model) {
-            helper.setImageResource(R.id.item_imag, model.getUrl());
-            helper.setText(R.id.item_name, model.getName());
-        }
     }
 }

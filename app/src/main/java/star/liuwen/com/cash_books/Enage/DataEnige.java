@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.bean.ChoiceAccount;
 import star.liuwen.com.cash_books.bean.IndexModel;
 import star.liuwen.com.cash_books.bean.PlanSaveMoneyModel;
 import star.liuwen.com.cash_books.bean.ZhiChuModel;
@@ -126,6 +127,28 @@ public class DataEnige {
         list.add(new IndexModel("广发银行"));
         list.add(new IndexModel("光大银行"));
         list.add(new IndexModel("其他"));
+        return list;
+    }
+
+    public static List<ZhiChuModel> getRemindData() {
+        List<ZhiChuModel> list = new ArrayList<>();
+        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期一"));
+        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期二"));
+        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期三"));
+        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期四"));
+        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期五"));
+        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期六"));
+        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期天"));
+        return list;
+    }
+
+
+    public static List<ChoiceAccount> getShouRuData() {
+        List<ChoiceAccount> list = new ArrayList<>();
+        list.add(new ChoiceAccount(R.mipmap.zongxiaofei, "现金", "500"));
+        list.add(new ChoiceAccount(R.mipmap.icon_add_1, "储蓄卡", "12500"));
+        list.add(new ChoiceAccount(R.mipmap.huankuan, "信用卡", "97000"));
+        list.add(new ChoiceAccount(R.mipmap.zhifubao, "支付宝", "20000"));
         return list;
     }
 }
