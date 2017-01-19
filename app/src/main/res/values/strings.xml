@@ -47,4 +47,16 @@
     <string name="remind">记账提醒</string>
     <string name="finish">完成</string>
     <string name="lx">生活不止眼前的苟且，还有远方的诗和田野</string>
+
+
+    <string name="ring">只响一次</string>
+    <string name="everyday">每天</string>
+    <string name="mon">周一</string>
+    <string name="tue">周二</string>
+    <string name="wed">周三</string>
+    <string name="thu">周四</string>
+    <string name="fri">周五</string>
+    <string name="sat">周六</string>
+    <string name="sun">周日</string>
+    <string name="cycle_sure">确定</string>
 </resources>

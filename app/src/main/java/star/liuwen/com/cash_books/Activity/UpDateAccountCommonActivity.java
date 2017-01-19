@@ -16,7 +16,7 @@ import star.liuwen.com.cash_books.bean.CreditCardModel;
 
 /**
  * Created by liuwen on 2017/1/10.
- * 修改账户余额
+ * 修改账户余额 通用页面
  */
 public class UpDateAccountCommonActivity extends BaseActivity {
     private EditText mEditText;

@@ -36,6 +36,8 @@
         <activity android:name=".Activity.ChoiceIssuingBankActivity"/>
         <!--提醒记账页面-->
         <activity android:name=".Activity.RemindActivity"/>
+        <!--新建存钱计划-->
+        <activity android:name=".Activity.newSaveMoneyPlanActivity"/>
     </application>
 
 </manifest>

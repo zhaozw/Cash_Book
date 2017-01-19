@@ -1,11 +1,12 @@
 package star.liuwen.com.cash_books.Activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
-import java.util.List;
-
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Base.BaseActivity;
@@ -18,7 +19,6 @@ import star.liuwen.com.cash_books.bean.PlanSaveMoneyModel;
  */
 public class PlanSaveMoneyActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
-    private List<PlanSaveMoneyModel> mList;
     private PlanSaveMoneyAdapter mAdapter;
 
 
@@ -44,6 +44,16 @@ public class PlanSaveMoneyActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter.setData(DataEnige.getPlanSaveMoneyData());
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnRVItemClickListener(new BGAOnRVItemClickListener() {
+            @Override
+            public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+                Intent intent = new Intent(PlanSaveMoneyActivity.this, newSaveMoneyPlanActivity.class);
+                PlanSaveMoneyModel model = mAdapter.getItem(position);
+                intent.putExtra("PlanSaveMoneyModel", model);
+                startActivity(intent);
+            }
+        });
     }
 
     public class PlanSaveMoneyAdapter extends BGARecyclerViewAdapter<PlanSaveMoneyModel> {

@@ -26,6 +26,11 @@ public class DateTimeUtil {
         return sdf.format(new Date());
     }
 
+    public static String getCurrentTimeHourMIn(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        return format.format(date);
+    }
+
     /**
      * 获取当前时间
      *

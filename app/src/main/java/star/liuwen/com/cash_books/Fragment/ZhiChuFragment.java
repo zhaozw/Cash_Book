@@ -207,7 +207,7 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
         window.setFocusable(true);
         window.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        window.setAnimationStyle(R.style.AnimBottom);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

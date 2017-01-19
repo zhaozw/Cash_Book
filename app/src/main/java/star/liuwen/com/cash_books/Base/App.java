@@ -27,7 +27,8 @@ public class App extends Application {
     public static HashMap<String, CreditCardModel> maps;
 
     public static boolean isRemindPush = false;
-
+    public static String cycleData = "";
+    public static String cycleTime = "";
 
     @Override
     public void onCreate() {

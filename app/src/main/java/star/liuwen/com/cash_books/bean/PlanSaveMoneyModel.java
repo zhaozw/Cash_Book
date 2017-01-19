@@ -1,9 +1,11 @@
 package star.liuwen.com.cash_books.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by liuwen on 2017/1/13.
  */
-public class PlanSaveMoneyModel {
+public class PlanSaveMoneyModel implements Serializable {
 
     private long id;
     private String planName;

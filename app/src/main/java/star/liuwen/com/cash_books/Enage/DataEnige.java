@@ -38,11 +38,11 @@ public class DataEnige {
     public static List<PlanSaveMoneyModel> getPlanSaveMoneyData() {
         List<PlanSaveMoneyModel> list = new ArrayList<>();
         list.add(new PlanSaveMoneyModel("旅行", "48234人已经加入", R.mipmap.lvyou, "加入 +", "生活不止眼前的苟且，还有远方的诗和田野"));
-        list.add(new PlanSaveMoneyModel("演唱会", "4987人已经加入", R.mipmap.yanchanghui, "加入 +", "生活不止眼前的苟且，还有远方的诗和田野"));
-        list.add(new PlanSaveMoneyModel("比赛", "429人已经加入", R.mipmap.bisai, "加入 +", "生活不止眼前的苟且，还有远方的诗和田野"));
+        list.add(new PlanSaveMoneyModel("演唱会", "4987人已经加入", R.mipmap.yanchanghui, "加入 +", "跨越万水千山去看你，只为静静听你唱，那首贯穿我整个青春的歌"));
+        list.add(new PlanSaveMoneyModel("比赛", "429人已经加入", R.mipmap.bisai, "加入 +", "输赢都是精彩，在我心中你永远是英雄"));
         list.add(new PlanSaveMoneyModel("买房装修", "20312人已经加入", R.mipmap.fang, "加入 +", "生活不止眼前的苟且，还有远方的诗和田野"));
-        list.add(new PlanSaveMoneyModel("买车", "18929人已经加入", R.mipmap.che, "加入 +", "生活不止眼前的苟且，还有远方的诗和田野"));
-        list.add(new PlanSaveMoneyModel("存下第一笔十万", "78551人已经加入", R.mipmap.shiwan, "加入 +", "生活不止眼前的苟且，还有远方的诗和田野"));
+        list.add(new PlanSaveMoneyModel("买车", "18929人已经加入", R.mipmap.che, "加入 +", "家,是你在这个城市扎下的根,是下班回家后橘黄色灯光的暖"));
+        list.add(new PlanSaveMoneyModel("存下第一笔十万", "78551人已经加入", R.mipmap.shiwan, "加入 +", "不再做月光，是时候为自己的未来打算了"));
         return list;
     }
 
@@ -127,18 +127,6 @@ public class DataEnige {
         list.add(new IndexModel("广发银行"));
         list.add(new IndexModel("光大银行"));
         list.add(new IndexModel("其他"));
-        return list;
-    }
-
-    public static List<ZhiChuModel> getRemindData() {
-        List<ZhiChuModel> list = new ArrayList<>();
-        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期一"));
-        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期二"));
-        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期三"));
-        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期四"));
-        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期五"));
-        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期六"));
-        list.add(new ZhiChuModel(R.mipmap.gou_lan, "星期天"));
         return list;
     }
 
