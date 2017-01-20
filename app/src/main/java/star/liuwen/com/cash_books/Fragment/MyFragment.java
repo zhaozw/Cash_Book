@@ -2,18 +2,27 @@ package star.liuwen.com.cash_books.Fragment;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import star.liuwen.com.cash_books.Activity.ChangeSkinActivity;
 import star.liuwen.com.cash_books.Activity.RemindActivity;
 import star.liuwen.com.cash_books.Activity.SaveMoneyActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
+import star.liuwen.com.cash_books.Utils.BitMapUtils;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**
@@ -21,6 +30,7 @@ import star.liuwen.com.cash_books.Utils.ToastUtils;
  */
 public class MyFragment extends BaseFragment implements View.OnClickListener {
     private RelativeLayout reUserInfo, reJq, reCq, reHf, reZd, reDaoData, reTx, reSuggest, reSetting, reAbout;
+    private DrawerLayout mDrawerLayout;
 
 
     @Nullable
@@ -46,6 +56,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         reSetting = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_setting);
         reAbout = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_about_us);
 
+        mDrawerLayout = (DrawerLayout) getContentView().findViewById(R.id.drawer_layout);
+
         reUserInfo.setOnClickListener(this);
         reJq.setOnClickListener(this);
         reCq.setOnClickListener(this);
@@ -56,10 +68,21 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         reSuggest.setOnClickListener(this);
         reSetting.setOnClickListener(this);
         reAbout.setOnClickListener(this);
+
+        if (!SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null).isEmpty()) {
+            Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
+            mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+        }
     }
 
     private void initData() {
-
+        RxBus.getInstance().toObserverableOnMainThread(Config.isBgCash, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), o.toString(), false);
+                mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+            }
+        });
     }
 
     @Override
@@ -73,12 +96,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             intent.putExtra("plan", "cunqian");
             startActivity(intent);
         } else if (v == reHf) {
-
+            startActivity(new Intent(getActivity(), ChangeSkinActivity.class));
         } else if (v == reZd) {
             intent.putExtra("plan", "zhangdan");
             startActivity(intent);
-        } else if (v == reHf) {
-
         } else if (v == reDaoData) {
 
         } else if (v == reTx) {
@@ -90,5 +111,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         } else if (v == reAbout) {
 
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
     }
 }

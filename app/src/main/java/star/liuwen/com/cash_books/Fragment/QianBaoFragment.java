@@ -2,8 +2,11 @@ package star.liuwen.com.cash_books.Fragment;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,9 @@ import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
+import star.liuwen.com.cash_books.Utils.BitMapUtils;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.View.CustomPopWindow;
@@ -29,6 +35,7 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
     private CustomPopWindow mCustomPopWindow;
     private ImageView imageCash, imageCxk, imageXYk, imageZfb, imageJC, imageJR;
     private int position;
+    private DrawerLayout mDrawerLayout;
 
     @Nullable
     @Override
@@ -64,6 +71,8 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
         tvjiechu = (TextView) getContentView().findViewById(R.id.jiechu_jia);
         tvjieru = (TextView) getContentView().findViewById(R.id.jieru_jia);
 
+        mDrawerLayout = (DrawerLayout) getContentView().findViewById(R.id.drawer_layout);
+
         mRyYuer.setOnClickListener(this);
         mRyCash.setOnClickListener(this);
         mRyChuxuka.setOnClickListener(this);
@@ -72,10 +81,21 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
         mRyjiechu.setOnClickListener(this);
         mRyjieru.setOnClickListener(this);
 
+        if (!SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null).isEmpty()) {
+            Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
+            mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+        }
+
     }
 
     private void initData() {
-
+        RxBus.getInstance().toObserverableOnMainThread(Config.isBgCash, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), o.toString(), false);
+                mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+            }
+        });
     }
 
     @Override
@@ -214,5 +234,11 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
                 break;
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
     }
 }

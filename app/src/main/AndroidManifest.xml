@@ -38,6 +38,8 @@
         <activity android:name=".Activity.RemindActivity"/>
         <!--新建存钱计划-->
         <activity android:name=".Activity.newSaveMoneyPlanActivity"/>
+        <!--主题皮肤-->
+        <activity android:name=".Activity.ChangeSkinActivity"/>
     </application>
 
 </manifest>

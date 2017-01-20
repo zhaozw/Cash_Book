@@ -20,12 +20,6 @@ public class Config {
 
     public final static String isRemindPush = "isRemindPush";
 
-    public final static String isOneDay = "isOneDay";
-    public final static String isTwoDay = "isTwoDay";
-    public final static String isThreeDay = "isThreeDay";
-    public final static String isFourDay = "isFourDay";
-    public final static String isFiveDay = "isFiveDay";
-    public final static String isSixDay = "isSixDay";
-    public final static String isSevenDay = "isSevenDay";
+    public final static String ChangeBg = "ChangeBg";
 
 }

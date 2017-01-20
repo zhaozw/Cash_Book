@@ -1,15 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/background"
-              android:orientation="vertical">
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <include layout="@layout/common_toolbar"/>
-
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/common_toolbar"/>
+    </FrameLayout>
+
+
+    <star.liuwen.com.cash_books.View.DampView
+        overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:fadingEdge="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -346,5 +356,5 @@
                     android:textSize="@dimen/txt_16"/>
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </star.liuwen.com.cash_books.View.DampView>
+</android.support.v4.widget.DrawerLayout>

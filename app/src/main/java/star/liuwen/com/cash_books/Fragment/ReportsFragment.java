@@ -1,10 +1,13 @@
 package star.liuwen.com.cash_books.Fragment;
 
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import star.liuwen.com.cash_books.Base.BaseFragment;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
+import star.liuwen.com.cash_books.Utils.BitMapUtils;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.View.MagnificentChart;
 import star.liuwen.com.cash_books.View.MagnificentChartItem;
@@ -25,6 +33,7 @@ import star.liuwen.com.cash_books.View.MagnificentChartItem;
 public class ReportsFragment extends BaseFragment implements View.OnClickListener {
     private MagnificentChart mChart;
     private TextView txtChoiceData;
+    private DrawerLayout mDrawerLayout;
 
     @Nullable
     @Override
@@ -40,6 +49,7 @@ public class ReportsFragment extends BaseFragment implements View.OnClickListene
     private void initView() {
         mChart = (MagnificentChart) getContentView().findViewById(R.id.f_re_magnificentChart);
         txtChoiceData = (TextView) getContentView().findViewById(R.id.f_re_data);
+        mDrawerLayout = (DrawerLayout) getContentView().findViewById(R.id.drawer_layout);
 
 
         txtChoiceData.setOnClickListener(this);
@@ -59,10 +69,21 @@ public class ReportsFragment extends BaseFragment implements View.OnClickListene
 
         mChart.setChartItemsList(chartItemsList);
         mChart.setMaxValue(100);
+
+        if (!SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null).isEmpty()) {
+            Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
+            mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+        }
     }
 
     private void initData() {
-
+        RxBus.getInstance().toObserverableOnMainThread(Config.isBgCash, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), o.toString(), false);
+                mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+            }
+        });
     }
 
     @Override
@@ -72,5 +93,11 @@ public class ReportsFragment extends BaseFragment implements View.OnClickListene
                 mChart.setAnimationSpeed(MagnificentChart.ANIMATION_SPEED_FAST);
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
     }
 }
