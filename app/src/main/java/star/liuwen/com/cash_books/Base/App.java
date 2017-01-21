@@ -1,6 +1,10 @@
 package star.liuwen.com.cash_books.Base;
 
 import android.app.Application;
+import android.content.Context;
+
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +34,21 @@ public class App extends Application {
     public static String cycleData = "";
     public static String cycleTime = "";
 
+    private RefWatcher mRefWatcher;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //初始化内存检测工具
+        mRefWatcher = LeakCanary.install(this);
+    }
+
+    // 在自己的Application中添加如下代码
+    public static RefWatcher getRefWatcher(Context context) {
+
+        App application = (App) context
+                .getApplicationContext();
+        return application.mRefWatcher;
     }
 }

@@ -70,7 +70,7 @@ public class ReportsFragment extends BaseFragment implements View.OnClickListene
         mChart.setChartItemsList(chartItemsList);
         mChart.setMaxValue(100);
 
-        if (!SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null).isEmpty()) {
+        if (SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null) != null) {
             Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
             mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
         }

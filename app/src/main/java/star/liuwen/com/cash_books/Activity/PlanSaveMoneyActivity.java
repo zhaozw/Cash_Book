@@ -67,7 +67,6 @@ public class PlanSaveMoneyActivity extends BaseActivity {
             helper.setText(R.id.item_plan_name, model.getPlanName()).setImageResource(R.id.item_url, model.getUrl())
                     .setText(R.id.item_message, model.getMessage()).setText(R.id.item_add, model.getAdd())
                     .setText(R.id.item_peopele_number, model.getPlanPeopleNumber());
-
         }
     }
 }

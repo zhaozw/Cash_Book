@@ -81,7 +81,7 @@ public class QianBaoFragment extends BaseFragment implements View.OnClickListene
         mRyjiechu.setOnClickListener(this);
         mRyjieru.setOnClickListener(this);
 
-        if (!SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null).isEmpty()) {
+        if (SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null) != null) {
             Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
             mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
         }

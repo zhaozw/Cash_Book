@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 
@@ -49,6 +51,13 @@ public class BaseFragment extends Fragment {
             mTitle.setBackgroundResource(resId);
             mTitle.getBackground().setAlpha(255);// 不透明
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = App.getRefWatcher(getActivity());
+        refWatcher.watch(getActivity());
     }
 
     /**

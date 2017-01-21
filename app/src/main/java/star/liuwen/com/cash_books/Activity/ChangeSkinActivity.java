@@ -50,9 +50,8 @@ public class ChangeSkinActivity extends BaseActivity {
         mGridView = (GridView) findViewById(R.id.change_background_grid);
         mList = new ArrayList<>();
         getDataFormAssets();
-
-        if (!SharedPreferencesUtil.getStringPreferences(this, Config.ChangeBg, null).isEmpty()) {
-            Bitmap bitmap = BitMapUtils.getBitmapByPath(ChangeSkinActivity.this, SharedPreferencesUtil.getStringPreferences(this, Config.ChangeBg, null), false);
+        if (SharedPreferencesUtil.getStringPreferences(this, Config.ChangeBg, null) != null) {
+            Bitmap bitmap = BitMapUtils.getBitmapByPath(this, SharedPreferencesUtil.getStringPreferences(this, Config.ChangeBg, null), false);
             mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
         }
         mAdapter = new BgPicGridAdapter(this, mList);

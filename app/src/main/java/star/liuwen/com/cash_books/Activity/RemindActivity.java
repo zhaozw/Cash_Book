@@ -43,11 +43,9 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
     private ImageView mImageView;
     private RelativeLayout rlRemindTime, rlRemindCycle;
     private TextView txtRemindTime, txtRemindCycle;
-    private PopupWindow window;
     private TimePickerView pvTime;
     private int cycle;
     private String cycleDay;
-    private String timeData;
 
 
     @Override

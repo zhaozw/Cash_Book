@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import star.liuwen.com.cash_books.Activity.ChangeSkinActivity;
 import star.liuwen.com.cash_books.Activity.RemindActivity;
 import star.liuwen.com.cash_books.Activity.SaveMoneyActivity;
+import star.liuwen.com.cash_books.Activity.UserInfoActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
@@ -69,10 +70,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         reSetting.setOnClickListener(this);
         reAbout.setOnClickListener(this);
 
-        if (!SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null).isEmpty()) {
+        if (SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null) != null) {
             Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
             mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
         }
+
     }
 
     private void initData() {
@@ -89,7 +91,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), SaveMoneyActivity.class);
         if (v == reUserInfo) {
-
+            startActivity(new Intent(getActivity(), UserInfoActivity.class));
         } else if (v == reJq) {
 
         } else if (v == reCq) {

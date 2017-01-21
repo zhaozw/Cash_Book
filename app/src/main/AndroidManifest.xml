@@ -40,6 +40,11 @@
         <activity android:name=".Activity.newSaveMoneyPlanActivity"/>
         <!--主题皮肤-->
         <activity android:name=".Activity.ChangeSkinActivity"/>
+        <!--通用修改存钱计划页面-->
+        <activity android:name=".Activity.UpDateSaveMoneyCommonActivity"/>
+        <!--用户界面-->
+        <activity android:name=".Activity.UserInfoActivity"/>
     </application>
+
 
 </manifest>

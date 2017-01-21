@@ -1,6 +1,7 @@
 package star.liuwen.com.cash_books.Fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -217,7 +218,7 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
             }
         });
 
-        window.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.pop_bg));
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(true);
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override

@@ -49,6 +49,14 @@
     <string name="lx">生活不止眼前的苟且，还有远方的诗和田野</string>
     <string name="theme">主题皮肤</string>
 
+    <string name="edit_money">编辑目标金额</string>
+    <string name="edit_remark">编辑备注</string>
+
+    <string name="edit_input_money">请输入目标金额</string>
+    <string name="edit_input_remark">请输入备注</string>
+
+    <string name="user_ino">我的个人资料</string>
+
     <string name="ring">只响一次</string>
     <string name="everyday">每天</string>
     <string name="mon">周一</string>

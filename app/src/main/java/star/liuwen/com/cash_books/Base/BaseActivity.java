@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.ActivityKiller;
 
@@ -39,6 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         // 移除Activity
         ActivityKiller.getInstance().removeActivity(this);
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
     /**
