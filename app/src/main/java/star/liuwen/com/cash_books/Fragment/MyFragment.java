@@ -3,6 +3,7 @@ package star.liuwen.com.cash_books.Fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,8 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import star.liuwen.com.cash_books.Activity.AboutMeActivity;
 import star.liuwen.com.cash_books.Activity.ChangeSkinActivity;
 import star.liuwen.com.cash_books.Activity.RemindActivity;
 import star.liuwen.com.cash_books.Activity.SaveMoneyActivity;
@@ -32,6 +36,8 @@ import star.liuwen.com.cash_books.Utils.ToastUtils;
 public class MyFragment extends BaseFragment implements View.OnClickListener {
     private RelativeLayout reUserInfo, reJq, reCq, reHf, reZd, reDaoData, reTx, reSuggest, reSetting, reAbout;
     private DrawerLayout mDrawerLayout;
+    private ImageView mImageUrl;
+    private TextView txtUserNickName, txtSignature;
 
 
     @Nullable
@@ -57,6 +63,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         reSetting = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_setting);
         reAbout = (RelativeLayout) getContentView().findViewById(R.id.re_f_my_about_us);
 
+        txtUserNickName = (TextView) getContentView().findViewById(R.id.f_my_userName);
+        txtSignature = (TextView) getContentView().findViewById(R.id.f_my_message);
+
+        mImageUrl = (ImageView) getContentView().findViewById(R.id.f_my_touxiang);
         mDrawerLayout = (DrawerLayout) getContentView().findViewById(R.id.drawer_layout);
 
         reUserInfo.setOnClickListener(this);
@@ -75,6 +85,15 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
         }
 
+
+        Bitmap bt = BitmapFactory.decodeFile(Config.RootPath + "head.jpg");
+        if (bt != null) {
+            mImageUrl.setImageBitmap(bt);
+        }
+
+        txtUserNickName.setText(SharedPreferencesUtil.getStringPreferences(getActivity(), Config.userNickName, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(getActivity(), Config.userNickName, ""));
+        txtSignature.setText(SharedPreferencesUtil.getStringPreferences(getActivity(), Config.userSignature, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(getActivity(), Config.userSignature, ""));
+
     }
 
     private void initData() {
@@ -85,6 +104,28 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
             }
         });
+
+        RxBus.getInstance().toObserverableOnMainThread(Config.userUrl, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                mImageUrl.setImageBitmap((Bitmap) o);
+            }
+        });
+
+        RxBus.getInstance().toObserverableOnMainThread(Config.userNickName, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                txtUserNickName.setText((CharSequence) o);
+            }
+        });
+
+        RxBus.getInstance().toObserverableOnMainThread(Config.userSignature, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                txtSignature.setText((CharSequence) o);
+            }
+        });
+
     }
 
     @Override
@@ -111,7 +152,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         } else if (v == reSetting) {
 
         } else if (v == reAbout) {
-
+            startActivity(new Intent(getActivity(), AboutMeActivity.class));
         }
     }
 

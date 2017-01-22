@@ -13,6 +13,7 @@ import com.squareup.leakcanary.RefWatcher;
 
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.ActivityKiller;
+import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2016/12/28.
@@ -41,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         // 移除Activity
         ActivityKiller.getInstance().removeActivity(this);
+        ToastUtils.removeToast();
         RefWatcher refWatcher = App.getRefWatcher(this);
         refWatcher.watch(this);
     }

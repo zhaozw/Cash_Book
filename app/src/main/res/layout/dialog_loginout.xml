@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/zhichu_bg">
+
+    <RelativeLayout
+        android:id="@+id/sethint_dialoglayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/dialog_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="15dp"
+            android:text="提示"
+            android:textColor="@color/text_color_33"
+            android:textSize="@dimen/txt_18"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/splint_line"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/dialog_hint"
+            android:alpha="0.2"
+            android:background="@color/text_color_99"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/dialog_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/splint_line"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/text_color_66"
+            android:textSize="@dimen/textSize_16"/>
+
+        <EditText
+            android:id="@+id/dialog_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/splint_line"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/zhichu_bg"
+            android:hint="请输入"
+            android:inputType="number"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/text_color_66"
+            android:textColorHint="@color/text_color_66"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_line"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/sethint_dialoglayout"
+        android:alpha="0.2"
+        android:background="@color/text_color_99"/>
+
+    <LinearLayout
+        android:id="@+id/layout_button"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/dialog_line">
+
+        <TextView
+            android:id="@+id/dialog_left"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textSize_16"/>
+
+        <TextView
+            android:id="@+id/line_s"
+            android:layout_width="0.5dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:alpha="0.2"
+            android:background="@color/text_color_66"/>
+
+        <TextView
+            android:id="@+id/dialog_right"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textSize_16"/>
+    </LinearLayout>
+</RelativeLayout>

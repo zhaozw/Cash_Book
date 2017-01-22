@@ -47,6 +47,17 @@ public class UpDateSaveMoneyCommonActivity extends BaseActivity {
             mEditText.setHint(getString(R.string.edit_input_remark));
             mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
             position = 2;
+            //处理编辑个人信息结果 因为不用重复写修改界面
+        } else if (values.equals("reNickName")) {
+            setTitle(getString(R.string.edit_renickName));
+            mEditText.setHint(getString(R.string.edit_input_renickName));
+            mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            position = 3;
+        } else if (values.equals("reSignature")) {
+            setTitle(getString(R.string.edit_reSignature));
+            mEditText.setHint(getString(R.string.edit_input_reSignature));
+            mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            position = 4;
         }
     }
 
@@ -64,6 +75,16 @@ public class UpDateSaveMoneyCommonActivity extends BaseActivity {
                 finish();
                 break;
             case 2:
+                intent.putExtra("textInput", textInput);
+                setResult(0, intent);
+                finish();
+                break;
+            case 3:
+                intent.putExtra("textInput", textInput);
+                setResult(0, intent);
+                finish();
+                break;
+            case 4:
                 intent.putExtra("textInput", textInput);
                 setResult(0, intent);
                 finish();

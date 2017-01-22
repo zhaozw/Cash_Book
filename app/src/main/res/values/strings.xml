@@ -51,12 +51,18 @@
 
     <string name="edit_money">编辑目标金额</string>
     <string name="edit_remark">编辑备注</string>
+    <string name="edit_renickName">编辑昵称</string>
+    <string name="edit_reSignature">编辑签名</string>
 
     <string name="edit_input_money">请输入目标金额</string>
     <string name="edit_input_remark">请输入备注</string>
+    <string name="edit_input_renickName">请输入昵称</string>
+    <string name="edit_input_reSignature">请输入签名</string>
 
     <string name="user_ino">我的个人资料</string>
-
+    <string name="about_me">关于</string>
+    <string name="my_github_web">https://github.com/liuwen370494581</string>
+    <string name="about_me_show">*本应用代码都在GitHub上Cash_Books中,如果喜欢，谢谢star</string>
     <string name="ring">只响一次</string>
     <string name="everyday">每天</string>
     <string name="mon">周一</string>

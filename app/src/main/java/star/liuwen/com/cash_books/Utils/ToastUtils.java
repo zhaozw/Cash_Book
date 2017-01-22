@@ -18,4 +18,8 @@ public class ToastUtils {
         }
         mToast.show();
     }
+
+    public static void removeToast() {
+        mToast = null;
+    }
 }

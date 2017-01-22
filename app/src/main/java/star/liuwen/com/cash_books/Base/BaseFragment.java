@@ -14,6 +14,7 @@ import com.squareup.leakcanary.RefWatcher;
 
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
+import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**
  * Created by liuwen on 2016/12/28.
@@ -56,6 +57,7 @@ public class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ToastUtils.removeToast();
         RefWatcher refWatcher = App.getRefWatcher(getActivity());
         refWatcher.watch(getActivity());
     }
