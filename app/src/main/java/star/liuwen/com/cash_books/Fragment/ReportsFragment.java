@@ -12,92 +12,100 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
+import star.liuwen.com.cash_books.PieChart.OnDateChangedLinstener;
+import star.liuwen.com.cash_books.PieChart.StatisticsView;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.Utils.BitMapUtils;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
-import star.liuwen.com.cash_books.View.MagnificentChart;
-import star.liuwen.com.cash_books.View.MagnificentChartItem;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReportsFragment extends BaseFragment implements View.OnClickListener {
-    private MagnificentChart mChart;
+public class ReportsFragment extends Fragment implements OnDateChangedLinstener {
     private TextView txtChoiceData;
     private DrawerLayout mDrawerLayout;
 
-    @Nullable
+
+    private StatisticsView mView;
+    private int total = 100;
+    private float[] items = {1200, 220, 57, 101, 210};
+    private String[] type = {"第一项", "第二项", "第三项", "第四项", "第五项"};
+
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        super.onCreateView(inflater, container, savedInstanceState);
+//        setContentView(R.layout.fragment_reports);
+//        setTitle(getString(R.string.reports_my));
+//        initView();
+//        initData();
+//        return getContentView();
+//    }
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        setContentView(R.layout.fragment_reports);
-        setTitle(getString(R.string.reports_my));
-        initView();
-        initData();
-        return getContentView();
-    }
-
-    private void initView() {
-        mChart = (MagnificentChart) getContentView().findViewById(R.id.f_re_magnificentChart);
-        txtChoiceData = (TextView) getContentView().findViewById(R.id.f_re_data);
-        mDrawerLayout = (DrawerLayout) getContentView().findViewById(R.id.drawer_layout);
-
-
-        txtChoiceData.setOnClickListener(this);
-
-        MagnificentChartItem firstItem = new MagnificentChartItem("first", 30, Color.parseColor("#BAF0A2"));
-        MagnificentChartItem secondItem = new MagnificentChartItem("second", 12, Color.parseColor("#2F6994"));
-        MagnificentChartItem thirdItem = new MagnificentChartItem("third", 3, Color.parseColor("#FF6600"));
-        MagnificentChartItem fourthItem = new MagnificentChartItem("fourth", 41, Color.parseColor("#800080"));
-        MagnificentChartItem fifthItem = new MagnificentChartItem("fifth", 14, Color.parseColor("#708090"));
-
-        List<MagnificentChartItem> chartItemsList = new ArrayList<MagnificentChartItem>();
-        chartItemsList.add(firstItem);
-        chartItemsList.add(secondItem);
-        chartItemsList.add(thirdItem);
-        chartItemsList.add(fourthItem);
-        chartItemsList.add(fifthItem);
-
-        mChart.setChartItemsList(chartItemsList);
-        mChart.setMaxValue(100);
-
-        if (SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null) != null) {
-            Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
-            mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
-        }
-    }
-
-    private void initData() {
-        RxBus.getInstance().toObserverableOnMainThread(Config.isBgCash, new RxBusResult() {
-            @Override
-            public void onRxBusResult(Object o) {
-                Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), o.toString(), false);
-                mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
-            }
-        });
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.statistics_layout, container, false);
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        mView = new StatisticsView(getActivity(), items, total, type);
+        mView.setCurrDate(year, month);
+        mView.setDateChangedListener(this);
+        return mView;
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.f_re_data:
-                mChart.setAnimationSpeed(MagnificentChart.ANIMATION_SPEED_FAST);
-                break;
-        }
+    public void onDateChanged(String startDate, String endDate) {
+        ToastUtils.showToast(getActivity(), "点击了日期" + startDate + "--" + endDate);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        RxBus.getInstance().release();
-    }
+//    private void initView() {
+//        txtChoiceData = (TextView) getContentView().findViewById(R.id.f_re_data);
+//        mDrawerLayout = (DrawerLayout) getContentView().findViewById(R.id.drawer_layout);
+//
+//        txtChoiceData.setOnClickListener(this);
+//
+//
+//        if (SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null) != null) {
+//            Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
+//            mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+//        }
+//    }
+//
+//    private void initData() {
+//        RxBus.getInstance().toObserverableOnMainThread(Config.isBgCash, new RxBusResult() {
+//            @Override
+//            public void onRxBusResult(Object o) {
+//                Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), o.toString(), false);
+//                mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.f_re_data:
+//                break;
+//        }
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        RxBus.getInstance().release();
+//    }
 }
