@@ -44,4 +44,8 @@ public class Config {
     public final static String userSex = "userSix";
 
 
+    public final static String HuoBICh = "HuoBICh";
+    public final static String HuoBIEn = "HuoBIEn";
+
+
 }

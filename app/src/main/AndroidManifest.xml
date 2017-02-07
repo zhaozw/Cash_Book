@@ -55,6 +55,14 @@
         <activity android:name=".Activity.UserInfoActivity"/>
         <!--关于界面-->
         <activity android:name=".Activity.AboutMeActivity"/>
+        <!--设置页面-->
+        <activity android:name=".Activity.SettingActivity"/>
+        <!--密码锁页面-->
+        <activity android:name=".Activity.CodedLockActivity"/>
+        <!--货币页面-->
+        <activity android:name=".Activity.HuoBiActivity"/>
+        <!--货币设置页面-->
+        <activity android:name=".Activity.HuoBiSettingActivity"/>
     </application>
 
 

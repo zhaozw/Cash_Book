@@ -78,4 +78,12 @@
     <string name="reports_find_detail">查看明细</string>
     <string name="reports_xiaofei_detail">消费(元)：</string>
     <string name="reports_xiaofei_txt">%s元</string>
+
+
+    <string name="setting">设置</string>
+    <string name="setting_save_account">账号安全</string>
+
+
+    <string name="huobi_setting">货币设置</string>
+    <string name="huobi_benweibi">选择本位币</string>
 </resources>

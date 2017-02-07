@@ -139,4 +139,47 @@ public class DataEnige {
         list.add(new ChoiceAccount(R.mipmap.zhifubao, "支付宝", "20000"));
         return list;
     }
+
+    public static List<IndexModel> getHuoBiData() {
+        List<IndexModel> list = new ArrayList<>();
+        list.add(new IndexModel("人民币", "CNY"));
+        list.add(new IndexModel("美元", "USD"));
+        list.add(new IndexModel("欧元", "EUR"));
+        list.add(new IndexModel("日元", "JPY"));
+        list.add(new IndexModel("英镑", "GBP"));
+        list.add(new IndexModel("澳大利亚元", "AUD"));
+        list.add(new IndexModel("加拿大元", "CAD"));
+        list.add(new IndexModel("澳门元", "MOP"));
+        list.add(new IndexModel("新西兰元", "NZD"));
+        list.add(new IndexModel("泰铢", "THB"));
+        list.add(new IndexModel("印度卢比", "INR"));
+        list.add(new IndexModel("新加坡元", "SGD"));
+        list.add(new IndexModel("韩元", "KRW"));
+        list.add(new IndexModel("阿联酋迪拉姆", "AED"));
+        list.add(new IndexModel("巴西雷亚尔", "BRL"));
+        list.add(new IndexModel("瑞士法郎", "CHF"));
+        list.add(new IndexModel("丹麦克朗", "DKK"));
+        list.add(new IndexModel("埃及镑", "EGP"));
+        list.add(new IndexModel("印度尼西亚盾", "IDR"));
+        list.add(new IndexModel("柬埔寨瑞尔", "KHR"));
+        list.add(new IndexModel("老挝基普", "LAk"));
+        list.add(new IndexModel("斯里兰卡卢比", "LKR"));
+        list.add(new IndexModel("马来西亚林吉特", "MYR"));
+        list.add(new IndexModel("缅甸元", "MMK"));
+        list.add(new IndexModel("马尔代夫卢非亚", "MVR"));
+        list.add(new IndexModel("菲律宾比索", "PHP"));
+        list.add(new IndexModel("卢布", "RUB"));
+        list.add(new IndexModel("瑞典克朗", "SEK"));
+        list.add(new IndexModel("越南盾", "YND"));
+        list.add(new IndexModel("南非兰特", "ZAR"));
+        list.add(new IndexModel("文莱元", "BND"));
+        list.add(new IndexModel("巴基斯坦卢比", "PKR"));
+        list.add(new IndexModel("乌克兰格里夫钠", "UAH"));
+        list.add(new IndexModel("哥斯达黎家克朗", "CRC"));
+        list.add(new IndexModel("保加利亚新列佛", "BGN"));
+        list.add(new IndexModel("孟加拉国塔卡", "BDT"));
+        list.add(new IndexModel("塔桑尼亚先令", "TZS"));
+        list.add(new IndexModel("以色列谢克尔", "ILS"));
+        return list;
+    }
 }

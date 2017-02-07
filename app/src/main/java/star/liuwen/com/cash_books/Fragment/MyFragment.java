@@ -20,6 +20,7 @@ import star.liuwen.com.cash_books.Activity.AboutMeActivity;
 import star.liuwen.com.cash_books.Activity.ChangeSkinActivity;
 import star.liuwen.com.cash_books.Activity.RemindActivity;
 import star.liuwen.com.cash_books.Activity.SaveMoneyActivity;
+import star.liuwen.com.cash_books.Activity.SettingActivity;
 import star.liuwen.com.cash_books.Activity.UserInfoActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
@@ -150,7 +151,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         } else if (v == reSuggest) {
 
         } else if (v == reSetting) {
-
+            startActivity(new Intent(getActivity(), SettingActivity.class));
         } else if (v == reAbout) {
             startActivity(new Intent(getActivity(), AboutMeActivity.class));
         }

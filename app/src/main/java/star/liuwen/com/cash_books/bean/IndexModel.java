@@ -12,5 +12,10 @@ public class IndexModel {
         this.name = name;
     }
 
+    public IndexModel(String topc, String name) {
+        this.name = name;
+        this.topc = topc;
+    }
+
 
 }

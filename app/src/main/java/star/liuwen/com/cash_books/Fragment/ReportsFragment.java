@@ -33,10 +33,6 @@ import star.liuwen.com.cash_books.Utils.ToastUtils;
  * A simple {@link Fragment} subclass.
  */
 public class ReportsFragment extends Fragment implements OnDateChangedLinstener {
-    private TextView txtChoiceData;
-    private DrawerLayout mDrawerLayout;
-
-
     private StatisticsView mView;
     private int total = 100;
     private float[] items = {1200, 220, 57, 101, 210};
