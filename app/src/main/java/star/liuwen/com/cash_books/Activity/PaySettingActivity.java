@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseActivity;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.RxBus.RxBusResult;
@@ -58,7 +59,7 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         reDebt.setOnClickListener(this);
         reDebtData.setOnClickListener(this);
 
-        AccountValues = getIntent().getStringExtra("666");
+        AccountValues = getIntent().getStringExtra(Config.AccountSetting);
         if (AccountValues.equals("cash")) {
             reBank.setVisibility(View.GONE);
             setAccountVisible();

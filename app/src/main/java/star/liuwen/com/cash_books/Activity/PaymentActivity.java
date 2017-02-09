@@ -19,8 +19,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 import star.liuwen.com.cash_books.Base.BaseActivity;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.StatusBarUtils;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.View.NumberAnimTextView;
@@ -64,7 +66,7 @@ public class PaymentActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PaymentActivity.this, PaySettingActivity.class);
-                intent.putExtra("666", AccountSetting);
+                intent.putExtra(Config.AccountSetting, AccountSetting);
                 startActivity(intent);
             }
         });
@@ -84,6 +86,7 @@ public class PaymentActivity extends BaseActivity {
             StatusBarUtils.setWindowStatusBarColor(PaymentActivity.this, R.color.zhifubao);
             setTitle("支付宝");
             AccountSetting = "zfb";
+            tvAccount.setText(SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.ZfbS, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.ZfbS, ""));
             setTexTSizeAndColor();
         } else if (value.equals("xinyaka")) {
             mRyBg.setBackgroundColor(this.getResources().getColor(R.color.xinyongka));
@@ -91,6 +94,7 @@ public class PaymentActivity extends BaseActivity {
             StatusBarUtils.setWindowStatusBarColor(PaymentActivity.this, R.color.xinyongka);
             setTitle("信用卡");
             AccountSetting = "xyk";
+            tvAccount.setText(SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.XykS, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.XykS, ""));
             setTexTSizeAndColor();
         } else if (value.equals("cash")) {
             mRyBg.setBackgroundColor(this.getResources().getColor(R.color.xianjian));
@@ -98,6 +102,7 @@ public class PaymentActivity extends BaseActivity {
             StatusBarUtils.setWindowStatusBarColor(PaymentActivity.this, R.color.xianjian);
             setTitle("现金");
             AccountSetting = "cash";
+            tvAccount.setText(SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.CashS, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.CashS, ""));
             setTexTSizeAndColor();
         } else if (value.equals("chuxuka")) {
             mRyBg.setBackgroundColor(this.getResources().getColor(R.color.chuxuka));
@@ -105,6 +110,7 @@ public class PaymentActivity extends BaseActivity {
             setTitleBg(R.color.chuxuka);
             setTitle("储蓄卡");
             AccountSetting = "cxk";
+            tvAccount.setText(SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.CxkS, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(PaymentActivity.this, Config.CxkS, ""));
             setTexTSizeAndColor();
         }
         setBackView();
@@ -148,7 +154,36 @@ public class PaymentActivity extends BaseActivity {
     }
 
     public void toYuer(View view) {
-
+        Intent intent = new Intent(PaymentActivity.this, UpDateSaveMoneyCommonActivity.class);
+        intent.putExtra("UpdateSaveMoney", "YuER");
+        intent.putExtra(Config.AccountSetting, AccountSetting);
+        startActivityForResult(intent, YuER);
     }
 
+    private static final int YuER = 101;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            switch (resultCode) {
+                case Config.Cash:
+                    tvAccount.setPrefixString("¥");
+                    tvAccount.setNumberString(data.getExtras().getString("textInput"));
+                    break;
+                case Config.Zfb:
+                    tvAccount.setPrefixString("¥");
+                    tvAccount.setNumberString(data.getExtras().getString("textInput"));
+                    break;
+                case Config.Xyk:
+                    tvAccount.setPrefixString("¥");
+                    tvAccount.setNumberString(data.getExtras().getString("textInput"));
+                    break;
+                case Config.Cxk:
+                    tvAccount.setPrefixString("¥");
+                    tvAccount.setNumberString(data.getExtras().getString("textInput"));
+                    break;
+            }
+        }
+    }
 }

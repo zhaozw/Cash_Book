@@ -1,5 +1,6 @@
 package star.liuwen.com.cash_books;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_PAGE_PERSON = "我的";
     private MainNavigateTabBar mNavigateTabBar;
 
+    private Fragment currentFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         mNavigateTabBar.onSaveInstanceState(outState);
     }
+
 
 
     public void onClickPublish(View v) {

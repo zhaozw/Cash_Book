@@ -1,7 +1,9 @@
 package star.liuwen.com.cash_books.Activity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -13,12 +15,23 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import cn.sharesdk.framework.ShareSDK;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.Base.Config;
+import star.liuwen.com.cash_books.Dialog.TipAndEditDialog;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
+import star.liuwen.com.cash_books.Utils.ActivityKiller;
 import star.liuwen.com.cash_books.Utils.BitMapUtils;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
+import star.liuwen.com.cash_books.onekeyshare.OnekeyShare;
 
 /**
  * Created by liuwen on 2017/2/7.
@@ -27,6 +40,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private RelativeLayout reSaveAccount, reHuoBi, reCleanHunCun, reShare, reUpdate, reCleanAllData, rePopQq, rePopWeXin, rePopFriend, rePopSina, reCancel;
     private DrawerLayout mDrawerLayout;
     private PopupWindow window;
+
+    private OnekeyShare mOks;
+    private String mDownLoadUrl;
+    private String mShareAppName;
+    private String mShareContent;
+    private String mFilePath;
 
     @Override
     public int activityLayoutRes() {
@@ -37,7 +56,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     public void initView() {
         setTitle(getString(R.string.setting));
         setBackView();
+        setLeftText(getString(R.string.back));
+        setLeftImage(R.mipmap.fanhui_lan);
         initDate();
+        copyShareImgToSD();
+
         reSaveAccount = (RelativeLayout) findViewById(R.id.re_setting_save_account);
         reHuoBi = (RelativeLayout) findViewById(R.id.re_setting_huobi);
         reCleanHunCun = (RelativeLayout) findViewById(R.id.re_setting_hucun);
@@ -62,7 +85,18 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initDate() {
+        mDownLoadUrl = "http://sap.dyajb.com/jiaju_share.html";
+        mShareAppName = getString(R.string.app_name);
+        mShareContent = getString(R.string.share_content);
+        mFilePath = Config.SHARE_LOGO;
 
+        RxBus.getInstance().toObserverableOnMainThread(Config.isBgCash, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                Bitmap bitmap = BitMapUtils.getBitmapByPath(SettingActivity.this, o.toString(), false);
+                mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+            }
+        });
     }
 
     @Override
@@ -84,19 +118,95 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         } else if (v == reUpdate) {
             ToastUtils.showToast(this, "该版本已经是最新版本");
         } else if (v == reCleanAllData) {
-
+            CleanAllData();
         } else if (v == rePopQq) {
-
+            shareMethod(0);
         } else if (v == rePopFriend) {
-
+            shareMethod(3);
         } else if (v == rePopSina) {
-
+            shareMethod(1);
         } else if (v == rePopWeXin) {
-
+            shareMethod(2);
         } else if (v == reCancel) {
             window.dismiss();
         }
     }
+
+    private void CleanAllData() {
+        final TipAndEditDialog dialog = new TipAndEditDialog(SettingActivity.this, getString(R.string.clean_all_data));
+        dialog.show();
+        dialog.setLeftText(getString(R.string.cancel));
+        dialog.setLeftTextColor(getResources().getColor(R.color.jiechu));
+        dialog.setRightText(getString(R.string.sure));
+        dialog.setRightTextColor(getResources().getColor(R.color.blue));
+        dialog.setListener(new TipAndEditDialog.ITipEndEditDialogListener() {
+            @Override
+            public void ClickLeft() {
+                dialog.dismiss();
+            }
+
+            @Override
+            public void ClickRight() {
+                SharedPreferencesUtil.cleanSharePreferences(SettingActivity.this, Config.ChangeBg);
+                ActivityKiller.getInstance().exitActivityInList();
+                startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+                dialog.dismiss();
+            }
+
+        });
+    }
+
+    private void shareMethod(int type) {
+        try {
+            ShareSDK.initSDK(this);
+            mOks = new OnekeyShare();
+            mOks.setAddress("");
+            mOks.setTitleUrl(mDownLoadUrl);
+            mOks.setUrl(mDownLoadUrl);
+            mOks.setSilent(true);// 设置成直接分享
+            switch (type) {
+                case 0:
+                    mOks.setTitle(mShareAppName);
+                    mOks.setImagePath(mFilePath + "logo_asset.png");
+                    mOks.setText(mShareContent);
+                    mOks.setPlatform("QQ");
+                    mOks.show(this);
+                    break;
+                case 1:
+                    mOks.disableSSOWhenAuthorize();
+                    mOks.setTitle(mShareAppName);
+                    mOks.setImagePath(mFilePath + "logo_asset.png");
+                    mOks.setText(mShareContent + "下载地址:" + mDownLoadUrl);
+                    mOks.setPlatform("SinaWeibo");
+                    mOks.show(this);
+
+                    break;
+                case 2:
+                    mOks.setTitle(mShareAppName);
+                    mOks.setImagePath(mFilePath + "logo_asset.png");
+                    mOks.setText(mShareContent);
+                    mOks.setPlatform("Wechat");
+                    mOks.show(this);
+
+                    break;
+                case 3:
+                    mOks.setTitle(mShareContent);
+                    mOks.setImagePath(mFilePath + "logo_asset.png");
+                    mOks.setText(mShareContent);
+                    mOks.setPlatform("WechatMoments");
+                    mOks.show(this);
+                    break;
+                default:
+                    break;
+            }
+            // ToastUtils.centerToast(this, getString(R.string.sharing));
+            // this.finish();
+        } catch (Exception e) {
+            ToastUtils.showToast(SettingActivity.this, getString(R.string.share_fail));
+            ShareSDK.stopSDK(this);
+        }
+    }
+
 
     private void showPopShare() {
         View popView = View.inflate(this, R.layout.pop_share, null);
@@ -140,4 +250,49 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         getWindow().setAttributes(lp);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
+    }
+
+    private void copyShareImgToSD() {
+        String fileName = "logo_asset.png";
+
+        try {
+            File file = new File(mFilePath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            file = new File(mFilePath + fileName);
+            if (!file.exists()) {
+                // 本地不存在才copy至sdcard，由于copy文件较大 使用线程来进行
+                file.createNewFile();
+                new Thread(runnableCopyFile).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    Runnable runnableCopyFile = new Runnable() {
+
+        @Override
+        public void run() {
+            try {
+                AssetManager am = getAssets();
+                String fileName = "logo_asset.png";
+                InputStream is = is = am.open(fileName);
+                Bitmap bitmap = BitmapFactory.decodeStream(is);
+                File file = new File(mFilePath + fileName);
+                FileOutputStream fos = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.flush();
+                fos.close();
+            } catch (Exception e) {
+
+            }
+        }
+    };
 }

@@ -145,11 +145,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             intent.putExtra("plan", "zhangdan");
             startActivity(intent);
         } else if (v == reDaoData) {
-
+            ToastUtils.showToast(getActivity(), "功能开发中，敬请期待");
         } else if (v == reTx) {
             startActivity(new Intent(getActivity(), RemindActivity.class));
         } else if (v == reSuggest) {
-
+            ToastUtils.showToast(getActivity(), "功能开发中,敬请期待");
         } else if (v == reSetting) {
             startActivity(new Intent(getActivity(), SettingActivity.class));
         } else if (v == reAbout) {

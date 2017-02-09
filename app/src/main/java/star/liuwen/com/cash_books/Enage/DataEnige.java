@@ -133,10 +133,10 @@ public class DataEnige {
 
     public static List<ChoiceAccount> getShouRuData() {
         List<ChoiceAccount> list = new ArrayList<>();
-        list.add(new ChoiceAccount(R.mipmap.zongxiaofei, "现金", "500"));
-        list.add(new ChoiceAccount(R.mipmap.icon_add_1, "储蓄卡", "12500"));
-        list.add(new ChoiceAccount(R.mipmap.huankuan, "信用卡", "97000"));
-        list.add(new ChoiceAccount(R.mipmap.zhifubao, "支付宝", "20000"));
+        list.add(new ChoiceAccount(R.mipmap.zongxiaofei, "现金", 500));
+        list.add(new ChoiceAccount(R.mipmap.icon_add_1, "储蓄卡", 12500));
+        list.add(new ChoiceAccount(R.mipmap.huankuan, "信用卡", 97000));
+        list.add(new ChoiceAccount(R.mipmap.zhifubao, "支付宝", 20000));
         return list;
     }
 

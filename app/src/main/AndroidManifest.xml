@@ -11,6 +11,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 获取当前WiFi接入的状态以及WLAN热点的信息 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <!-- 改变WiFi多播状态 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:name=".Base.App"
         android:allowBackup="true"
@@ -63,6 +69,10 @@
         <activity android:name=".Activity.HuoBiActivity"/>
         <!--货币设置页面-->
         <activity android:name=".Activity.HuoBiSettingActivity"/>
+        <!--报表明细页面-->
+        <activity android:name=".Activity.ReportsDetailActivity"/>
+        <!--登陆界面-->
+        <activity android:name=".Activity.LoginActivity"/>
     </application>
 
 

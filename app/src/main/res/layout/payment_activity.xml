@@ -33,6 +33,7 @@
             android:src="@mipmap/photo_picker_ic_tab_filter"/>
 
         <TextView
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pay_txt_account"

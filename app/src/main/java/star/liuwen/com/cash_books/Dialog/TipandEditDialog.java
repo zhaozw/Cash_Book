@@ -5,21 +5,27 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import star.liuwen.com.cash_books.R;
 
 /**
- * Created by liuwen on 2017/1/22.
+ * Created by liuwen on 2017/2/9.
  */
 public class TipAndEditDialog extends Dialog implements View.OnClickListener {
-    private TextView mTvLeft, mTvRight, mTvTitle, mTvMessage;
-    private EditText mEdMessage;
-    private ITipDialogListener mListener;
     private String mContent = "";
+    private ITipEndEditDialogListener mListener;
+    private TextView mTvLeft = null;
+    private TextView mTvRight = null;
+    private TextView mSLine = null;
+
+    private TextView mTxtContent;
+    private RelativeLayout mReLayout;
+    private EditText mEditText;
 
     public TipAndEditDialog(Context context, String content) {
-        super(context, R.style.FullScreenDialog);
+        super(context, R.style.CustomDialogStyle);
         this.mContent = content;
     }
 
@@ -27,49 +33,43 @@ public class TipAndEditDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_loginout);
+        mTxtContent = (TextView) findViewById(R.id.dialog_tv);
+        mTxtContent.setText(mContent);
+        mSLine = (TextView) findViewById(R.id.line_s);
+        mReLayout = (RelativeLayout) findViewById(R.id.layout);
+
         mTvLeft = (TextView) findViewById(R.id.dialog_left);
         mTvRight = (TextView) findViewById(R.id.dialog_right);
-        mTvTitle = (TextView) findViewById(R.id.dialog_hint);
-        mTvMessage = (TextView) findViewById(R.id.dialog_tv);
-        mEdMessage = (EditText) findViewById(R.id.dialog_edit);
-
-        mTvTitle.setText(mContent);
-
+        mEditText = (EditText) findViewById(R.id.edittext_dialog_content_et);
         mTvLeft.setOnClickListener(this);
         mTvRight.setOnClickListener(this);
     }
 
 
-    public void setTvMessage(String text) {
-        if (mTvMessage != null) {
-            mTvMessage.setVisibility(View.VISIBLE);
-            mTvMessage.setText(text);
-        }
+    public void setEtHint(String text) {
+        mEditText.setHint(text);
     }
 
-    public void setHintMessage(String text) {
-        if (mEdMessage != null) {
-            mEdMessage.setVisibility(View.VISIBLE);
-            mEdMessage.setHint(text);
-        }
+    public void setInputName(String text) {
+        mEditText.setText(text);
     }
 
-    public void setInputMessage(String text) {
-        if (mEdMessage != null) {
-            mEdMessage.setVisibility(View.VISIBLE);
-            mEdMessage.setText(text);
-        }
+    public void setLayoutVisible() {
+        mReLayout.setVisibility(View.VISIBLE);
     }
 
+    public interface ITipEndEditDialogListener {
+        void ClickLeft();
 
-    public interface ITipDialogListener {
-        void clickLeft();
-
-        void clickRight();
+        void ClickRight();
     }
 
-
-    public void setListener(ITipDialogListener listener) {
+    /**
+     * 暴露接口 给外面方便调用
+     *
+     * @param listener
+     */
+    public void setListener(ITipEndEditDialogListener listener) {
         mListener = listener;
     }
 
@@ -78,15 +78,47 @@ public class TipAndEditDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         if (v == mTvLeft) {
             if (mListener != null) {
-                mListener.clickLeft();
-                dismiss();
+                mListener.ClickLeft();
             }
+            dismiss();
         } else if (v == mTvRight) {
-            if (v == mTvRight) {
-                mListener.clickRight();
-                dismiss();
+            if (mListener != null) {
+                mListener.ClickRight();
             }
+            dismiss();
+        }
+    }
+
+    public void setRightButtonVisible(boolean isShow) {
+        mTvLeft.setBackgroundResource(R.drawable.btn_radius_bottom_selector);
+        mTvRight.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        mSLine.setVisibility(isShow ? View.VISIBLE : View.GONE);
+    }
+
+    public void setLeftText(String text) {
+        if (mTvLeft != null) {
+            mTvLeft.setText(text);
         }
 
     }
+
+    public void setRightText(String text) {
+        if (mTvRight != null) {
+            mTvRight.setText(text);
+        }
+    }
+
+    public void setLeftTextColor(int resID) {
+        if (mTvLeft != null) {
+            mTvLeft.setTextColor(resID);
+        }
+    }
+
+    public void setRightTextColor(int resID) {
+        if (mTvRight != null) {
+            mTvRight.setTextColor(resID);
+        }
+    }
+
+
 }

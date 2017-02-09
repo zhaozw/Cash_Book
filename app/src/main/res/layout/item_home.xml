@@ -139,9 +139,9 @@
                 android:id="@+id/item_h_image_shouru"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_alignParentRight="true"
                 android:layout_below="@id/item_h_txt_shouru_time"
                 android:layout_marginLeft="22dp"
+                android:layout_toLeftOf="@+id/item_h_txt_shouru_type"
                 android:src="@mipmap/maicai"/>
 
             <TextView
@@ -149,7 +149,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/item_h_txt_shouru_time"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="3dp"
+                android:layout_toLeftOf="@+id/item_h_txt_shouru"
                 android:padding="2dp"
                 android:text="收入："
                 android:textSize="@dimen/txr_14"/>
@@ -158,8 +159,9 @@
                 android:id="@+id/item_h_txt_shouru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_below="@id/item_h_txt_shouru_time"
-                android:layout_toRightOf="@id/item_h_txt_shouru_type"
+                android:layout_marginRight="20dp"
                 android:padding="2dp"
                 android:text="0.00"
                 android:textSize="@dimen/txr_14"/>

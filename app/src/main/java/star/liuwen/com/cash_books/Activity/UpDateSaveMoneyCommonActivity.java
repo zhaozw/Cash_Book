@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import star.liuwen.com.cash_books.Base.BaseActivity;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 
 /**
@@ -38,6 +40,7 @@ public class UpDateSaveMoneyCommonActivity extends BaseActivity {
         });
 
         String values = getIntent().getStringExtra("UpdateSaveMoney");
+        String account = getIntent().getStringExtra(Config.AccountSetting);
         if (values.equals("ReMoney")) {
             setTitle(getString(R.string.edit_money));
             mEditText.setHint(getString(R.string.edit_input_money));
@@ -58,6 +61,26 @@ public class UpDateSaveMoneyCommonActivity extends BaseActivity {
             mEditText.setHint(getString(R.string.edit_input_reSignature));
             mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
             position = 4;
+        } else if (values.equals("YuER")) {
+            if (account.equals("cash")) {
+                setTitle(getString(R.string.edit_setCashYuEr));
+                mEditText.setHint(getString(R.string.edit_input_yuer));
+                position = 5;
+            } else if (account.equals("zfb")) {
+                setTitle(getString(R.string.edit_setZfbYuEr));
+                mEditText.setHint(getString(R.string.edit_input_yuer));
+                position = 6;
+
+            } else if (account.equals("xyk")) {
+                setTitle(getString(R.string.edit_setXykYuEr));
+                mEditText.setHint(getString(R.string.edit_input_yuer));
+                position = 7;
+            } else if (account.equals("cxk")) {
+                setTitle(getString(R.string.edit_setCxkYuEr));
+                mEditText.setHint(getString(R.string.edit_input_yuer));
+                position = 8;
+            }
+
         }
     }
 
@@ -87,6 +110,30 @@ public class UpDateSaveMoneyCommonActivity extends BaseActivity {
             case 4:
                 intent.putExtra("textInput", textInput);
                 setResult(0, intent);
+                finish();
+                break;
+            case 5:
+                intent.putExtra("textInput", textInput);
+                setResult(Config.Cash, intent);
+                SharedPreferencesUtil.setStringPreferences(UpDateSaveMoneyCommonActivity.this, Config.CashS, textInput);
+                finish();
+                break;
+            case 6:
+                intent.putExtra("textInput", textInput);
+                setResult(Config.Zfb, intent);
+                SharedPreferencesUtil.setStringPreferences(UpDateSaveMoneyCommonActivity.this, Config.ZfbS, textInput);
+                finish();
+                break;
+            case 7:
+                intent.putExtra("textInput", textInput);
+                setResult(Config.Xyk, intent);
+                SharedPreferencesUtil.setStringPreferences(UpDateSaveMoneyCommonActivity.this, Config.XykS, textInput);
+                finish();
+                break;
+            case 8:
+                intent.putExtra("textInput", textInput);
+                setResult(Config.Cxk, intent);
+                SharedPreferencesUtil.setStringPreferences(UpDateSaveMoneyCommonActivity.this, Config.CxkS, textInput);
                 finish();
                 break;
         }

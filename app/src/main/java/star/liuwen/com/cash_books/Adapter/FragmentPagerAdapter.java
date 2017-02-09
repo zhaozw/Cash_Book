@@ -172,5 +172,5 @@ public abstract class FragmentPagerAdapter extends PagerAdapter {
 
     private static String makeFragmentName(int viewId, long id) {
         return "android:switcher:" + viewId + ":" + id;
-    }
-}
+        }
+        }

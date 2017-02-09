@@ -8,12 +8,13 @@ public class ChoiceAccount {
     private Long id;
     private int url;
     private String accountName;
-    private String money;
+    private long money;
+
 
     public ChoiceAccount() {
     }
 
-    public ChoiceAccount(int url, String accountName, String money) {
+    public ChoiceAccount(int url, String accountName, long money) {
         this.url = url;
         this.accountName = accountName;
         this.money = money;
@@ -43,11 +44,11 @@ public class ChoiceAccount {
         this.accountName = accountName;
     }
 
-    public String getMoney() {
+    public long getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(long money) {
         this.money = money;
     }
 }

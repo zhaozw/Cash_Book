@@ -42,10 +42,29 @@ public class Config {
     public final static String userNickName = "userNickName";
     public final static String userSignature = "userSignature";
     public final static String userSex = "userSix";
+    public final static String tarGet = "tarGet";
+    public final static String tarRemarks = "tarRemarks";
+    public final static String tarYear = "tarYear";
+    public final static String YuEr = "YuEr";
 
 
     public final static String HuoBICh = "HuoBICh";
     public final static String HuoBIEn = "HuoBIEn";
+
+    public final static String AccountSetting = "AccountSetting";
+
+    public static final String SHARE_LOGO = RootPath + "/share/logo/";
+
+
+    public static final int Xyk = 101;
+    public static final int Cxk = 102;
+    public static final int Zfb = 103;
+    public static final int Cash = 104;
+
+    public static final String XykS = "Xyk";
+    public static final String CxkS = "Cxk";
+    public static final String ZfbS = "Zfb";
+    public static final String CashS = "Cash";
 
 
 }
