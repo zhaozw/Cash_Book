@@ -1,6 +1,7 @@
 package star.liuwen.com.cash_books.Activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,8 +11,11 @@ import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Base.BaseActivity;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.Enage.DataEnige;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.bean.PlanSaveMoneyModel;
 
 /**
@@ -54,6 +58,7 @@ public class PlanSaveMoneyActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     public class PlanSaveMoneyAdapter extends BGARecyclerViewAdapter<PlanSaveMoneyModel> {
@@ -63,10 +68,11 @@ public class PlanSaveMoneyActivity extends BaseActivity {
         }
 
         @Override
-        protected void fillData(BGAViewHolderHelper helper, int position, PlanSaveMoneyModel model) {
+        protected void fillData(final BGAViewHolderHelper helper, int position, PlanSaveMoneyModel model) {
             helper.setText(R.id.item_plan_name, model.getPlanName()).setImageResource(R.id.item_url, model.getUrl())
                     .setText(R.id.item_message, model.getMessage()).setText(R.id.item_add, model.getAdd())
                     .setText(R.id.item_peopele_number, model.getPlanPeopleNumber());
+
         }
     }
 }

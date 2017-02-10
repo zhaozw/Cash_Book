@@ -30,6 +30,7 @@ public class Config {
     public final static String isBgJR = "isBgJR";
 
     public final static String isRemindPush = "isRemindPush";
+    public final static String isOpenCodedLock = "isOpenCodedLock";
     public final static String ChangeBg = "ChangeBg";
 
     public enum SaveMoneyPlan {
@@ -38,6 +39,7 @@ public class Config {
 
     public static SaveMoneyPlan mSaveMoneyPlan = null;
 
+    public final static String TarGetUrl = "TarGetUrl";
     public final static String userUrl = "userUrl";
     public final static String userNickName = "userNickName";
     public final static String userSignature = "userSignature";
@@ -65,6 +67,8 @@ public class Config {
     public static final String CxkS = "Cxk";
     public static final String ZfbS = "Zfb";
     public static final String CashS = "Cash";
+
+    public static final String LockPassword = "LockPassword";
 
 
 }

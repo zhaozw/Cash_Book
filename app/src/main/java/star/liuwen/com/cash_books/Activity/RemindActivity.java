@@ -75,9 +75,10 @@ public class RemindActivity extends BaseActivity implements View.OnClickListener
         txtRemindTime.setText(TextUtils.isEmpty(App.cycleTime) ? getString(R.string.no_setting) : App.cycleTime);
         txtRemindCycle.setText(TextUtils.isEmpty(App.cycleData) ? getString(R.string.no_setting) : App.cycleData);
 
-        mImageView.setImageResource(App.isRemindPush ? R.mipmap.more_push_on : R.mipmap.more_push_off);
-        rlRemindCycle.setVisibility(App.isRemindPush ? View.VISIBLE : View.GONE);
-        rlRemindTime.setVisibility(App.isRemindPush ? View.VISIBLE : View.GONE);
+        boolean isRemind = SharedPreferencesUtil.getBooleanPreferences(this, Config.isRemindPush, false);
+        mImageView.setImageResource(isRemind ? R.mipmap.more_push_on : R.mipmap.more_push_off);
+        rlRemindCycle.setVisibility(isRemind ? View.VISIBLE : View.GONE);
+        rlRemindTime.setVisibility(isRemind ? View.VISIBLE : View.GONE);
 
         rlRemindCycle.setOnClickListener(this);
         rlRemindTime.setOnClickListener(this);
