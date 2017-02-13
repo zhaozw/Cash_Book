@@ -21,7 +21,7 @@ import star.liuwen.com.cash_books.R;
 
 /**
  * 九宫格解锁
- *Created by liuwen on 2017/2/10..
+ * Created by liuwen on 2017/2/10..
  */
 public class GraphicLockView extends View {
 
@@ -125,9 +125,9 @@ public class GraphicLockView extends View {
         /*================================================================================*/
 
         //3、图片资源(图片资源自己加上)
-        bpPointNormal = BitmapFactory.decodeResource(getResources(), R.drawable.point_normal);
-        bpPointPressed = BitmapFactory.decodeResource(getResources(), R.drawable.point_pressed);
-        bpPointError = BitmapFactory.decodeResource(getResources(), R.drawable.point_error);
+        bpPointNormal = BitmapFactory.decodeResource(getResources(), R.mipmap.gesture_node_normal);
+        bpPointPressed = BitmapFactory.decodeResource(getResources(), R.mipmap.gesture_node_pressed);
+        bpPointError = BitmapFactory.decodeResource(getResources(), R.mipmap.gesture_node_wrong);
         bpLinePressed = BitmapFactory.decodeResource(getResources(), R.drawable.line_pressed);
         bpLineError = BitmapFactory.decodeResource(getResources(), R.drawable.line_error);
 

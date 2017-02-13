@@ -41,7 +41,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     private RecyclerView mRecyclerView;
     private HomeAdapter mAdapter;
 
-    private List<Map<String, AccountModel>> mList;
+    private List<AccountModel> mList;
     private TextView tvShouRu, tvZhiChu;
 
     private DefineBAGRefreshWithLoadView mDefineBAGRefreshWithLoadView = null;
@@ -127,7 +127,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
         RxBus.getInstance().toObserverableOnMainThread("AccountModel", new RxBusResult() {
             @Override
             public void onRxBusResult(Object o) {
-                mList = (List<Map<String, AccountModel>>) o;
+                mList = (List<AccountModel>) o;
                 mAdapter.addNewData(mList);
                 mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
                 mViewStub.setVisibility(View.GONE);

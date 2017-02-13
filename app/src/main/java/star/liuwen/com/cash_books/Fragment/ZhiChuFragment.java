@@ -65,8 +65,7 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
     private TextView txtName, tvData, tvZhanghu, tvSure;
     private int position, AccountUrl;
     private PopupWindow window;
-    private List<Map<String, AccountModel>> homListData;
-    private HashMap<String, AccountModel> mMap;
+    private List<AccountModel> homListData;
 
     private String AccountType, AccountData, AccountConsumeType;
     private ListView mListView;
@@ -175,7 +174,6 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
 
     private void doSure() {
         homListData = new ArrayList<>();
-        mMap = new HashMap<>();
         String mEdName = edName.getText().toString();
         if (TextUtils.isEmpty(mEdName.trim())) {
             ToastUtils.showToast(getActivity(), "请输入金额");
@@ -189,8 +187,7 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
         if (tvData.getText().toString().equals("日期")) {
             ToastUtils.showToast(getActivity(), "请选择日期");
         }
-        mMap.put("AccountModel", new AccountModel(AccountType, AccountData, mEdName, AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.zhiChu));
-        homListData.add(mMap);
+        homListData.add(new AccountModel(AccountType, AccountData, mEdName, AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.zhiChu));
         App.accountMaps = homListData;
         RxBus.getInstance().post("AccountModel", homListData);
         getActivity().finish();

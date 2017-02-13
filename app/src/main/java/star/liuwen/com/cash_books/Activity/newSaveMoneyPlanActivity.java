@@ -8,6 +8,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
@@ -32,6 +34,7 @@ import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.bean.PlanSaveMoneyModel;
 
@@ -64,8 +67,7 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
 
             }
         });
-        PlanSaveMoneyModel model = (PlanSaveMoneyModel) getIntent().getExtras().getSerializable("PlanSaveMoneyModel");
-
+        PlanSaveMoneyModel model = (PlanSaveMoneyModel) getIntent().getExtras().getSerializable(Config.PlanSaveMoneyModel);
         imageUrl = (ImageView) findViewById(R.id.new_money_image_url);
         imagePhoto = (ImageView) findViewById(R.id.new_money_photo);
 
@@ -87,7 +89,6 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
 
         imageUrl.setImageResource(model.getUrl());
         txtMubiao.setText(model.getPlanName());
-
         pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
         pvTime.setRange(2017, 2055);
         pvTime.setTime(new Date());
@@ -103,8 +104,8 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
         if (bt != null) {
             imageUrl.setImageBitmap(bt);
         }
-
     }
+
 
     @Override
     public void onClick(View v) {
@@ -112,6 +113,7 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
         if (v == reMoney) {
             intent.putExtra("UpdateSaveMoney", "ReMoney");
             startActivityForResult(intent, ReMoney);
+
         } else if (v == reTime) {
             pvTime.show();
         } else if (v == reMark) {

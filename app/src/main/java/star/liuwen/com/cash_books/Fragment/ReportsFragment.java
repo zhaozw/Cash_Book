@@ -1,6 +1,7 @@
 package star.liuwen.com.cash_books.Fragment;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,7 +18,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
+import star.liuwen.com.cash_books.Activity.ReportsDetailActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.PieChart.OnDateChangedLinstener;
@@ -28,15 +31,19 @@ import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.Utils.BitMapUtils;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
+import star.liuwen.com.cash_books.bean.AccountModel;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReportsFragment extends Fragment implements OnDateChangedLinstener {
+public class ReportsFragment extends Fragment implements OnDateChangedLinstener, StatisticsView.OnClickDetailListener {
     private StatisticsView mView;
     private int total = 100;
     private float[] items = {1200, 220, 57, 101, 210};
-    private String[] type = {"第一项", "第二项", "第三项", "第四项", "第五项"};
+    private String[] type = {"淘宝", "医疗教育", "餐饮", "酒水", "衣服"};
+    private List<AccountModel> mList;
+    private List<String> types;
+    private List<Float> money;
 
 //    @Nullable
 //    @Override
@@ -60,12 +67,22 @@ public class ReportsFragment extends Fragment implements OnDateChangedLinstener 
         mView = new StatisticsView(getActivity(), items, total, type);
         mView.setCurrDate(year, month);
         mView.setDateChangedListener(this);
+        mView.setDetailListener(this);
+        mList = new ArrayList<>();
+        types = new ArrayList<>();
+        money = new ArrayList<>();
         return mView;
     }
+
 
     @Override
     public void onDateChanged(String startDate, String endDate) {
         ToastUtils.showToast(getActivity(), "点击了日期" + startDate + "--" + endDate);
+    }
+
+    @Override
+    public void showDetail() {
+        startActivity(new Intent(getActivity(), ReportsDetailActivity.class));
     }
 
 //    private void initView() {
@@ -104,4 +121,11 @@ public class ReportsFragment extends Fragment implements OnDateChangedLinstener 
 //        super.onDestroy();
 //        RxBus.getInstance().release();
 //    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
+    }
 }

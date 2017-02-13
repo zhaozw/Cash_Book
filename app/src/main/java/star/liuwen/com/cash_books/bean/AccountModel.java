@@ -15,6 +15,7 @@ public class AccountModel {
     public AccountType mAccountType;
 
 
+
     public AccountModel() {
     }
 
@@ -22,7 +23,11 @@ public class AccountModel {
         zhiChu, shouRu;
     }
 
-
+    public AccountModel(String money, String consumeType, int url) {
+        Money = money;
+        ConsumeType = consumeType;
+        this.url = url;
+    }
 
     public AccountModel(String accountType, String data, String money, String consumeType, int url, String timeMinSec, AccountModel.AccountType accountType1) {
         AccountType = accountType;

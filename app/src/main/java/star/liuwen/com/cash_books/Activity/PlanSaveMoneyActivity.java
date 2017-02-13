@@ -54,7 +54,7 @@ public class PlanSaveMoneyActivity extends BaseActivity {
             public void onRVItemClick(ViewGroup parent, View itemView, int position) {
                 Intent intent = new Intent(PlanSaveMoneyActivity.this, newSaveMoneyPlanActivity.class);
                 PlanSaveMoneyModel model = mAdapter.getItem(position);
-                intent.putExtra("PlanSaveMoneyModel", model);
+                intent.putExtra(Config.PlanSaveMoneyModel, model);
                 startActivity(intent);
             }
         });

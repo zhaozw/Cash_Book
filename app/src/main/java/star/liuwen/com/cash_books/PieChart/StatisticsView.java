@@ -32,6 +32,7 @@ public class StatisticsView extends ViewGroup implements OnClickListener {
     private int mMaxMonth, mMaxYear, mMinMonth, mMinYear;
     private String startDate, endDate;
     private OnDateChangedLinstener mDateChangedListener;
+    private OnClickDetailListener mListener;
     private PieChartView pieChart;
     private String[] colors = {"#bc3c46", "#fe992a", "#c03c9a", "#11b60d", "#fa376c"};
     private float[] items;
@@ -316,7 +317,7 @@ public class StatisticsView extends ViewGroup implements OnClickListener {
                 break;
 
             case R.id.find_detail:
-                ToastUtils.showToast(context, "点击了查看明细");
+                mListener.showDetail();
                 break;
             default:
                 break;
@@ -333,5 +334,14 @@ public class StatisticsView extends ViewGroup implements OnClickListener {
     public void setDateChangedListener(
             OnDateChangedLinstener mDateChangedListener) {
         this.mDateChangedListener = mDateChangedListener;
+    }
+
+    public void setDetailListener(OnClickDetailListener mClickDetailListener) {
+        this.mListener = mClickDetailListener;
+
+    }
+
+    public interface OnClickDetailListener {
+        void showDetail();
     }
 }

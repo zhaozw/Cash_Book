@@ -95,11 +95,13 @@ public class UpDateSaveMoneyCommonActivity extends BaseActivity {
             case 1:
                 intent.putExtra("textInput", textInput);
                 setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(UpDateSaveMoneyCommonActivity.this, Config.TargetAmount, textInput);
                 finish();
                 break;
             case 2:
                 intent.putExtra("textInput", textInput);
                 setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(UpDateSaveMoneyCommonActivity.this, Config.ReMark, textInput);
                 finish();
                 break;
             case 3:
