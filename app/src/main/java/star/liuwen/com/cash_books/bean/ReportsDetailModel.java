@@ -11,12 +11,12 @@ public class ReportsDetailModel implements Serializable {
     private String consumeName;
     private int url;
     private String consumeMoney;
-    private Double consumePercent;
+    private float consumePercent;
 
     public ReportsDetailModel() {
     }
 
-    public ReportsDetailModel(String consumeName, int url, String consumeMoney, Double consumePercent) {
+    public ReportsDetailModel(String consumeName, int url, String consumeMoney, float consumePercent) {
         this.consumeName = consumeName;
         this.url = url;
         this.consumeMoney = consumeMoney;
@@ -55,11 +55,11 @@ public class ReportsDetailModel implements Serializable {
         this.consumeMoney = consumeMoney;
     }
 
-    public Double getConsumePercent() {
+    public float getConsumePercent() {
         return consumePercent;
     }
 
-    public void setConsumePercent(Double consumePercent) {
+    public void setConsumePercent(float consumePercent) {
         this.consumePercent = consumePercent;
     }
 }

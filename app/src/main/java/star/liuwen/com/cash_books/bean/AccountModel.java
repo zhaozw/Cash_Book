@@ -13,10 +13,19 @@ public class AccountModel {
     private int url;
     private String timeMinSec;
     public AccountType mAccountType;
-
+    private float consumePercent;//百分比
 
 
     public AccountModel() {
+    }
+
+
+    public AccountModel(String consumeType, int url, String money, float consumePercent, String data) {
+        ConsumeType = consumeType;
+        this.url = url;
+        Money = money;
+        this.consumePercent = consumePercent;
+        Data = data;
     }
 
     public enum AccountType {
@@ -89,6 +98,14 @@ public class AccountModel {
 
     public String getTimeMinSec() {
         return timeMinSec;
+    }
+
+    public float getConsumePercent() {
+        return consumePercent;
+    }
+
+    public void setConsumePercent(float consumePercent) {
+        this.consumePercent = consumePercent;
     }
 
     public void setTimeMinSec(String timeMinSec) {

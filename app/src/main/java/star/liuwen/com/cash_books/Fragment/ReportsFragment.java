@@ -23,6 +23,7 @@ import java.util.Map;
 import star.liuwen.com.cash_books.Activity.ReportsDetailActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
+import star.liuwen.com.cash_books.Enage.DataEnige;
 import star.liuwen.com.cash_books.PieChart.OnDateChangedLinstener;
 import star.liuwen.com.cash_books.PieChart.StatisticsView;
 import star.liuwen.com.cash_books.R;
@@ -39,11 +40,8 @@ import star.liuwen.com.cash_books.bean.AccountModel;
 public class ReportsFragment extends Fragment implements OnDateChangedLinstener, StatisticsView.OnClickDetailListener {
     private StatisticsView mView;
     private int total = 100;
-    private float[] items = {1200, 220, 57, 101, 210};
-    private String[] type = {"淘宝", "医疗教育", "餐饮", "酒水", "衣服"};
-    private List<AccountModel> mList;
-    private List<String> types;
-    private List<Float> money;
+    private float[] moneys;
+    private String[] types;
 
 //    @Nullable
 //    @Override
@@ -64,13 +62,16 @@ public class ReportsFragment extends Fragment implements OnDateChangedLinstener,
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
-        mView = new StatisticsView(getActivity(), items, total, type);
+        types = new String[DataEnige.getReportsData().size()];
+        moneys = new float[DataEnige.getReportsData().size()];
+        for (int i = 0; i < DataEnige.getReportsData().size(); i++) {
+            types[i] = DataEnige.getReportsData().get(i).getConsumeType();
+            moneys[i] = Float.parseFloat(DataEnige.getReportsData().get(i).getMoney());
+        }
+        mView = new StatisticsView(getActivity(), moneys, total, types);
         mView.setCurrDate(year, month);
         mView.setDateChangedListener(this);
         mView.setDetailListener(this);
-        mList = new ArrayList<>();
-        types = new ArrayList<>();
-        money = new ArrayList<>();
         return mView;
     }
 

@@ -30,6 +30,7 @@ import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.Utils.ActivityKiller;
 import star.liuwen.com.cash_books.Utils.BitMapUtils;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
+import star.liuwen.com.cash_books.Utils.SnackBarUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.onekeyshare.OnekeyShare;
 
@@ -106,7 +107,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         } else if (v == reHuoBi) {
             startActivity(new Intent(SettingActivity.this, HuoBiActivity.class));
         } else if (v == reCleanHunCun) {
-            ToastUtils.showToast(this, "缓存已经清除");
+            SnackBarUtil.show(reCleanHunCun, "缓存已经清除");
         } else if (v == reShare) {
             showPopShare();
             if (window.isShowing()) {
@@ -116,7 +117,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 backgroundAlpha(0.5f);
             }
         } else if (v == reUpdate) {
-            ToastUtils.showToast(this, "该版本已经是最新版本");
+            SnackBarUtil.show(reUpdate, "该版本已经是最新版本");
         } else if (v == reCleanAllData) {
             CleanAllData();
         } else if (v == rePopQq) {

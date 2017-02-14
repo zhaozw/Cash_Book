@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemLongClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
@@ -27,6 +29,7 @@ import star.liuwen.com.cash_books.Activity.CalendarActivity;
 import star.liuwen.com.cash_books.Adapter.HomeAdapter;
 import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
+import star.liuwen.com.cash_books.Dialog.TipAndEditDialog;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.RxBus.RxBusResult;
@@ -37,7 +40,7 @@ import star.liuwen.com.cash_books.bean.AccountModel;
 /**
  * 明细
  */
-public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate, BGAOnRVItemClickListener, BGAOnRVItemLongClickListener {
     private RecyclerView mRecyclerView;
     private HomeAdapter mAdapter;
 
@@ -116,9 +119,9 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
             mBGARefreshLayout.setVisibility(View.GONE);
             mAdapter.setData(mList);
             mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
-
         }
-
+        mAdapter.setOnRVItemClickListener(this);
+        mAdapter.setOnRVItemLongClickListener(this);
 
     }
 
@@ -154,6 +157,33 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        return false;
+    }
+
+    @Override
+    public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+
+    }
+
+    @Override
+    public boolean onRVItemLongClick(final ViewGroup parent, View itemView, final int position) {
+        final TipAndEditDialog dialog = new TipAndEditDialog(getActivity(), "确定要删除吗?");
+        dialog.show();
+        dialog.setLeftText(getString(R.string.cancel));
+        dialog.setLeftTextColor(getResources().getColor(R.color.jiechu));
+        dialog.setRightText(getString(R.string.sure));
+        dialog.setRightTextColor(getResources().getColor(R.color.blue));
+        dialog.setListener(new TipAndEditDialog.ITipEndEditDialogListener() {
+            @Override
+            public void ClickLeft() {
+                dialog.dismiss();
+            }
+
+            @Override
+            public void ClickRight() {
+                mAdapter.removeItem(position);
+            }
+        });
         return false;
     }
 }

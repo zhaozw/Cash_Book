@@ -1,6 +1,8 @@
 package star.liuwen.com.cash_books.Utils;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -82,6 +84,20 @@ public class DateTimeUtil {
     public static String getYearMonthDay(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(date);
+    }
+
+    public static Calendar CALENDAR = Calendar.getInstance();
+
+    /**
+     * 格式化时间
+     *
+     * @param timeMillis
+     * @return yyyy-MM-dd
+     */
+    public static String formatDataToYMD(long timeMillis) {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        CALENDAR.setTimeInMillis(timeMillis);
+        return formatter.format(CALENDAR.getTime());
     }
 }
 

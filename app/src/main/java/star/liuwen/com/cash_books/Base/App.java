@@ -28,7 +28,6 @@ public class App extends Application {
     public static boolean isBgJR = true;
 
     public static CreditCardModel cardModel;
-    public static HashMap<String, CreditCardModel> maps;
 
     public static boolean isRemindPush = false;
     public static boolean isOpenCodedLock = false;

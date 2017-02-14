@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.bean.AccountModel;
 import star.liuwen.com.cash_books.bean.ChoiceAccount;
 import star.liuwen.com.cash_books.bean.IndexModel;
 import star.liuwen.com.cash_books.bean.PlanSaveMoneyModel;
@@ -184,13 +185,13 @@ public class DataEnige {
         return list;
     }
 
-    public static List<ReportsDetailModel> getReportsData() {
-        List<ReportsDetailModel> list = new ArrayList<>();
-        list.add(new ReportsDetailModel("淘宝", R.mipmap.icon_zhichu_type_taobao, "1200", (1200 / 3870.3)*100));
-        list.add(new ReportsDetailModel("医药教育", R.mipmap.icon_zhichu_type_yiliaojiaoyu, "220", (220 / 3870.3)*100));
-        list.add(new ReportsDetailModel("餐饮", R.mipmap.xiaochi, "57", (57 / 3870.3)*100));
-        list.add(new ReportsDetailModel("酒水", R.mipmap.jiushui, "101", (101 / 3870.3)*100));
-        list.add(new ReportsDetailModel("衣服", R.mipmap.yifu, "210", (210 / 3870.3)*100));
+    public static List<AccountModel> getReportsData() {
+        List<AccountModel> list = new ArrayList<>();
+        list.add(new AccountModel("淘宝", R.mipmap.icon_zhichu_type_taobao, "1200", (float) ((1200 / 3870.3) * 100), "2017-2-14"));
+        list.add(new AccountModel("医药教育", R.mipmap.icon_zhichu_type_yiliaojiaoyu, "220", (float) ((220 / 3870.3) * 100), "2017-2-13"));
+        list.add(new AccountModel("餐饮", R.mipmap.xiaochi, "57", (float) ((57 / 3870.3) * 100), "2017-2-13"));
+        list.add(new AccountModel("酒水", R.mipmap.jiushui, "101", (float) ((101 / 3870.3) * 100), "2017-2-13"));
+        list.add(new AccountModel("衣服", R.mipmap.yifu, "210", (float) ((210 / 3870.3) * 100), "2017-2-12"));
         return list;
     }
 

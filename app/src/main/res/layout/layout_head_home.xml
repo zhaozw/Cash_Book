@@ -8,7 +8,7 @@
     <View
         android:id="@+id/view_1"
         android:layout_width="1dp"
-        android:layout_height="35dp"
+        android:layout_height="25dp"
         android:layout_centerHorizontal="true"
         android:background="#A6A6A6"/>
 
