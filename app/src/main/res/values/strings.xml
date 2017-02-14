@@ -112,6 +112,7 @@
     <string name="lock_more_four_point">请至少连接四个点</string>
     <string name="lock_can_login">你可以登录了</string>
     <string name="lock_password_short">密码过短,设置失败</string>
-    
+
     <string name="dao_excel">导出excel</string>
+    <string name="welcome">立即体验</string>
 </resources>

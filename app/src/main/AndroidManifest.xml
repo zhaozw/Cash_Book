@@ -24,7 +24,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -145,6 +145,11 @@
         <!--登陆的时候弹出九宫格解锁页面-->
         <activity
             android:name=".Activity.LoginLockActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
+        <!--主页-->
+        <activity
+            android:name=".MainActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
     </application>

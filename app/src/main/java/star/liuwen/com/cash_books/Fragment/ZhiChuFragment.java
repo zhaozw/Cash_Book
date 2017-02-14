@@ -37,6 +37,7 @@ import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
 import cn.bingoogolapple.androidcommon.adapter.BGAAdapterViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemLongClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Adapter.PopWindowAdapter;
@@ -107,7 +108,7 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
         mAdapter = new ZhiChuAdapter(mRecyclerView);
         mAdapter.addHeaderView(headView);
 
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), 5, LinearLayoutManager.VERTICAL, false);
+        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 5, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
         mList = new ArrayList<>();
         mList.add(new ZhiChuModel(R.mipmap.icon_shouru_type_qita, "一般"));
@@ -145,7 +146,6 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
                 }
             }
         });
-
     }
 
     private void initData() {

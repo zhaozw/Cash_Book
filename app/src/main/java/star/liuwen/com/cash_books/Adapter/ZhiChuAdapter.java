@@ -21,4 +21,5 @@ public class ZhiChuAdapter extends BGARecyclerViewAdapter<ZhiChuModel> {
         helper.setImageResource(R.id.item_imag, model.getUrl());
         helper.setText(R.id.item_name, model.getName());
     }
+
 }

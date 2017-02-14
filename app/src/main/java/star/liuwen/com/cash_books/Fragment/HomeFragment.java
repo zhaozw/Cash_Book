@@ -184,7 +184,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
                 mAdapter.removeItem(position);
             }
         });
-        return false;
+        return true;
     }
 }
 

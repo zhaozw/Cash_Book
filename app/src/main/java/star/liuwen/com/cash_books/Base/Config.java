@@ -81,4 +81,9 @@ public class Config {
     public static final String TargetAmount = "TargetAmount";
     public static final String ReMark = "ReMark";
 
+
+    public static final String FistStar = "FirstStar";
+    public static final String UserName = "UserName";
+    public static final String UserPassWord = "UserPassWord";
+
 }
