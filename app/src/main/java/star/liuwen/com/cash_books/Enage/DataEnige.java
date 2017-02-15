@@ -195,4 +195,83 @@ public class DataEnige {
         return list;
     }
 
+
+    public static List<IndexModel> getP2PData() {
+        List<IndexModel> data = new ArrayList<>();
+        data.add(new IndexModel("余额宝"));
+        data.add(new IndexModel("娱乐宝"));
+        data.add(new IndexModel("爱钱进"));
+        data.add(new IndexModel("百度财富"));
+        data.add(new IndexModel("草根投资"));
+        data.add(new IndexModel("点融网"));
+        data.add(new IndexModel("钱宝网"));
+        data.add(new IndexModel("红岭创投"));
+        data.add(new IndexModel("桔子理财"));
+        data.add(new IndexModel("积木盒子"));
+        data.add(new IndexModel("口袋财富"));
+        data.add(new IndexModel("懒投资"));
+        data.add(new IndexModel("陆金所"));
+        data.add(new IndexModel("你我贷"));
+        data.add(new IndexModel("PPMoney"));
+        data.add(new IndexModel("钱爸爸"));
+        data.add(new IndexModel("人人贷"));
+        data.add(new IndexModel("铜板街"));
+        data.add(new IndexModel("投米网"));
+        data.add(new IndexModel("投那网"));
+        data.add(new IndexModel("温州贷"));
+        data.add(new IndexModel("小金理财"));
+        data.add(new IndexModel("鑫合汇"));
+        data.add(new IndexModel("翼龙贷"));
+        data.add(new IndexModel("拍拍贷"));
+        data.add(new IndexModel("盈盈理财"));
+        data.add(new IndexModel("宜人贷"));
+        data.add(new IndexModel("有利网"));
+        data.add(new IndexModel("其他"));
+        PinyinComparator pinyinComparator = new PinyinComparator();
+        CharacterParser characterParser = CharacterParser.getInstance();
+        for (IndexModel indexModel : data) {
+            indexModel.topc = characterParser.getSelling(indexModel.name).substring(0, 1).toUpperCase();
+            if (indexModel.name.equals("草根投资")) {
+                indexModel.topc = "C";
+            }
+        }
+        Collections.sort(data, pinyinComparator);
+        return data;
+
+    }
+
+    public static List<IndexModel> getBankData() {
+        List<IndexModel> data = new ArrayList<>();
+        data.add(new IndexModel("北京银行"));
+        data.add(new IndexModel("工商银行"));
+        data.add(new IndexModel("光大银行"));
+        data.add(new IndexModel("广发银行"));
+        data.add(new IndexModel("杭州银行"));
+        data.add(new IndexModel("华夏银行"));
+        data.add(new IndexModel("建设银行"));
+        data.add(new IndexModel("交通银行"));
+        data.add(new IndexModel("民生银行"));
+        data.add(new IndexModel("南京银行"));
+        data.add(new IndexModel("农商银行"));
+        data.add(new IndexModel("农业银行"));
+        data.add(new IndexModel("平安银行"));
+        data.add(new IndexModel("浦发银行"));
+        data.add(new IndexModel("上海银行"));
+        data.add(new IndexModel("兴业银行"));
+        data.add(new IndexModel("招商银行"));
+        data.add(new IndexModel("中国人民银行"));
+        data.add(new IndexModel("中国银行"));
+        data.add(new IndexModel("中国邮政储蓄银行"));
+        data.add(new IndexModel("中信银行"));
+        data.add(new IndexModel("央行国债"));
+        data.add(new IndexModel("其他"));
+        PinyinComparator pinyinComparator = new PinyinComparator();
+        CharacterParser characterParser = CharacterParser.getInstance();
+        for (IndexModel indexModel : data) {
+            indexModel.topc = characterParser.getSelling(indexModel.name).substring(0, 1).toUpperCase();
+        }
+        Collections.sort(data, pinyinComparator);
+        return data;
+
+    }
 }

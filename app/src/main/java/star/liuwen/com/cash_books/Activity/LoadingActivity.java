@@ -86,7 +86,7 @@ public class LoadingActivity extends AppCompatActivity {
             mViewPager.setAdapter(pagerAdapter);
 
         } else {
-            handler.postDelayed(runnable, 2000);
+            handler.postDelayed(runnable, 1000);
         }
     }
 

@@ -86,4 +86,12 @@ public class Config {
     public static final String UserName = "UserName";
     public static final String UserPassWord = "UserPassWord";
 
+    public static final String PlanMoney = "PlanMoney";
+    public static final String PlanFinishTime = "PlanFinishTime";
+    public static final String PlanRemark = "PlanRemark";
+    public static final String PlanIsPut = "PlanIsPut";
+
+    public static final String SaveAPenPlatform = "SaveAPenPlatform";
+
+
 }

@@ -58,7 +58,19 @@ public class PlanSaveMoneyActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        initData();
+    }
 
+    private void initData() {
+        RxBus.getInstance().toObserverableOnMainThread(Config.Game, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                boolean close = (boolean) o;
+                if (close) {
+                    PlanSaveMoneyActivity.this.finish();
+                }
+            }
+        });
     }
 
     public class PlanSaveMoneyAdapter extends BGARecyclerViewAdapter<PlanSaveMoneyModel> {
@@ -74,5 +86,11 @@ public class PlanSaveMoneyActivity extends BaseActivity {
                     .setText(R.id.item_peopele_number, model.getPlanPeopleNumber());
 
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
     }
 }

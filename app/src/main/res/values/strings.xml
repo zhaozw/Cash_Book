@@ -115,4 +115,6 @@
 
     <string name="dao_excel">导出excel</string>
     <string name="welcome">立即体验</string>
+
+    <string name="save_a_pen">存一笔</string>
 </resources>

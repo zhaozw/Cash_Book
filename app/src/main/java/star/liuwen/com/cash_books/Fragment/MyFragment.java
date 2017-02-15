@@ -21,6 +21,7 @@ import star.liuwen.com.cash_books.Activity.ChangeSkinActivity;
 import star.liuwen.com.cash_books.Activity.RemindActivity;
 import star.liuwen.com.cash_books.Activity.SaveMoneyActivity;
 import star.liuwen.com.cash_books.Activity.SettingActivity;
+import star.liuwen.com.cash_books.Activity.ShowSaveMoneyPlanActivity;
 import star.liuwen.com.cash_books.Activity.UserInfoActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
@@ -30,6 +31,7 @@ import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.Utils.BitMapUtils;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
+import star.liuwen.com.cash_books.bean.PlanSaveMoneyModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +41,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     private DrawerLayout mDrawerLayout;
     private ImageView mImageUrl;
     private TextView txtUserNickName, txtSignature;
+    private PlanSaveMoneyModel model;
 
 
     @Nullable
@@ -127,6 +130,13 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             }
         });
 
+        RxBus.getInstance().toObserverableOnMainThread(Config.PlanSaveMoneyModel, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                model = (PlanSaveMoneyModel) o;
+            }
+        });
+
     }
 
     @Override
@@ -138,7 +148,13 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
         } else if (v == reCq) {
             intent.putExtra("plan", "cunqian");
-            startActivity(intent);
+            if (SharedPreferencesUtil.getBooleanPreferences(getActivity(), Config.PlanIsPut, false)) {
+                Intent intentPlan = new Intent(new Intent(getActivity(), ShowSaveMoneyPlanActivity.class));
+                intentPlan.putExtra(Config.PlanSaveMoneyModel, model);
+                startActivity(intentPlan);
+            } else {
+                startActivity(intent);
+            }
         } else if (v == reHf) {
             startActivity(new Intent(getActivity(), ChangeSkinActivity.class));
         } else if (v == reZd) {

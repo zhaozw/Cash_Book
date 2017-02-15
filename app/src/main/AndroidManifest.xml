@@ -152,6 +152,22 @@
             android:name=".MainActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
+        <!--展示存钱的页面-->
+        <activity
+            android:name=".Activity.ShowSaveMoneyPlanActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
+
+        <!--存一笔-->
+        <activity
+            android:name=".Activity.SaveAPenActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
+        <!--存钱平台-->
+        <activity
+            android:name=".Activity.SavePlatformActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
     </application>
 
 

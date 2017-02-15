@@ -8,7 +8,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import star.liuwen.com.cash_books.Base.BaseActivity;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
 
 /**
  * Created by liuwen on 2017/1/13.
@@ -56,5 +59,25 @@ public class SaveMoneyActivity extends BaseActivity {
                 }
             }
         });
+
+        initData();
+    }
+
+    private void initData() {
+        RxBus.getInstance().toObserverableOnMainThread(Config.Game, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                boolean close = (boolean) o;
+                if (close) {
+                    SaveMoneyActivity.this.finish();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
     }
 }

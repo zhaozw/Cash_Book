@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,10 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
     private RelativeLayout reMoney, reTime, reMark, rePhoto, rePhotoChoice, rePhotoCancel;
     private TextView txtMoney, txtTime, txtReMark, txtMubiao;
     private TimePickerView pvTime;
-
+    private PlanSaveMoneyModel model;
     private PopupWindow window;
     private Bitmap head;//头像Bitmap
+
 
     @Override
     public int activityLayoutRes() {
@@ -64,10 +66,11 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
         setRightText(getString(R.string.finish), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                putSaveMoneyPlan();
             }
+
         });
-        PlanSaveMoneyModel model = (PlanSaveMoneyModel) getIntent().getExtras().getSerializable(Config.PlanSaveMoneyModel);
+        model = (PlanSaveMoneyModel) getIntent().getExtras().getSerializable(Config.PlanSaveMoneyModel);
         imageUrl = (ImageView) findViewById(R.id.new_money_image_url);
         imagePhoto = (ImageView) findViewById(R.id.new_money_photo);
 
@@ -106,6 +109,34 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
         }
     }
 
+    private void putSaveMoneyPlan() {
+        String money = txtMoney.getText().toString();
+        String planTime = txtTime.getText().toString();
+        String remark = txtReMark.getText().toString();
+        if (TextUtils.isEmpty(money)) {
+            ToastUtils.showToast(this, "目标金额不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(planTime)) {
+            ToastUtils.showToast(this, "计划完成时间不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(remark)) {
+            ToastUtils.showToast(this, "备注不能为空");
+            return;
+        }
+        SharedPreferencesUtil.setStringPreferences(this, Config.PlanMoney, money);
+        SharedPreferencesUtil.setStringPreferences(this, Config.PlanFinishTime, planTime);
+        SharedPreferencesUtil.setStringPreferences(this, Config.PlanRemark, remark);
+        SharedPreferencesUtil.setBooleanPreferences(this, Config.PlanIsPut, true);
+        Intent intent = new Intent(newSaveMoneyPlanActivity.this, ShowSaveMoneyPlanActivity.class);
+        intent.putExtra(Config.PlanSaveMoneyModel, model);
+        startActivity(intent);
+        RxBus.getInstance().post(Config.Game, true);
+        RxBus.getInstance().post(Config.PlanSaveMoneyModel, model);
+        newSaveMoneyPlanActivity.this.finish();
+
+    }
 
     @Override
     public void onClick(View v) {
