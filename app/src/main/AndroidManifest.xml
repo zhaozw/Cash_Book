@@ -24,7 +24,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.LoadingActivity">
+        <activity
+            android:name=".Activity.LoadingActivity"
+            android:theme="@style/welcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -166,6 +168,12 @@
         <!--存钱平台-->
         <activity
             android:name=".Activity.SavePlatformActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
+
+        <!--通用的修改页面-->
+        <activity
+            android:name=".Activity.UpdateCommonKeyBoardActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
     </application>

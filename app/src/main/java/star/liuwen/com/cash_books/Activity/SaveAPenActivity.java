@@ -54,6 +54,11 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         reTime.setOnClickListener(this);
         reRemark.setOnClickListener(this);
 
+        txtSavePlatform.setText(SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "'"));
+        txtMoney.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "'"));
+        txtYield.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "").isEmpty() ? getString(R.string.ling) + "%" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "'") + "%");
+        txtRemark.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
+
         initDate();
     }
 
@@ -62,15 +67,22 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
 
 
     private static final int ReSavePlatForm = 101;
+    private static final int ReMoney = 102;
+    private static final int ReYield = 103;
+    private static final int ReRemark = 104;
+
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent(SaveAPenActivity.this, UpdateCommonKeyBoardActivity.class);
         if (v == reSavePlatform) {
             startActivityForResult(new Intent(SaveAPenActivity.this, SavePlatformActivity.class), ReSavePlatForm);
         } else if (v == reMoney) {
-
+            intent.putExtra(Config.SaveAPenPlatform, "reMoney");
+            startActivityForResult(intent, ReMoney);
         } else if (v == reYield) {
-
+            intent.putExtra(Config.SaveAPenPlatform, "reYield");
+            startActivityForResult(intent, ReYield);
         } else if (v == reAccount) {
 
         } else if (v == reStartTime) {
@@ -78,7 +90,8 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         } else if (v == reTime) {
 
         } else if (v == reRemark) {
-
+            intent.putExtra(Config.SaveAPenPlatform, "reRemark");
+            startActivityForResult(intent, ReRemark);
         }
     }
 
@@ -92,6 +105,16 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
             case ReSavePlatForm:
                 txtSavePlatform.setText(data.getExtras().getString("bank"));
                 SharedPreferencesUtil.setStringPreferences(SaveAPenActivity.this, Config.SaveAPenPlatform, data.getExtras().getString("bank"));
+                break;
+            case ReMoney:
+                txtMoney.setText(data.getExtras().getString(Config.TextInPut));
+                break;
+
+            case ReYield:
+                txtYield.setText(data.getExtras().getString(Config.TextInPut) + "%");
+                break;
+            case ReRemark:
+                txtRemark.setText(data.getExtras().getString(Config.TextInPut));
                 break;
 
         }

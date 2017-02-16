@@ -14,6 +14,7 @@ import star.liuwen.com.cash_books.Fragment.HomeFragment;
 import star.liuwen.com.cash_books.Fragment.MyFragment;
 import star.liuwen.com.cash_books.Fragment.QianBaoFragment;
 import star.liuwen.com.cash_books.Fragment.ReportsFragment;
+import star.liuwen.com.cash_books.Fragment.WalletFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mNavigateTabBar = (MainNavigateTabBar) findViewById(R.id.mainTabBar);
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
         mNavigateTabBar.addTab(HomeFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.shiguangzhou, R.mipmap.shiguangzhou_lan, TAG_PAGE_HOME));
-        mNavigateTabBar.addTab(QianBaoFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.qianbao, R.mipmap.qianbao_lan, TAG_PAGE_CITY));
+        mNavigateTabBar.addTab(WalletFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.qianbao, R.mipmap.qianbao_lan, TAG_PAGE_CITY));
         mNavigateTabBar.addTab(null, new MainNavigateTabBar.TabParam(0, 0, TAG_PAGE_PUBLISH));
         mNavigateTabBar.addTab(ReportsFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.baobiao, R.mipmap.baobiao_lan, TAG_PAGE_MESSAGE));
         mNavigateTabBar.addTab(MyFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.tixing, R.mipmap.tixing_lan, TAG_PAGE_PERSON));

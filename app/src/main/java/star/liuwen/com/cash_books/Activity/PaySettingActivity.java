@@ -79,17 +79,6 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
             txtType.setText(getString(R.string.qianbao_chuxuka));
         }
 
-        if (App.cardModel != null) {
-            txtAccount.setText(App.cardModel.getAccountName());
-            txtCreditLimit.setText(App.cardModel.getCardLimit());
-            txtMoney.setText(App.cardModel.getMoney());
-            txtDebt.setText(App.cardModel.getDept());
-        } else {
-            txtAccount.setText(getString(R.string.no_setting));
-            txtCreditLimit.setText(getString(R.string.no_setting));
-            txtMoney.setText(getString(R.string.no_setting));
-            txtDebt.setText(getString(R.string.no_setting));
-        }
 
     }
 
@@ -101,16 +90,16 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         if (v == reBank) {
             startActivityForResult(new Intent(PaySettingActivity.this, ChoiceIssuingBankActivity.class), ChoiceIssuingBank);
         } else if (v == reAccount) {
-            intent.putExtra("888", "AccountName");
+            intent.putExtra(Config.SaveAccount, "AccountName");
             startActivityForResult(intent, ACCOUNT);
         } else if (v == reMoney) {
-            intent.putExtra("888", "AccountMoney");
+            intent.putExtra(Config.SaveAccount, "AccountMoney");
             startActivityForResult(intent, MONEY);
         } else if (v == reCreditLimit) {
-            intent.putExtra("888", "CreditLimit");
+            intent.putExtra(Config.SaveAccount, "CreditLimit");
             startActivityForResult(intent, CreditLimit);
         } else if (v == reDebt) {
-            intent.putExtra("888", "Debt");
+            intent.putExtra(Config.SaveAccount, "Debt");
             startActivityForResult(intent, Debt);
         } else if (v == reDebtData) {
 
@@ -137,19 +126,19 @@ public class PaySettingActivity extends BaseActivity implements View.OnClickList
         }
         switch (requestCode) {
             case ACCOUNT:
-                txtAccount.setText(data.getExtras().getString("textInput"));
+                txtAccount.setText(data.getExtras().getString(Config.TextInPut));
                 break;
             case MONEY:
-                txtMoney.setText(data.getExtras().getString("textInput"));
+                txtMoney.setText(data.getExtras().getString(Config.TextInPut));
                 break;
             case CreditLimit:
-                txtCreditLimit.setText(data.getExtras().getString("textInput"));
+                txtCreditLimit.setText(data.getExtras().getString(Config.TextInPut));
                 break;
             case Debt:
-                txtDebt.setText(data.getExtras().getString("textInput"));
+                txtDebt.setText(data.getExtras().getString(Config.TextInPut));
                 break;
             case ChoiceIssuingBank:
-                txtBank.setText(data.getExtras().getString("bank"));
+                txtBank.setText(data.getExtras().getString(Config.TextInPut));
             default:
                 break;
         }

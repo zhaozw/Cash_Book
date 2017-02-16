@@ -3,79 +3,71 @@ package star.liuwen.com.cash_books.Activity;
 import android.content.Intent;
 import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.HashMap;
-
-import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.Base.Config;
+import star.liuwen.com.cash_books.GraphicLock.AppUtil;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.ApkInfoUtils;
 import star.liuwen.com.cash_books.Utils.KeyboardUtil;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
+import star.liuwen.com.cash_books.Utils.SnackBarUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
-import star.liuwen.com.cash_books.bean.CreditCardModel;
 
 /**
- * Created by liuwen on 2017/1/10.
- * 修改账户余额 通用页面
+ * Created by liuwen on 2017/2/16.
  */
-public class UpDateAccountCommonActivity extends BaseActivity {
+public class UpdateCommonKeyBoardActivity extends BaseActivity {
     private EditText edMoney;
     private KeyboardUtil mKeyboardUtil;
     private int position;
     private boolean isShowInput;
     private KeyboardView mKeyBoardView;
 
-    private String AccountValues;
-
 
     @Override
     public int activityLayoutRes() {
-        return R.layout.update_account_activity;
+        return R.layout.update_common_keyboard_activity;
     }
 
     @Override
     public void initView() {
         setBackView();
-        setLeftText(getString(R.string.pay_setting));
         setLeftImage(R.mipmap.fanhui_lan);
+        setLeftText(getString(R.string.back));
         edMoney = (EditText) findViewById(R.id.update_common_money);
         mKeyBoardView = (KeyboardView) findViewById(R.id.keyboard_view);
-        mKeyboardUtil = new KeyboardUtil(UpDateAccountCommonActivity.this, UpDateAccountCommonActivity.this, edMoney);
+        mKeyboardUtil = new KeyboardUtil(UpdateCommonKeyBoardActivity.this, UpdateCommonKeyBoardActivity.this, edMoney);
 
-        String values = getIntent().getStringExtra(Config.SaveAccount);
-        AccountValues = getIntent().getStringExtra("Account");
-        if (values.equals("AccountName")) {
-            setTitle(getString(R.string.edit_account_name));
-            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccountName, "").isEmpty() ? getString(R.string.edit_account_name) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccountName, ""));
+        String values = getIntent().getStringExtra(Config.SaveAPenPlatform);
+        if (values.equals("reMoney")) {
+            setTitle(getString(R.string.edit_money));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, ""));
             position = 1;
-            isShowInput = false;
-        } else if (values.equals("AccountMoney")) {
-            setTitle(getString(R.string.edit_account_money));
-            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccountMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccountMoney, ""));
+            isShowInput = true;
+        } else if (values.equals("reYield")) {
+            setTitle(getString(R.string.edit_percent));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "").isEmpty() ? getString(R.string.ling) + "%" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, ""));
             position = 2;
             isShowInput = true;
-        } else if (values.equals("CreditLimit")) {
-            setTitle(getString(R.string.edit_credit_limit));
-            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtCreditLimit, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtCreditLimit, ""));
+        } else if (values.equals("reRemark")) {
+            setTitle(getString(R.string.edit_remark));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? getString(R.string.edit_remark) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
             position = 3;
-            isShowInput = true;
-        } else if (values.equals("Debt")) {
-            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtDebt, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtDebt, ""));
-            position = 4;
-            isShowInput = true;
-
+            isShowInput = false;
         }
-        setListener(isShowInput);
-    }
 
+        setListener(isShowInput);
+
+    }
 
     private void setListener(boolean isShowInput) {
         if (isShowInput) {
@@ -88,6 +80,7 @@ public class UpDateAccountCommonActivity extends BaseActivity {
                     return true;
                 }
             });
+
             edMoney.addTextChangedListener(new TextWatcher() {
 
                 @Override
@@ -152,7 +145,6 @@ public class UpDateAccountCommonActivity extends BaseActivity {
     }
 
     private void onSure(int position) {
-
         String textInput = edMoney.getText().toString();
         if (TextUtils.isEmpty(textInput)) {
             ToastUtils.showToast(this, "亲，输入的不能为空哟");
@@ -162,35 +154,31 @@ public class UpDateAccountCommonActivity extends BaseActivity {
             ToastUtils.showToast(this, "亲，请输入大于0的数字");
             return;
         }
+
+
         Intent intent = new Intent();
         switch (position) {
             case 1:
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
-                SharedPreferencesUtil.setStringPreferences(this, Config.TxtAccountName, textInput);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtMoney, textInput);
                 finish();
                 break;
             case 2:
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
-                SharedPreferencesUtil.setStringPreferences(this, Config.TxtAccountMoney, textInput);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtPercent, textInput);
                 finish();
                 break;
-
             case 3:
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
-                SharedPreferencesUtil.setStringPreferences(this, Config.TxtCreditLimit, textInput);
-                finish();
-                break;
-            case 4:
-                intent.putExtra(Config.TextInPut, textInput);
-                setResult(0, intent);
-                SharedPreferencesUtil.setStringPreferences(this, Config.TxtDebt, textInput);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtRemark, textInput);
                 finish();
                 break;
         }
 
     }
+
 
 }

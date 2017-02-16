@@ -21,6 +21,7 @@ public class HomeAdapter extends BGARecyclerViewAdapter<AccountModel> {
 
     @Override
     protected void fillData(BGAViewHolderHelper helper, int position, AccountModel model) {
+
         if (model.mAccountType == AccountModel.AccountType.zhiChu) {
             helper.setVisibility(R.id.re_shouru, View.GONE);
             helper.setText(R.id.item_h_txt_xiaofei_type, "消费类型：" + model.getAccountType());

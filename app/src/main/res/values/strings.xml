@@ -32,6 +32,9 @@
     <string name="edit_account_money">编辑账户余额</string>
     <string name="edit_credit_limit">编辑信用卡额度</string>
     <string name="edit_debt">编辑信用卡欠款</string>
+
+    <string name="edit_Money">编辑金额</string>
+    <string name="edit_percent">输入年华收益率%</string>
     <string name="save">保存</string>
     <string name="save_money_plan">存钱计划</string>
     <string name="zhangdan_zongjie">账单总结</string>
@@ -117,4 +120,5 @@
     <string name="welcome">立即体验</string>
 
     <string name="save_a_pen">存一笔</string>
+    <string name="ling">0.00</string>
 </resources>

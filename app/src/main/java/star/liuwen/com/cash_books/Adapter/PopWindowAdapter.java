@@ -1,6 +1,7 @@
 package star.liuwen.com.cash_books.Adapter;
 
 import android.content.Context;
+import android.view.View;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAAdapterViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
@@ -18,7 +19,17 @@ public class PopWindowAdapter extends BGAAdapterViewAdapter<ChoiceAccount> {
 
     @Override
     protected void fillData(BGAViewHolderHelper helper, int position, ChoiceAccount model) {
-        helper.setText(R.id.choose_cash_txt, model.getAccountName()).setImageResource(R.id.choose_cash_img, model.getUrl())
-                .setText(R.id.layout_cash_y, "余额(元)：" + model.getMoney());
+        if (model.mAccountType == ChoiceAccount.AccountType.Xyk) {
+            helper.setText(R.id.choose_cash_txt, model.getAccountName()).setImageResource(R.id.choose_cash_img, model.getUrl());
+            helper.setVisibility(R.id.layout_cash_y, View.GONE);
+            helper.setText(R.id.layout_cash_limit, "剩余额度:"+model.getCreditLimit() + "元");
+            helper.setText(R.id.layout_cash_limit_y,"欠款:"+ model.getDebt() + "元");
+        } else {
+            helper.setText(R.id.choose_cash_txt, model.getAccountName()).setImageResource(R.id.choose_cash_img, model.getUrl())
+                    .setText(R.id.layout_cash_y, "余额(元):" + model.getMoney());
+            helper.setVisibility(R.id.layout_cash_limit, View.GONE).setVisibility(R.id.layout_cash_limit_y, View.GONE);
+
+        }
+
     }
 }

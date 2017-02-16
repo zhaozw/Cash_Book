@@ -17,7 +17,7 @@ public class Config {
     }
 
     public enum Account {
-        Cash, Cxk, Xyk, Zfb, Jc, Jr
+        Cash, Cxk, Xyk, Zfb, Jc, Jr, other
     }
 
     public static Account mAccount = null;
@@ -92,6 +92,17 @@ public class Config {
     public static final String PlanIsPut = "PlanIsPut";
 
     public static final String SaveAPenPlatform = "SaveAPenPlatform";
+    public static final String SaveAccount = "SaveAccount";
+    public static final String TextInPut = "TextInPut";
+
+
+    public static final String TxtMoney = "TxtMoney";
+    public static final String TxtPercent = "TxtPercent";
+    public static final String TxtRemark = "TxtRemark";
+    public static final String TxtAccountName = "TxtAccountName";
+    public static final String TxtAccountMoney = "TxtAccountMoney";
+    public static final String TxtCreditLimit = "TxtCreditLimit";
+    public static final String TxtDebt = "TxtDebt";
 
 
 }

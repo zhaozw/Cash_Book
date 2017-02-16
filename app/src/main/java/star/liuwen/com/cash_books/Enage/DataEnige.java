@@ -135,10 +135,13 @@ public class DataEnige {
 
     public static List<ChoiceAccount> getShouRuData() {
         List<ChoiceAccount> list = new ArrayList<>();
-        list.add(new ChoiceAccount(R.mipmap.zongxiaofei, "现金", 500));
-        list.add(new ChoiceAccount(R.mipmap.icon_add_1, "储蓄卡", 12500));
-        list.add(new ChoiceAccount(R.mipmap.huankuan, "信用卡", 97000));
-        list.add(new ChoiceAccount(R.mipmap.zhifubao, "支付宝", 20000));
+        list.add(new ChoiceAccount(R.mipmap.xianjin, "现金", 500.00, 0.00, 0.00, ChoiceAccount.AccountType.Cash, R.color.xianjian));
+        list.add(new ChoiceAccount(R.mipmap.icon_add_1, "储蓄卡", 12500.00, 0.00, 0.00, ChoiceAccount.AccountType.Cxk, R.color.chuxuka));
+        list.add(new ChoiceAccount(R.mipmap.huankuan, "信用卡", 0.00, 20000.00, 20000.00, ChoiceAccount.AccountType.Xyk, R.color.xinyongka));
+        list.add(new ChoiceAccount(R.mipmap.zhifubao, "支付宝", 20000.00, 0.00, 0.00, ChoiceAccount.AccountType.Zfb, R.color.zhifubao));
+        list.add(new ChoiceAccount(R.mipmap.zhuanzhang, "借出", 74000.00, 0.00, 0.00, ChoiceAccount.AccountType.Jc, R.color.jiechu));
+        list.add(new ChoiceAccount(R.mipmap.tuikuan, "借入", 6000.0, 0.00, 0.00, ChoiceAccount.AccountType.Jr, R.color.jieru));
+
         return list;
     }
 
@@ -274,4 +277,5 @@ public class DataEnige {
         return data;
 
     }
+
 }
