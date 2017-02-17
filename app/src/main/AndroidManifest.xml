@@ -176,6 +176,17 @@
             android:name=".Activity.UpdateCommonKeyBoardActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
+
+        <!--钱包显示页面-->
+        <activity
+            android:name=".Activity.PayShowActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
+        <!--设置账户页面-->
+        <activity
+            android:name=".Activity.PaySettingsActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"/>
     </application>
 
 

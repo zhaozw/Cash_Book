@@ -103,6 +103,8 @@ public class Config {
     public static final String TxtAccountMoney = "TxtAccountMoney";
     public static final String TxtCreditLimit = "TxtCreditLimit";
     public static final String TxtDebt = "TxtDebt";
+    public static final String TxtYuEr = "TxtYuer";
 
+    public static final String ModelWallet = "ModelWallet";
 
 }

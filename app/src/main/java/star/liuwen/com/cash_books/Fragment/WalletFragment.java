@@ -1,5 +1,6 @@
 package star.liuwen.com.cash_books.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
+import star.liuwen.com.cash_books.Activity.PayShowActivity;
 import star.liuwen.com.cash_books.Base.BaseFragment;
+import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.Enage.DataEnige;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
@@ -19,7 +23,7 @@ import star.liuwen.com.cash_books.bean.ChoiceAccount;
 /**
  * Created by liuwen on 2017/2/16.
  */
-public class WalletFragment extends BaseFragment {
+public class WalletFragment extends BaseFragment implements BGAOnRVItemClickListener {
     private RecyclerView mRecyclerView;
     private WalletAdapter mAdapter;
 
@@ -48,11 +52,20 @@ public class WalletFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter.setData(DataEnige.getShouRuData());
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnRVItemClickListener(this);
     }
 
 
     private void initData() {
 
+    }
+
+    @Override
+    public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+        ChoiceAccount model = DataEnige.getShouRuData().get(position);
+        Intent intent = new Intent(getActivity(), PayShowActivity.class);
+        intent.putExtra(Config.ModelWallet, model);
+        startActivity(intent);
     }
 
     public class WalletAdapter extends BGARecyclerViewAdapter<ChoiceAccount> {
@@ -68,7 +81,7 @@ public class WalletFragment extends BaseFragment {
             if (model.mAccountType == ChoiceAccount.AccountType.Xyk) {
                 helper.setText(R.id.qb_txt_xinyka, model.getAccountName()).setImageResource(R.id.qb_image_xinyka, model.getUrl());
                 helper.setText(R.id.qb_txt_xinyka_yuer, "剩余额度" + model.getDebt() + "元");
-                helper.setText(R.id.xinyka_jia, model.getCreditLimit() + "");
+                helper.setText(R.id.xinyka_jia, model.getMoney() + "");
             } else {
                 helper.setText(R.id.qb_txt_xinyka, model.getAccountName()).setImageResource(R.id.qb_image_xinyka, model.getUrl());
                 helper.setText(R.id.qb_txt_xinyka_yuer, model.getAccountName() + "额度");

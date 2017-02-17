@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/qb_image_xinyka"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:src="@mipmap/huankuan"/>

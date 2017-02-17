@@ -63,6 +63,11 @@ public class UpdateCommonKeyBoardActivity extends BaseActivity {
             edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? getString(R.string.edit_remark) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
             position = 3;
             isShowInput = false;
+        } else if (values.equals("YuER")) {
+            setTitle(getString(R.string.edit_input_yuer));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtYuEr, "").isEmpty() ? getString(R.string.edit_input_yuer) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtYuEr, ""));
+            position = 4;
+            isShowInput = true;
         }
 
         setListener(isShowInput);
@@ -174,6 +179,12 @@ public class UpdateCommonKeyBoardActivity extends BaseActivity {
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
                 SharedPreferencesUtil.setStringPreferences(this, Config.TxtRemark, textInput);
+                finish();
+                break;
+            case 4:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtYuEr, textInput);
                 finish();
                 break;
         }

@@ -12,11 +12,11 @@
         android:layout_marginLeft="5dp">
 
         <ImageView
+            android:src="@mipmap/ic_laun"
             android:id="@+id/choose_cash_img"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/zongxiaofei"/>
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:layout_marginTop="3dp"

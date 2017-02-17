@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@mipmap/share_qqfriend"/>
+                android:src="@mipmap/config_share_qq"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@mipmap/share_wepo"/>
+                android:src="@mipmap/config_share_weibo"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@mipmap/share_weixinfriend"/>
+                android:src="@mipmap/config_share_weixin"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@mipmap/share_friendlock"/>
+                android:src="@mipmap/config_share_pengyouquan"/>
 
             <TextView
                 android:layout_width="wrap_content"

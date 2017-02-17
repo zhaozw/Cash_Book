@@ -1,25 +1,29 @@
 package star.liuwen.com.cash_books.bean;
 
+import java.io.Serializable;
+
 import star.liuwen.com.cash_books.Base.Config;
 
 /**
  * Created by liuwen on 2017/1/18.
  */
-public class ChoiceAccount {
+public class ChoiceAccount implements Serializable {
 
     private Long id;
     private int url;//选择账户的url
     private int WalletUrl;
     private String accountName;//账户名
     private Double money;//金额(其他账户的余额)
-    private Double CreditLimit;//信用卡余额
+    private Double CreditLimit;//信用卡余额 //废弃的字段
     private Double Debt;//欠款
     private String DebtDate;//欠款日
     private String AccountType;//账户类型
     private String IssuingBank;//发卡行
     //颜色的字段
     private int color;
-    public AccountType mAccountType;
+    public AccountType mAccountType; //账户类型
+    private Double liuChu; //账户流出
+    private Double liuRu; //账户流入
 
 
     public ChoiceAccount(int url, String accountName, Double money, Double creditLimit, Double debt, ChoiceAccount.AccountType account, int color) {
