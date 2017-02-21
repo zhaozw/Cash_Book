@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.startsmake.mainnavigatetabbar.widget.MainNavigateTabBar;
 
 import star.liuwen.com.cash_books.Activity.IncomeAndCostActivity;
 import star.liuwen.com.cash_books.Fragment.HomeFragment;
 import star.liuwen.com.cash_books.Fragment.MyFragment;
-import star.liuwen.com.cash_books.Fragment.QianBaoFragment;
 import star.liuwen.com.cash_books.Fragment.ReportsFragment;
 import star.liuwen.com.cash_books.Fragment.WalletFragment;
 

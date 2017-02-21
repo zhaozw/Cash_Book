@@ -28,6 +28,7 @@ public class PayShowActivity extends BaseActivity {
     private TextView txtMonth, txtLiuChu, txtLiuRu;
     private RelativeLayout ryBg;
     private TimePickerView pvTime;
+    private ChoiceAccount model;
 
 
     @Override
@@ -46,7 +47,9 @@ public class PayShowActivity extends BaseActivity {
         setRightText(getString(R.string.setting), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(PayShowActivity.this, PaySettingsActivity.class);
+                intent.putExtra(Config.ModelWallet, model);
+                startActivity(intent);
             }
         });
 
@@ -56,7 +59,7 @@ public class PayShowActivity extends BaseActivity {
         txtLiuRu = (TextView) findViewById(R.id.pay_show_txt_liuru);
         ryBg = (RelativeLayout) findViewById(R.id.pay_ry);
 
-        ChoiceAccount model = (ChoiceAccount) getIntent().getExtras().getSerializable(Config.ModelWallet);
+        model = (ChoiceAccount) getIntent().getExtras().getSerializable(Config.ModelWallet);
         if (model != null) {
             tvAccount.setText(model.getMoney() + "元");
             ryBg.setBackgroundResource(model.getColor());

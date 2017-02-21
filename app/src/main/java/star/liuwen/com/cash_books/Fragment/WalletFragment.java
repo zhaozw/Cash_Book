@@ -1,31 +1,51 @@
 package star.liuwen.com.cash_books.Fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Activity.PayShowActivity;
+import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseFragment;
 import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.Enage.DataEnige;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.RxBus.RxBusResult;
+import star.liuwen.com.cash_books.Utils.BitMapUtils;
+import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
+import star.liuwen.com.cash_books.Utils.SnackBarUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
+import star.liuwen.com.cash_books.View.CustomPopWindow;
 import star.liuwen.com.cash_books.bean.ChoiceAccount;
 
 /**
  * Created by liuwen on 2017/2/16.
  */
-public class WalletFragment extends BaseFragment implements BGAOnRVItemClickListener {
+public class WalletFragment extends BaseFragment implements BGAOnRVItemClickListener, View.OnClickListener {
     private RecyclerView mRecyclerView;
     private WalletAdapter mAdapter;
+
+    private RelativeLayout mRyYuer;
+    private TextView tvYuer;
+    private CustomPopWindow mCustomPopWindow;
+    private ImageView imageCash, imageCxk, imageXYk, imageZfb, imageJC, imageJR;
+    private int position;
+    private DrawerLayout mDrawerLayout;
 
     @Nullable
     @Override
@@ -45,6 +65,12 @@ public class WalletFragment extends BaseFragment implements BGAOnRVItemClickList
     }
 
     private void initView() {
+        mRyYuer = (RelativeLayout) getContentView().findViewById(R.id.qb_ry_yuer);
+        tvYuer = (TextView) getContentView().findViewById(R.id.yuer_jia);
+
+        mRyYuer.setOnClickListener(this);
+        mDrawerLayout = (DrawerLayout) getContentView().findViewById(R.id.drawer_layout);
+
         mRecyclerView = (RecyclerView) getContentView().findViewById(R.id.wallet_fragment_recyclerView);
         mAdapter = new WalletAdapter(mRecyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -53,20 +79,155 @@ public class WalletFragment extends BaseFragment implements BGAOnRVItemClickList
         mAdapter.setData(DataEnige.getShouRuData());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnRVItemClickListener(this);
+      //  mAdapter.addLastItem(new ChoiceAccount(R.mipmap.notice_add_icon, "添加账户", null, null, null, null, R.color.white));
+
+        if (SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null) != null) {
+            Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), SharedPreferencesUtil.getStringPreferences(getActivity(), Config.ChangeBg, null), false);
+            mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+        }
     }
 
 
     private void initData() {
-
+        RxBus.getInstance().toObserverableOnMainThread(Config.isBgCash, new RxBusResult() {
+            @Override
+            public void onRxBusResult(Object o) {
+                Bitmap bitmap = BitMapUtils.getBitmapByPath(getActivity(), o.toString(), false);
+                mDrawerLayout.setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
+            }
+        });
     }
 
     @Override
     public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-        ChoiceAccount model = DataEnige.getShouRuData().get(position);
-        Intent intent = new Intent(getActivity(), PayShowActivity.class);
-        intent.putExtra(Config.ModelWallet, model);
-        startActivity(intent);
+
+            ChoiceAccount model = DataEnige.getShouRuData().get(position);
+            Intent intent = new Intent(getActivity(), PayShowActivity.class);
+            intent.putExtra(Config.ModelWallet, model);
+            startActivity(intent);
+
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().release();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mRyYuer) {
+            showPopWindow();
+        }
+    }
+
+    private void showPopWindow() {
+        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.pop_menu, null);
+        //处理popWindow 显示内容
+        handleLogic(contentView);
+
+        imageCash = (ImageView) contentView.findViewById(R.id.image_1);
+        imageCxk = (ImageView) contentView.findViewById(R.id.image_2);
+        imageXYk = (ImageView) contentView.findViewById(R.id.image_3);
+        imageZfb = (ImageView) contentView.findViewById(R.id.image_4);
+        imageJC = (ImageView) contentView.findViewById(R.id.image_5);
+        imageJR = (ImageView) contentView.findViewById(R.id.image_6);
+
+        imageCash.setImageResource(App.isBgCash ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageCxk.setImageResource(App.isBgCXK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageXYk.setImageResource(App.isBgXYK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageZfb.setImageResource(App.isBgZFB ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageJC.setImageResource(App.isBgJC ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+        imageJR.setImageResource(App.isBgJR ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+
+        //创建并显示popWindow
+        mCustomPopWindow = new CustomPopWindow.PopupWindowBuilder(getActivity())
+                .setView(contentView)
+                .create()
+                .showAsDropDown(mRyYuer, 0, 20);
+    }
+
+    /**
+     * 处理弹出显示内容、点击事件等逻辑
+     *
+     * @param contentView
+     */
+    private void handleLogic(View contentView) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.menu1:
+                        position = 1;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu2:
+                        position = 2;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu3:
+                        setPopWindowBG(position);
+                        position = 3;
+                        break;
+                    case R.id.menu4:
+                        position = 4;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu5:
+                        position = 5;
+                        setPopWindowBG(position);
+                        break;
+                    case R.id.menu6:
+                        position = 6;
+                        setPopWindowBG(position);
+                }
+            }
+        };
+        contentView.findViewById(R.id.menu1).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu2).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu3).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu4).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu5).setOnClickListener(listener);
+        contentView.findViewById(R.id.menu6).setOnClickListener(listener);
+    }
+
+    public void setPopWindowBG(int position) {
+        switch (position) {
+            case 1:
+                imageCash.setImageResource(!App.isBgCash ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgCash = !App.isBgCash;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgCash, App.isBgCash);
+                break;
+            case 2:
+                imageCxk.setImageResource(!App.isBgCXK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgCXK = !App.isBgCXK;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgCXK, App.isBgCXK);
+                break;
+            case 3:
+                imageXYk.setImageResource(!App.isBgXYK ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgXYK = !App.isBgXYK;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgXYK, App.isBgXYK);
+                break;
+            case 4:
+                imageZfb.setImageResource(!App.isBgZFB ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgZFB = !App.isBgZFB;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgZFB, App.isBgZFB);
+                break;
+            case 5:
+                imageJC.setImageResource(!App.isBgJC ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgJC = !App.isBgJC;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgJC, App.isBgJC);
+                break;
+            case 6:
+                imageJR.setImageResource(!App.isBgJR ? R.mipmap.btg_icon_tick_pressed : R.mipmap.btg_icon_priority_1_normal);
+                App.isBgJR = !App.isBgJR;
+                SharedPreferencesUtil.setBooleanPreferences(getActivity(), Config.isBgJR, App.isBgJR);
+                break;
+        }
+
+    }
+
 
     public class WalletAdapter extends BGARecyclerViewAdapter<ChoiceAccount> {
 

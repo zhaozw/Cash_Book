@@ -68,6 +68,26 @@ public class UpdateCommonKeyBoardActivity extends BaseActivity {
             edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtYuEr, "").isEmpty() ? getString(R.string.edit_input_yuer) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtYuEr, ""));
             position = 4;
             isShowInput = true;
+        } else if (values.equals("AccountName")) {
+            setTitle(getString(R.string.edit_account_name));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccountName, "").isEmpty() ? getString(R.string.edit_account_name) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccountName, ""));
+            position = 5;
+            isShowInput = false;
+        } else if (values.equals("AccountMoney")) {
+            setTitle(getString(R.string.edit_Money));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.edit_money) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, ""));
+            position = 6;
+            isShowInput = true;
+        } else if (values.equals("CreditLimit")) {
+            setTitle(getString(R.string.edit_credit_limit));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtCreditLimit, "").isEmpty() ? getString(R.string.edit_credit_limit) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtCreditLimit, ""));
+            position = 7;
+            isShowInput = true;
+        } else if (values.equals("Debt")) {
+            setTitle(getString(R.string.edit_debt));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtDebt, "").isEmpty() ? getString(R.string.edit_debt) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtDebt, ""));
+            position = 8;
+            isShowInput = true;
         }
 
         setListener(isShowInput);
@@ -166,25 +186,46 @@ public class UpdateCommonKeyBoardActivity extends BaseActivity {
             case 1:
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
-                SharedPreferencesUtil.setStringPreferences(this, Config.TxtMoney, textInput);
                 finish();
                 break;
             case 2:
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
-                SharedPreferencesUtil.setStringPreferences(this, Config.TxtPercent, textInput);
                 finish();
                 break;
             case 3:
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
-                SharedPreferencesUtil.setStringPreferences(this, Config.TxtRemark, textInput);
+
                 finish();
                 break;
             case 4:
                 intent.putExtra(Config.TextInPut, textInput);
                 setResult(0, intent);
                 SharedPreferencesUtil.setStringPreferences(this, Config.TxtYuEr, textInput);
+                finish();
+            case 5:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtAccountName, textInput);
+                finish();
+                break;
+            case 6:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtMoney, textInput);
+                finish();
+                break;
+            case 7:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtCreditLimit, textInput);
+                finish();
+                break;
+            case 8:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtDebt, textInput);
                 finish();
                 break;
         }

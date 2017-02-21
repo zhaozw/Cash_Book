@@ -49,10 +49,6 @@
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
         <!--钱的设置页面-->
-        <activity
-            android:name=".Activity.PaySettingActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"/>
         <!--修改的通用界面-->
         <activity
             android:name=".Activity.UpDateAccountCommonActivity"

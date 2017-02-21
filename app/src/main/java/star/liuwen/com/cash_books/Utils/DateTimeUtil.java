@@ -81,6 +81,11 @@ public class DateTimeUtil {
         return format.format(date);
     }
 
+    public static String getYearMonthDay_(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
+    }
+
     public static String getYearMonthDay(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(date);

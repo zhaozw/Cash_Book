@@ -62,15 +62,6 @@ public class PaymentActivity extends BaseActivity {
         mViewStub = (ViewStub) findViewById(R.id.view_stub);
         mViewStub.inflate();
 
-        setRightText(getString(R.string.pay_setting), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PaymentActivity.this, PaySettingActivity.class);
-                intent.putExtra(Config.AccountSetting, AccountSetting);
-                startActivity(intent);
-            }
-        });
-
         tvYear = (TextView) findViewById(R.id.pay_txt_year);
         tvAccount = (NumberAnimTextView) findViewById(R.id.pay_txt_account);
         tvZhuangZhang = (TextView) findViewById(R.id.pay_zhuanzhuang);

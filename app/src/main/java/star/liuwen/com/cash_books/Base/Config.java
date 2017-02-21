@@ -104,6 +104,9 @@ public class Config {
     public static final String TxtCreditLimit = "TxtCreditLimit";
     public static final String TxtDebt = "TxtDebt";
     public static final String TxtYuEr = "TxtYuer";
+    public static final String TxtAccount = "TxtAccount";
+    public static final String TxtStartTime = "TxtStartTime";
+    public static final String TxtEndTime = "TxtEndTime";
 
     public static final String ModelWallet = "ModelWallet";
 

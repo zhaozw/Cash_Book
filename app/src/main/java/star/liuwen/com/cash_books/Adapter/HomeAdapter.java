@@ -22,7 +22,7 @@ public class HomeAdapter extends BGARecyclerViewAdapter<AccountModel> {
     @Override
     protected void fillData(BGAViewHolderHelper helper, int position, AccountModel model) {
 
-        if (model.mAccountType == AccountModel.AccountType.zhiChu) {
+        if (model.mAccountType.equals(AccountModel.AccountType.zhiChu)) {
             helper.setVisibility(R.id.re_shouru, View.GONE);
             helper.setText(R.id.item_h_txt_xiaofei_type, "消费类型：" + model.getAccountType());
             helper.setText(R.id.item_h_txt_zhichu_type, model.getConsumeType() + ":");
@@ -34,8 +34,8 @@ public class HomeAdapter extends BGARecyclerViewAdapter<AccountModel> {
                 helper.setText(R.id.item_h__txt_data, model.getData());
             } else {
                 helper.setVisibility(R.id.item_h__txt_data, View.GONE);
-                helper.setVisibility(R.id.view_1,View.GONE);
-                helper.setVisibility(R.id.itme_h__img_data,View.GONE);
+                helper.setVisibility(R.id.view_1, View.GONE);
+                helper.setVisibility(R.id.itme_h__img_data, View.GONE);
             }
         } else {
             helper.setVisibility(R.id.re_zhichu, View.GONE);
@@ -49,8 +49,8 @@ public class HomeAdapter extends BGARecyclerViewAdapter<AccountModel> {
                 helper.setText(R.id.item_h__txt_data, model.getData());
             } else {
                 helper.setVisibility(R.id.item_h__txt_data, View.GONE);
-                helper.setVisibility(R.id.view_1,View.GONE);
-                helper.setVisibility(R.id.itme_h__img_data,View.GONE);
+                helper.setVisibility(R.id.view_1, View.GONE);
+                helper.setVisibility(R.id.itme_h__img_data, View.GONE);
             }
         }
     }
