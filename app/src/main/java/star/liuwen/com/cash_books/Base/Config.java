@@ -109,5 +109,6 @@ public class Config {
     public static final String TxtEndTime = "TxtEndTime";
 
     public static final String ModelWallet = "ModelWallet";
+    public static final String ModelSaveAPen = "ModeSaveAPen";
 
 }

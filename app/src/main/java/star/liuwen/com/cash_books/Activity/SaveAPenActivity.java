@@ -15,17 +15,23 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import star.liuwen.com.cash_books.Adapter.PopWindowAdapter;
+import star.liuwen.com.cash_books.Base.App;
 import star.liuwen.com.cash_books.Base.BaseActivity;
 import star.liuwen.com.cash_books.Base.Config;
 import star.liuwen.com.cash_books.Enage.DataEnige;
 import star.liuwen.com.cash_books.R;
+import star.liuwen.com.cash_books.RxBus.RxBus;
+import star.liuwen.com.cash_books.Utils.CashBookUtils;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
+import star.liuwen.com.cash_books.bean.SaveMoneyPlanModel;
 
 /**
  * Created by liuwen on 2017/2/15.
@@ -40,6 +46,7 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
     private TimePickerView pvTime;
     private int position;
     private Date startDate, endDate;
+    private List<SaveMoneyPlanModel> mList;
 
     @Override
 
@@ -84,13 +91,13 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         reEndTime.setOnClickListener(this);
         reRemark.setOnClickListener(this);
 
-        txtSavePlatform.setText(SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "'"));
-        txtMoney.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "'"));
-        txtYield.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "").isEmpty() ? getString(R.string.ling) + "%" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "'") + "%");
-        txtRemark.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
-        txtAccount.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
-        txtStartTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, ""));
-        txtEndTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, ""));
+//        txtSavePlatform.setText(SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "'"));
+//        txtMoney.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "'"));
+//        txtYield.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "").isEmpty() ? getString(R.string.ling) + "%" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "'") + "%");
+//        txtRemark.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
+//        txtAccount.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
+//        txtStartTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, ""));
+//        txtEndTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, ""));
 
         initDate();
     }
@@ -151,10 +158,18 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         SharedPreferencesUtil.setStringPreferences(this, Config.TxtMoney, moneys != null ? moneys : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, ""));
         SharedPreferencesUtil.setStringPreferences(this, Config.TxtPercent, percent != null ? percent : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, ""));
         SharedPreferencesUtil.setStringPreferences(this, Config.TxtRemark, remarks != null ? remark : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
+        SaveMoneyPlanModel model = new SaveMoneyPlanModel(accounts, Double.parseDouble(moneys), Double.parseDouble(percent), DateTimeUtil.getYearMonthDay_(startDate), DateTimeUtil.getYearMonthDay_(endDate), remarks);
+        mList.add(model);
+        CashBookUtils.saveMoneyPlan(this, model);
+        App.saveMoneyLists = mList;
+        RxBus.getInstance().post(Config.ModelSaveAPen, mList);
         this.finish();
     }
 
     private void initDate() {
+        mList = new ArrayList<>();
+
+
     }
 
 

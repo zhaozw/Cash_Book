@@ -2,7 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 背景图 -->
     <item android:id="@android:id/background">
-
         <shape android:shape="line">
             <stroke
                 android:width="6dp"
@@ -15,7 +14,7 @@
             <shape android:shape="line">
                 <stroke
                     android:width="6dp"
-                    android:color="#36c1f5"/>
+                    android:color="#E0E0E0"/>
             </shape>
         </clip>
     </item>
@@ -25,7 +24,7 @@
             <shape android:shape="line">
                 <stroke
                     android:width="6dp"
-                    android:color="#36f559"/>
+                    android:color="#E0E0E0"/>
             </shape>
         </clip>
     </item>

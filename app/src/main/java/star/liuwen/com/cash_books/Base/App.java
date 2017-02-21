@@ -12,6 +12,7 @@ import java.util.Map;
 
 import star.liuwen.com.cash_books.bean.AccountModel;
 import star.liuwen.com.cash_books.bean.CreditCardModel;
+import star.liuwen.com.cash_books.bean.SaveMoneyPlanModel;
 
 /**
  * Created by liuwen on 2017/1/6.
@@ -20,6 +21,7 @@ public class App extends Application {
 
     public static int position;//账户position;
     public static List<AccountModel> accountMaps;
+    public static List<SaveMoneyPlanModel> saveMoneyLists;
     public static boolean isBgCash = true;
     public static boolean isBgCXK = true;
     public static boolean isBgXYK = true;
