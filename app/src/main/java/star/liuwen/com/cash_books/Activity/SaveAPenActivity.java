@@ -91,13 +91,13 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         reEndTime.setOnClickListener(this);
         reRemark.setOnClickListener(this);
 
-//        txtSavePlatform.setText(SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "'"));
-//        txtMoney.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "'"));
-//        txtYield.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "").isEmpty() ? getString(R.string.ling) + "%" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "'") + "%");
-//        txtRemark.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
-//        txtAccount.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
-//        txtStartTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, ""));
-//        txtEndTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, ""));
+        txtSavePlatform.setText(SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "'"));
+        txtMoney.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "'"));
+        txtYield.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "").isEmpty() ? getString(R.string.ling) + "%" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "'") + "%");
+        txtRemark.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
+        txtAccount.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
+        txtStartTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, ""));
+        txtEndTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, ""));
 
         initDate();
     }

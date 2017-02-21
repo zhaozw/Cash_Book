@@ -94,7 +94,6 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity implements BGAOnRVIt
             mRecyclerView.setAdapter(mAdapter);
         }
 
-
         Bitmap bt = BitmapFactory.decodeFile(Config.RootPath + "TargetBg.jpg");
         if (bt != null) {
             url.setImageBitmap(bt);
