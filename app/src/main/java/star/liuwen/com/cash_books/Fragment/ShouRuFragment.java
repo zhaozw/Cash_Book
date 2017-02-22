@@ -171,7 +171,7 @@ public class ShouRuFragment extends BaseFragment implements View.OnClickListener
             ToastUtils.showToast(getActivity(), "请选择日期");
         }
 
-        homListData.add(new AccountModel(AccountType, AccountData, mEdName, AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.shouRu));
+        homListData.add(new AccountModel(AccountType, AccountData, Double.parseDouble(mEdName), AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.shouRu));
         App.accountMaps = homListData;
         RxBus.getInstance().post("AccountModel", homListData);
         getActivity().finish();

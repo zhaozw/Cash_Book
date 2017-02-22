@@ -66,7 +66,7 @@ public class ReportsFragment extends Fragment implements OnDateChangedLinstener,
         moneys = new float[DataEnige.getReportsData().size()];
         for (int i = 0; i < DataEnige.getReportsData().size(); i++) {
             types[i] = DataEnige.getReportsData().get(i).getConsumeType();
-            moneys[i] = Float.parseFloat(DataEnige.getReportsData().get(i).getMoney());
+            moneys[i] = Float.parseFloat(String.valueOf(DataEnige.getReportsData().get(i).getMoney()));
         }
         mView = new StatisticsView(getActivity(), moneys, total, types);
         mView.setCurrDate(year, month);

@@ -34,6 +34,11 @@ public class DateTimeUtil {
         return format.format(date);
     }
 
+    public static String getCurrentMonth() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM月");
+        return sdf.format(new Date());
+    }
+
     /**
      * 获取当前时间
      *

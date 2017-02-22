@@ -187,7 +187,7 @@ public class ZhiChuFragment extends BaseFragment implements View.OnClickListener
         if (tvData.getText().toString().equals("日期")) {
             ToastUtils.showToast(getActivity(), "请选择日期");
         }
-        homListData.add(new AccountModel(AccountType, AccountData, mEdName, AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.zhiChu));
+        homListData.add(new AccountModel(AccountType, AccountData, Double.parseDouble(mEdName), AccountConsumeType, AccountUrl, DateTimeUtil.getCurrentTimeMinSec(), AccountModel.AccountType.zhiChu));
         App.accountMaps = homListData;
         RxBus.getInstance().post("AccountModel", homListData);
         getActivity().finish();

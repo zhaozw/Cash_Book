@@ -85,7 +85,6 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity {
         mSeekBar.setEnabled(false);
         mSeekBar.setClickable(false);
 
-
         mAdapter = new SaveMoneyPlanAdapter(mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -131,7 +130,6 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity {
             }
         });
     }
-
 
     @Override
     protected void onDestroy() {

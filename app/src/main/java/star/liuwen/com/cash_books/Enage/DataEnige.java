@@ -190,11 +190,11 @@ public class DataEnige {
 
     public static List<AccountModel> getReportsData() {
         List<AccountModel> list = new ArrayList<>();
-        list.add(new AccountModel("淘宝", R.mipmap.icon_zhichu_type_taobao, "1200", (float) ((1200 / 3870.3) * 100), "2017-2-14"));
-        list.add(new AccountModel("医药教育", R.mipmap.icon_zhichu_type_yiliaojiaoyu, "220", (float) ((220 / 3870.3) * 100), "2017-2-13"));
-        list.add(new AccountModel("餐饮", R.mipmap.xiaochi, "57", (float) ((57 / 3870.3) * 100), "2017-2-13"));
-        list.add(new AccountModel("酒水", R.mipmap.jiushui, "101", (float) ((101 / 3870.3) * 100), "2017-2-13"));
-        list.add(new AccountModel("衣服", R.mipmap.yifu, "210", (float) ((210 / 3870.3) * 100), "2017-2-12"));
+        list.add(new AccountModel("淘宝", R.mipmap.icon_zhichu_type_taobao, 1200.00, (float) ((1200 / 3870.3) * 100), "2017-2-14"));
+        list.add(new AccountModel("医药教育", R.mipmap.icon_zhichu_type_yiliaojiaoyu, 220.00, (float) ((220 / 3870.3) * 100), "2017-2-13"));
+        list.add(new AccountModel("餐饮", R.mipmap.xiaochi, 57.00, (float) ((57 / 3870.3) * 100), "2017-2-13"));
+        list.add(new AccountModel("酒水", R.mipmap.jiushui, 101.00, (float) ((101 / 3870.3) * 100), "2017 - 2 - 13"));
+        list.add(new AccountModel("衣服", R.mipmap.yifu, 210.00, (float) ((210 / 3870.3) * 100), "2017-2-12"));
         return list;
     }
 

@@ -26,7 +26,7 @@ public class HomeAdapter extends BGARecyclerViewAdapter<AccountModel> {
             helper.setVisibility(R.id.re_shouru, View.GONE);
             helper.setText(R.id.item_h_txt_xiaofei_type, "消费类型：" + model.getAccountType());
             helper.setText(R.id.item_h_txt_zhichu_type, model.getConsumeType() + ":");
-            helper.setText(R.id.item_h_txt_zhichu, model.getMoney() + "元");
+            helper.setText(R.id.item_h_txt_zhichu, String.format("%.2f", model.getMoney()));
             helper.setText(R.id.item_h_txt_zhichu_time, model.getTimeMinSec());
             helper.setImageResource(R.id.item_h_image_zhichu, model.getUrl());
             if (needTitle(position)) {
@@ -41,7 +41,7 @@ public class HomeAdapter extends BGARecyclerViewAdapter<AccountModel> {
             helper.setVisibility(R.id.re_zhichu, View.GONE);
             helper.setText(R.id.item_h_txt_chucun_type, "存款类型：" + model.getAccountType());
             helper.setText(R.id.item_h_txt_shouru_type, model.getConsumeType() + ":");
-            helper.setText(R.id.item_h_txt_shouru, model.getMoney() + "元");
+            helper.setText(R.id.item_h_txt_shouru, String.format("%.2f", model.getMoney()));
             helper.setText(R.id.item_h_txt_shouru_time, model.getTimeMinSec());
             helper.setImageResource(R.id.item_h_image_shouru, model.getUrl());
             if (needTitle(position)) {

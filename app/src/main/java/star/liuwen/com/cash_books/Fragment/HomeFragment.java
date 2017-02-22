@@ -35,6 +35,7 @@ import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.RxBus.RxBusResult;
 import star.liuwen.com.cash_books.Utils.DateTimeUtil;
 import star.liuwen.com.cash_books.View.DefineBAGRefreshWithLoadView;
+import star.liuwen.com.cash_books.View.NumberAnimTextView;
 import star.liuwen.com.cash_books.bean.AccountModel;
 
 /**
@@ -45,13 +46,15 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     private HomeAdapter mAdapter;
 
     private List<AccountModel> mList;
-    private TextView tvShouRu, tvZhiChu;
+    private TextView tvShouRuMonth, tvZhiChuMonth;
+    private NumberAnimTextView tvShouRuData, tvZhiChuData;
 
     private DefineBAGRefreshWithLoadView mDefineBAGRefreshWithLoadView = null;
     private BGARefreshLayout mBGARefreshLayout;
 
     private ViewStub mViewStub;
     private View headView;
+    private double zhiChuAdd = 0, shouRuAdd = 0;
 
     @Nullable
     @Override
@@ -102,9 +105,12 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
         mBGARefreshLayout.setDelegate(this);
 
         headView = View.inflate(getActivity(), R.layout.layout_head_home, null);
-        tvShouRu = (TextView) headView.findViewById(R.id.home_shouru);
-        tvZhiChu = (TextView) headView.findViewById(R.id.zhichu_name);
-
+        tvShouRuMonth = (TextView) headView.findViewById(R.id.home_shouru_month);
+        tvZhiChuMonth = (TextView) headView.findViewById(R.id.home_zhichu_month);
+        tvShouRuData = (NumberAnimTextView) headView.findViewById(R.id.home_shouru_data);
+        tvZhiChuData = (NumberAnimTextView) headView.findViewById(R.id.home_zhichu_data);
+        tvShouRuMonth.setText(String.format("%s收入", DateTimeUtil.getCurrentMonth()));
+        tvZhiChuMonth.setText(String.format("%s支出", DateTimeUtil.getCurrentMonth()));
         mList = new ArrayList<>();
         mAdapter = new HomeAdapter(mRecyclerView);
         mAdapter.addHeaderView(headView);
@@ -132,11 +138,19 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
             public void onRxBusResult(Object o) {
                 mList = (List<AccountModel>) o;
                 mAdapter.addNewData(mList);
+                for (int i = 0; i < mList.size(); i++) {
+                    if (mList.get(i).mAccountType.equals(AccountModel.AccountType.zhiChu)) {
+                        zhiChuAdd = zhiChuAdd + mList.get(i).getMoney();
+                    } else {
+                        shouRuAdd = shouRuAdd + mList.get(i).getMoney();
+                    }
+                }
+                tvShouRuData.setNumberString(String.format("%.2f", shouRuAdd));
+                tvZhiChuData.setNumberString(String.format("%.2f", zhiChuAdd));
                 mRecyclerView.setAdapter(mAdapter.getHeaderAndFooterAdapter());
                 mViewStub.setVisibility(View.GONE);
                 headView.setVisibility(View.VISIBLE);
                 mBGARefreshLayout.setVisibility(View.VISIBLE);
-
             }
         });
 

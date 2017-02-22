@@ -25,15 +25,17 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/home_shouru"
+                android:id="@+id/home_shouru_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12月收入"/>
 
-            <TextView
+            <star.liuwen.com.cash_books.View.NumberAnimTextView
+                android:id="@+id/home_shouru_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.00"/>
+                android:text="0.00"
+                android:textSize="@dimen/textSize_18"/>
         </LinearLayout>
 
         <ImageView
@@ -51,14 +53,17 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/home_zhichu_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12月支出"/>
 
-            <TextView
+            <star.liuwen.com.cash_books.View.NumberAnimTextView
+                android:id="@+id/home_zhichu_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.00"/>
+                android:text="0.00"
+                android:textSize="@dimen/textSize_18"/>
         </LinearLayout>
     </RelativeLayout>
 

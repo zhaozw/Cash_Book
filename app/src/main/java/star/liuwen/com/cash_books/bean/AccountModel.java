@@ -8,7 +8,7 @@ public class AccountModel {
     private Long id;
     private String AccountType;
     private String Data;
-    private String Money;
+    private Double Money;
     private String ConsumeType;
     private int url;
     private String timeMinSec;
@@ -20,7 +20,7 @@ public class AccountModel {
     }
 
 
-    public AccountModel(String consumeType, int url, String money, float consumePercent, String data) {
+    public AccountModel(String consumeType, int url, Double money, float consumePercent, String data) {
         ConsumeType = consumeType;
         this.url = url;
         Money = money;
@@ -32,13 +32,13 @@ public class AccountModel {
         zhiChu, shouRu;
     }
 
-    public AccountModel(String money, String consumeType, int url) {
+    public AccountModel(Double money, String consumeType, int url) {
         Money = money;
         ConsumeType = consumeType;
         this.url = url;
     }
 
-    public AccountModel(String accountType, String data, String money, String consumeType, int url, String timeMinSec, AccountModel.AccountType accountType1) {
+    public AccountModel(String accountType, String data, Double money, String consumeType, int url, String timeMinSec, AccountModel.AccountType accountType1) {
         AccountType = accountType;
         Data = data;
         Money = money;
@@ -72,11 +72,11 @@ public class AccountModel {
         Data = data;
     }
 
-    public String getMoney() {
+    public Double getMoney() {
         return Money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(Double money) {
         Money = money;
     }
 
