@@ -135,7 +135,7 @@
                         android:progressDrawable="@drawable/seek_bar_progress_bg"
                         android:thumb="@color/blue"/>
 
-                    <TextView
+                    <star.liuwen.com.cash_books.View.NumberAnimTextView
                         android:id="@+id/show_money_finish_percent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

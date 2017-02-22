@@ -140,15 +140,15 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(newSaveMoneyPlanActivity.this, UpDateSaveMoneyCommonActivity.class);
+        Intent intent = new Intent(newSaveMoneyPlanActivity.this, UpdateCommonKeyBoardActivity.class);
         if (v == reMoney) {
-            intent.putExtra("UpdateSaveMoney", "ReMoney");
+            intent.putExtra(Config.SaveAPenPlatform, "PlanMoney");
             startActivityForResult(intent, ReMoney);
 
         } else if (v == reTime) {
             pvTime.show();
         } else if (v == reMark) {
-            intent.putExtra("UpdateSaveMoney", "ReMark");
+            intent.putExtra(Config.SaveAPenPlatform, "PlanReMark");
             startActivityForResult(intent, ReMark);
         } else if (v == imagePhoto) {
             showPopWindowPhoto();
@@ -244,12 +244,12 @@ public class newSaveMoneyPlanActivity extends BaseActivity implements View.OnCli
             switch (requestCode) {
                 case ReMoney:
                     if (data != null) {
-                        txtMoney.setText(data.getExtras().getString("textInput"));
+                        txtMoney.setText(data.getExtras().getString(Config.TextInPut));
                     }
                     break;
                 case ReMark:
                     if (data != null) {
-                        txtReMark.setText(data.getExtras().getString("textInput"));
+                        txtReMark.setText(data.getExtras().getString(Config.TextInPut));
                     }
                     break;
             }

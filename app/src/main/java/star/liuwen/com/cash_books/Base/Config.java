@@ -74,13 +74,6 @@ public class Config {
     public static final String Travel = "Travel";
     public static final String Concert = "Concert";
     public static final String Game = "Game";
-    public static final String HouseDecoration = "HouseDecoration";
-    public static final String BuyCar = "BuyCar";
-    public static final String SaveTenMoney = "SaveTenMoney";
-
-    public static final String TargetAmount = "TargetAmount";
-    public static final String ReMark = "ReMark";
-
 
     public static final String FistStar = "FirstStar";
     public static final String UserName = "UserName";
@@ -109,6 +102,11 @@ public class Config {
     public static final String TxtEndTime = "TxtEndTime";
     public static final String TxtAdd = "TxtAdd";
     public static final String TxtFinishPercent = "TxtFinishPercent";
+    public static final String TxtPlanMoney = "TxtPlanMoney";
+    public static final String TxtPlanRemark = "TxtPlanRemark";
+    public static final String TxtNickName = "TxtNickName";
+    public static final String TxtSigNature = "TxtSigNature";
+    public static final String TxtSeekBar = "TxtSeekBar";
 
     public static final String ModelWallet = "ModelWallet";
     public static final String ModelSaveAPen = "ModeSaveAPen";

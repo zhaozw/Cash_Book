@@ -90,12 +90,12 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, UpDateSaveMoneyCommonActivity.class);
+        Intent intent = new Intent(this, UpdateCommonKeyBoardActivity.class);
         if (v == reNickName) {
-            intent.putExtra("UpdateSaveMoney", "reNickName");
+            intent.putExtra(Config.SaveAPenPlatform, "reNickName");
             startActivityForResult(intent, ReNickName);
         } else if (v == reSignature) {
-            intent.putExtra("UpdateSaveMoney", "reSignature");
+            intent.putExtra(Config.SaveAPenPlatform, "reSignature");
             startActivityForResult(intent, ReSignature);
         } else if (v == reSex) {
             showPopWindowSex();
@@ -130,15 +130,15 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
         } else if (v == reMan) {
             txtSex.setText("男");
-            SharedPreferencesUtil.setStringPreferences(this,Config.userSex,"男");
+            SharedPreferencesUtil.setStringPreferences(this, Config.userSex, "男");
             window.dismiss();
         } else if (v == reWoman) {
             txtSex.setText("女");
-            SharedPreferencesUtil.setStringPreferences(this,Config.userSex,"女");
+            SharedPreferencesUtil.setStringPreferences(this, Config.userSex, "女");
             window.dismiss();
         } else if (v == reBaomi) {
             txtSex.setText("保密");
-            SharedPreferencesUtil.setStringPreferences(this,Config.userSex,"保密");
+            SharedPreferencesUtil.setStringPreferences(this, Config.userSex, "保密");
             window.dismiss();
         } else if (v == url) {
             showPopWindowPhoto();
@@ -189,16 +189,16 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             switch (requestCode) {
                 case ReNickName:
                     if (data != null) {
-                        txtNickName.setText(data.getExtras().getString("textInput"));
-                        SharedPreferencesUtil.setStringPreferences(UserInfoActivity.this, Config.userNickName, data.getExtras().getString("textInput"));
-                        RxBus.getInstance().post(Config.userNickName, data.getExtras().getString("textInput"));
+                        txtNickName.setText(data.getExtras().getString(Config.TextInPut));
+                        SharedPreferencesUtil.setStringPreferences(UserInfoActivity.this, Config.userNickName, data.getExtras().getString(Config.TextInPut));
+                        RxBus.getInstance().post(Config.userNickName, data.getExtras().getString(Config.TextInPut));
                     }
                     break;
                 case ReSignature:
                     if (data != null) {
-                        txtSignature.setText(data.getExtras().getString("textInput"));
-                        SharedPreferencesUtil.setStringPreferences(UserInfoActivity.this, Config.userSignature, data.getExtras().getString("textInput"));
-                        RxBus.getInstance().post(Config.userSignature, data.getExtras().getString("textInput"));
+                        txtSignature.setText(data.getExtras().getString(Config.TextInPut));
+                        SharedPreferencesUtil.setStringPreferences(UserInfoActivity.this, Config.userSignature, data.getExtras().getString(Config.TextInPut));
+                        RxBus.getInstance().post(Config.userSignature, data.getExtras().getString(Config.TextInPut));
                     }
             }
         }
@@ -256,7 +256,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         });
 
     }
-
 
 
     /**

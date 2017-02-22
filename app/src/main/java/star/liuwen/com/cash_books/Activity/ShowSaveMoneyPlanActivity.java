@@ -33,6 +33,7 @@ import star.liuwen.com.cash_books.Utils.DateTimeUtil;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.View.NumberAnimTextView;
+import star.liuwen.com.cash_books.bean.AccountModel;
 import star.liuwen.com.cash_books.bean.PlanSaveMoneyModel;
 import star.liuwen.com.cash_books.bean.SaveMoneyPlanModel;
 
@@ -40,13 +41,13 @@ import star.liuwen.com.cash_books.bean.SaveMoneyPlanModel;
  * Created by liuwen on 2017/2/15.
  */
 public class ShowSaveMoneyPlanActivity extends BaseActivity {
-    private TextView txtName, txtTime, txtFinishPercent;
+    private TextView txtName, txtTime;
     private ImageView url;
     private RecyclerView mRecyclerView;
     private SeekBar mSeekBar;
     private SaveMoneyPlanAdapter mAdapter;
     private List<SaveMoneyPlanModel> mList;
-    private NumberAnimTextView txtPercent, txtMoney;
+    private NumberAnimTextView txtPercent, txtMoney, txtFinishPercent;
     private double add = 0;
 
     @Override
@@ -65,7 +66,7 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity {
         txtTime = (TextView) findViewById(R.id.show_money_txt_time);
         txtMoney = (NumberAnimTextView) findViewById(R.id.show_money_plan);
         txtPercent = (NumberAnimTextView) findViewById(R.id.show_money_precent);
-        txtFinishPercent = (TextView) findViewById(R.id.show_money_finish_percent);
+        txtFinishPercent = (NumberAnimTextView) findViewById(R.id.show_money_finish_percent);
 
         url = (ImageView) findViewById(R.id.show_money_image_url);
         mSeekBar = (SeekBar) findViewById(R.id.id_seekbar);
@@ -83,8 +84,7 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity {
         mSeekBar.setProgressDrawable(ContextCompat.getDrawable(this, R.drawable.seek_bar_progress_bg));
         mSeekBar.setEnabled(false);
         mSeekBar.setClickable(false);
-        mSeekBar.setProgress(30);
-        txtPercent.setNumberString(String.format("%.2f", add));
+
 
         mAdapter = new SaveMoneyPlanAdapter(mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -103,10 +103,12 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity {
         if (bt != null) {
             url.setImageBitmap(bt);
         }
+        mSeekBar.setProgress(30);
         txtTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.PlanFinishTime, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(this, Config.PlanFinishTime, ""));
         txtMoney.setNumberString(SharedPreferencesUtil.getStringPreferences(this, Config.PlanMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.PlanMoney, ""));
         txtPercent.setNumberString(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAdd, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAdd, ""));
-        txtFinishPercent.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtFinishPercent, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtFinishPercent, ""));
+        txtFinishPercent.setNumberString(SharedPreferencesUtil.getStringPreferences(this, Config.TxtFinishPercent, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtFinishPercent, ""));
+        mSeekBar.setProgress(SharedPreferencesUtil.getIntPreferences(this, Config.TxtSeekBar, 0));
     }
 
     private void initData() {
@@ -122,7 +124,8 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity {
                 String money = SharedPreferencesUtil.getStringPreferences(ShowSaveMoneyPlanActivity.this, Config.PlanMoney, "");
                 mSeekBar.setProgress(new Double((add / Double.parseDouble(money)) * 100).intValue());
                 txtPercent.setNumberString(String.format("%.2f", add));
-                txtFinishPercent.setText(String.format("%.2f", (add / Double.parseDouble(money)) * 100) + "%");
+                txtFinishPercent.setNumberString(String.format("%.2f", (add / Double.parseDouble(money)) * 100) + "%");
+                SharedPreferencesUtil.setIntPreferences(ShowSaveMoneyPlanActivity.this, Config.TxtSeekBar, new Double((add / Double.parseDouble(money)) * 100).intValue());
                 SharedPreferencesUtil.setStringPreferences(ShowSaveMoneyPlanActivity.this, Config.TxtFinishPercent, String.format("%.2f", (add / Double.parseDouble(money)) * 100) + "%");
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -149,18 +152,49 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity {
         @Override
         protected void fillData(BGAViewHolderHelper helper, int position, SaveMoneyPlanModel model) {
             try {
-                helper.setText(R.id.item_plan_platform, model.getPlatForm()).setText(R.id.item_plan_money, "本金：" + String.format("%.2f", model.getSaveMoney()));
-                helper.setText(R.id.item_plan_starttime, model.getStartTime());
-                helper.setText(R.id.item_plan_benjin, String.format("%.2f", model.getSaveMoney())).setText(R.id.item_plan_endtime, model.getEndTime());
                 String startTime = model.getStartTime();
                 String endTime = model.getEndTime();
                 Double lixi = ((model.getSaveMoney() * model.getYield()) / 100 * DateTimeUtil.LoadDay(startTime, endTime)) / 365;
-                helper.setText(R.id.item_plan_lixi, "预计利息：" + String.format("%.2f", lixi)).setText(R.id.item_plan_daishoulixi, String.format("%.2f", lixi));
+                if (needTitle(position)) {
+                    helper.setVisibility(R.id.re_head_show, View.VISIBLE);
+                    helper.setText(R.id.item_plan_platform, model.getPlatForm()).setText(R.id.item_plan_money, "本金：" + String.format("%.2f", model.getSaveMoney()));
+                    helper.setText(R.id.item_plan_lixi, "预计利息：" + String.format("%.2f", lixi));
+                } else {
+                    helper.setVisibility(R.id.re_head_show, View.GONE);
+                }
+                helper.setText(R.id.item_plan_starttime, model.getStartTime());
+                helper.setText(R.id.item_plan_benjin, String.format("%.2f", model.getSaveMoney())).setText(R.id.item_plan_endtime, model.getEndTime());
+                helper.setText(R.id.item_plan_daishoulixi, String.format("%.2f", lixi));
                 helper.setVisibility(R.id.item_re_show, View.VISIBLE);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
         }
+
+
+        private boolean needTitle(int position) {
+            //第一个是分类
+            if (position == 0) {
+                return true;
+            }
+            if (position < 0) {
+                return false;
+            }
+            SaveMoneyPlanModel currentModel = (SaveMoneyPlanModel) getItem(position);
+            SaveMoneyPlanModel previousModel = (SaveMoneyPlanModel) getItem(position - 1);
+            if (currentModel == null || previousModel == null) {
+                return false;
+            }
+            String currentData = currentModel.getPlatForm();
+            String previousData = previousModel.getPlatForm();
+
+            // 当前item分类名和上一个item分类名不同，则表示两item属于不同分类
+            if (currentData.equals(previousData)) {
+                return false;
+            }
+            return true;
+        }
     }
+
 }

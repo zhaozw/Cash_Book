@@ -44,16 +44,8 @@
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
         <!--显示money页面-->
-        <activity
-            android:name=".Activity.PaymentActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"/>
         <!--钱的设置页面-->
         <!--修改的通用界面-->
-        <activity
-            android:name=".Activity.UpDateAccountCommonActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"/>
         <!--存钱和账单总结的通用页面-->
         <activity
             android:name=".Activity.SaveMoneyActivity"
@@ -90,10 +82,6 @@
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
         <!--通用修改存钱计划页面-->
-        <activity
-            android:name=".Activity.UpDateSaveMoneyCommonActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"/>
         <!--用户界面-->
         <activity
             android:name=".Activity.UserInfoActivity"

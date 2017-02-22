@@ -170,8 +170,6 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
 
     private void initDate() {
         mList = new ArrayList<>();
-
-
     }
 
 
@@ -274,7 +272,6 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
                 txtAccount.setText(AccountType);
             }
         });
-
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setOutsideTouchable(true);
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {

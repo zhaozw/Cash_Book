@@ -88,6 +88,26 @@ public class UpdateCommonKeyBoardActivity extends BaseActivity {
             edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtDebt, "").isEmpty() ? getString(R.string.edit_debt) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtDebt, ""));
             position = 8;
             isShowInput = true;
+        } else if (values.equals("PlanMoney")) {
+            setTitle(getString(R.string.edit_Money));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPlanMoney, "").isEmpty() ? getString(R.string.edit_money) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPlanMoney, ""));
+            position = 9;
+            isShowInput = true;
+        } else if (values.equals("PlanReMark")) {
+            setTitle(getString(R.string.edit_remark));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPlanRemark, "").isEmpty() ? getString(R.string.edit_remark) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPlanRemark, ""));
+            position = 10;
+            isShowInput = false;
+        } else if (values.equals("reNickName")) {
+            setTitle(getString(R.string.edit_renickName));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtNickName, "").isEmpty() ? getString(R.string.edit_renickName) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtNickName, ""));
+            position = 11;
+            isShowInput = false;
+        } else if (values.equals("reSignature")) {
+            setTitle(getString(R.string.edit_reSignature));
+            edMoney.setHint(SharedPreferencesUtil.getStringPreferences(this, Config.TxtSigNature, "").isEmpty() ? getString(R.string.edit_reSignature) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtSigNature, ""));
+            position = 12;
+            isShowInput = false;
         }
 
         setListener(isShowInput);
@@ -228,6 +248,31 @@ public class UpdateCommonKeyBoardActivity extends BaseActivity {
                 SharedPreferencesUtil.setStringPreferences(this, Config.TxtDebt, textInput);
                 finish();
                 break;
+            case 9:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtPlanMoney, textInput);
+                finish();
+                break;
+            case 10:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtPlanRemark, textInput);
+                finish();
+                break;
+            case 11:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtNickName, textInput);
+                finish();
+                break;
+            case 12:
+                intent.putExtra(Config.TextInPut, textInput);
+                setResult(0, intent);
+                SharedPreferencesUtil.setStringPreferences(this, Config.TxtSigNature, textInput);
+                finish();
+                break;
+
         }
 
     }

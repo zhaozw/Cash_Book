@@ -151,6 +151,7 @@ public class SharedPreferencesUtil {
         return preferences.getLong(key, defaultLong);
     }
 
+
     public static void cleanSharePreferences(Context context, String key) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
