@@ -42,7 +42,7 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
     private ListView mListView;
     private PopupWindow window;
     private PopWindowAdapter mPopWindowAdapter;
-    private String AccountType, accounts, moneys, percent, remarks;
+    private String AccountType, savePlatForm, moneys, percent, remarks;
     private TimePickerView pvTime;
     private int position;
     private Date startDate, endDate;
@@ -92,13 +92,8 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         reRemark.setOnClickListener(this);
 
         txtSavePlatform.setText(SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, "'"));
-        txtMoney.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, "'"));
-        txtYield.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "").isEmpty() ? getString(R.string.ling) + "%" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, "'") + "%");
         txtRemark.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
         txtAccount.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
-        txtStartTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, ""));
-        txtEndTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, "").isEmpty() ? "" : SharedPreferencesUtil.getStringPreferences(this, Config.TxtEndTime, ""));
-
         initDate();
     }
 
@@ -143,7 +138,6 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
             return;
         }
 
-
         if (startDate == null) {
             SharedPreferencesUtil.setStringPreferences(this, Config.TxtStartTime, SharedPreferencesUtil.getStringPreferences(this, Config.TxtStartTime, ""));
         } else {
@@ -154,11 +148,19 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         } else {
             SharedPreferencesUtil.setStringPreferences(this, Config.TxtEndTime, DateTimeUtil.getYearMonthDay_(endDate));
         }
-        SharedPreferencesUtil.setStringPreferences(SaveAPenActivity.this, Config.SaveAPenPlatform, accounts != null ? accounts : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
+        SharedPreferencesUtil.setStringPreferences(SaveAPenActivity.this, Config.SaveAPenPlatform, savePlatForm != null ? savePlatForm : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, ""));
+        SharedPreferencesUtil.setStringPreferences(SaveAPenActivity.this, Config.TxtAccount, AccountType != null ? AccountType : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
         SharedPreferencesUtil.setStringPreferences(this, Config.TxtMoney, moneys != null ? moneys : SharedPreferencesUtil.getStringPreferences(this, Config.TxtMoney, ""));
         SharedPreferencesUtil.setStringPreferences(this, Config.TxtPercent, percent != null ? percent : SharedPreferencesUtil.getStringPreferences(this, Config.TxtPercent, ""));
         SharedPreferencesUtil.setStringPreferences(this, Config.TxtRemark, remarks != null ? remark : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""));
-        SaveMoneyPlanModel model = new SaveMoneyPlanModel(accounts, Double.parseDouble(moneys), Double.parseDouble(percent), DateTimeUtil.getYearMonthDay_(startDate), DateTimeUtil.getYearMonthDay_(endDate), remarks);
+        SaveMoneyPlanModel model = new SaveMoneyPlanModel(
+                savePlatForm != null ? savePlatform : SharedPreferencesUtil.getStringPreferences(this, Config.SaveAPenPlatform, ""),
+                Double.parseDouble(moneys),
+                Double.parseDouble(percent),
+                DateTimeUtil.getYearMonthDay_(startDate),
+                DateTimeUtil.getYearMonthDay_(endDate),
+                remarks != null ? remarks : SharedPreferencesUtil.getStringPreferences(this, Config.TxtRemark, ""),
+                AccountType != null ? AccountType : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAccount, ""));
         mList.add(model);
         CashBookUtils.saveMoneyPlan(this, model);
         App.saveMoneyLists = mList;
@@ -270,7 +272,6 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
                 window.dismiss();
                 AccountType = mPopWindowAdapter.getItem(position).getAccountName();
                 txtAccount.setText(AccountType);
-                SharedPreferencesUtil.setStringPreferences(SaveAPenActivity.this, Config.TxtAccount, AccountType);
             }
         });
 
@@ -304,7 +305,7 @@ public class SaveAPenActivity extends BaseActivity implements View.OnClickListen
         }
         switch (requestCode) {
             case ReSavePlatForm:
-                accounts = data.getExtras().getString("bank");
+                savePlatForm = data.getExtras().getString("bank");
                 txtSavePlatform.setText(data.getExtras().getString("bank"));
                 break;
             case ReMoney:

@@ -107,6 +107,8 @@ public class Config {
     public static final String TxtAccount = "TxtAccount";
     public static final String TxtStartTime = "TxtStartTime";
     public static final String TxtEndTime = "TxtEndTime";
+    public static final String TxtAdd = "TxtAdd";
+    public static final String TxtFinishPercent = "TxtFinishPercent";
 
     public static final String ModelWallet = "ModelWallet";
     public static final String ModelSaveAPen = "ModeSaveAPen";

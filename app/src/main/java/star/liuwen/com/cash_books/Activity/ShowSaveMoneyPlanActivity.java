@@ -12,10 +12,14 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemLongClickListener;
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 import star.liuwen.com.cash_books.Base.App;
@@ -25,6 +29,7 @@ import star.liuwen.com.cash_books.MainActivity;
 import star.liuwen.com.cash_books.R;
 import star.liuwen.com.cash_books.RxBus.RxBus;
 import star.liuwen.com.cash_books.RxBus.RxBusResult;
+import star.liuwen.com.cash_books.Utils.DateTimeUtil;
 import star.liuwen.com.cash_books.Utils.SharedPreferencesUtil;
 import star.liuwen.com.cash_books.Utils.ToastUtils;
 import star.liuwen.com.cash_books.View.NumberAnimTextView;
@@ -34,14 +39,15 @@ import star.liuwen.com.cash_books.bean.SaveMoneyPlanModel;
 /**
  * Created by liuwen on 2017/2/15.
  */
-public class ShowSaveMoneyPlanActivity extends BaseActivity implements BGAOnRVItemClickListener {
-    private TextView txtName, txtTime, txtMoney, txtFinishPercent;
+public class ShowSaveMoneyPlanActivity extends BaseActivity {
+    private TextView txtName, txtTime, txtFinishPercent;
     private ImageView url;
     private RecyclerView mRecyclerView;
     private SeekBar mSeekBar;
     private SaveMoneyPlanAdapter mAdapter;
     private List<SaveMoneyPlanModel> mList;
-    private NumberAnimTextView txtPercent;
+    private NumberAnimTextView txtPercent, txtMoney;
+    private double add = 0;
 
     @Override
     public int activityLayoutRes() {
@@ -57,7 +63,7 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity implements BGAOnRVIt
 
         txtName = (TextView) findViewById(R.id.show_money_txt_name);
         txtTime = (TextView) findViewById(R.id.show_money_txt_time);
-        txtMoney = (TextView) findViewById(R.id.show_money_plan);
+        txtMoney = (NumberAnimTextView) findViewById(R.id.show_money_plan);
         txtPercent = (NumberAnimTextView) findViewById(R.id.show_money_precent);
         txtFinishPercent = (TextView) findViewById(R.id.show_money_finish_percent);
 
@@ -78,11 +84,10 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity implements BGAOnRVIt
         mSeekBar.setEnabled(false);
         mSeekBar.setClickable(false);
         mSeekBar.setProgress(30);
-
+        txtPercent.setNumberString(String.format("%.2f", add));
 
         mAdapter = new SaveMoneyPlanAdapter(mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter.setOnRVItemClickListener(this);
 
 
         if (App.saveMoneyLists != null) {
@@ -99,8 +104,9 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity implements BGAOnRVIt
             url.setImageBitmap(bt);
         }
         txtTime.setText(SharedPreferencesUtil.getStringPreferences(this, Config.PlanFinishTime, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(this, Config.PlanFinishTime, ""));
-        txtMoney.setText(SharedPreferencesUtil.getStringPreferences(this, Config.PlanMoney, "").isEmpty() ? getString(R.string.no_setting) : SharedPreferencesUtil.getStringPreferences(this, Config.PlanMoney, ""));
-
+        txtMoney.setNumberString(SharedPreferencesUtil.getStringPreferences(this, Config.PlanMoney, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.PlanMoney, ""));
+        txtPercent.setNumberString(SharedPreferencesUtil.getStringPreferences(this, Config.TxtAdd, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtAdd, ""));
+        txtFinishPercent.setText(SharedPreferencesUtil.getStringPreferences(this, Config.TxtFinishPercent, "").isEmpty() ? getString(R.string.ling) : SharedPreferencesUtil.getStringPreferences(this, Config.TxtFinishPercent, ""));
     }
 
     private void initData() {
@@ -109,6 +115,15 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity implements BGAOnRVIt
             public void onRxBusResult(Object o) {
                 mList = (List<SaveMoneyPlanModel>) o;
                 mAdapter.addMoreData(mList);
+                for (int i = 0; i < mList.size(); i++) {
+                    add = add + mList.get(i).getSaveMoney();
+                }
+                SharedPreferencesUtil.setStringPreferences(ShowSaveMoneyPlanActivity.this, Config.TxtAdd, String.format("%.2f", add));
+                String money = SharedPreferencesUtil.getStringPreferences(ShowSaveMoneyPlanActivity.this, Config.PlanMoney, "");
+                mSeekBar.setProgress(new Double((add / Double.parseDouble(money)) * 100).intValue());
+                txtPercent.setNumberString(String.format("%.2f", add));
+                txtFinishPercent.setText(String.format("%.2f", (add / Double.parseDouble(money)) * 100) + "%");
+                SharedPreferencesUtil.setStringPreferences(ShowSaveMoneyPlanActivity.this, Config.TxtFinishPercent, String.format("%.2f", (add / Double.parseDouble(money)) * 100) + "%");
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
@@ -125,32 +140,27 @@ public class ShowSaveMoneyPlanActivity extends BaseActivity implements BGAOnRVIt
         startActivity(new Intent(this, SaveAPenActivity.class));
     }
 
-    @Override
-    public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-
-    }
-
 
     public class SaveMoneyPlanAdapter extends BGARecyclerViewAdapter<SaveMoneyPlanModel> {
-
         public SaveMoneyPlanAdapter(RecyclerView recyclerView) {
             super(recyclerView, R.layout.item_show_save_money_plan);
         }
 
         @Override
         protected void fillData(BGAViewHolderHelper helper, int position, SaveMoneyPlanModel model) {
-            helper.setText(R.id.item_plan_platform, model.getPlatForm()).setText(R.id.item_plan_money, model.getSaveMoney() + "");
-            helper.setText(R.id.item_plan_starttime, model.getStartTime());
-            helper.setText(R.id.item_plan_benjin, model.getSaveMoney() + "").setText(R.id.item_plan_endtime, model.getEndTime());
-            String startTime = model.getStartTime();
-            String endTime = model.getEndTime();
-            String[] str = startTime.split("-");
-            String startTimes = str[0] + str[1] + str[2];
-            String[] strs = endTime.split("-");
-            String endTimes = strs[0] + strs[1] + strs[2];
-            double lixi = (model.getSaveMoney() * model.getYield() * (Integer.parseInt(endTimes) - Integer.parseInt(startTimes))) / 365;
-            helper.setText(R.id.item_plan_lixi, lixi + "").setText(R.id.item_plan_daishoulixi, lixi + "");
-            // helper.setVisibility(R.id.item_re_show, View.GONE);
+            try {
+                helper.setText(R.id.item_plan_platform, model.getPlatForm()).setText(R.id.item_plan_money, "本金：" + String.format("%.2f", model.getSaveMoney()));
+                helper.setText(R.id.item_plan_starttime, model.getStartTime());
+                helper.setText(R.id.item_plan_benjin, String.format("%.2f", model.getSaveMoney())).setText(R.id.item_plan_endtime, model.getEndTime());
+                String startTime = model.getStartTime();
+                String endTime = model.getEndTime();
+                Double lixi = ((model.getSaveMoney() * model.getYield()) / 100 * DateTimeUtil.LoadDay(startTime, endTime)) / 365;
+                helper.setText(R.id.item_plan_lixi, "预计利息：" + String.format("%.2f", lixi)).setText(R.id.item_plan_daishoulixi, String.format("%.2f", lixi));
+                helper.setVisibility(R.id.item_re_show, View.VISIBLE);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

@@ -13,17 +13,27 @@ public class SaveMoneyPlanModel implements Serializable {
     private String startTime;//起息时间
     private String endTime;//结束时间
     private String remark;//备注
+    private String accountType;//账户类型
 
     public SaveMoneyPlanModel() {
     }
 
-    public SaveMoneyPlanModel(String platForm, double saveMoney, double yield, String startTime, String endTime, String remark) {
+    public SaveMoneyPlanModel(String platForm, double saveMoney, double yield, String startTime, String endTime, String remark, String accountType) {
         this.platForm = platForm;
         this.saveMoney = saveMoney;
         this.yield = yield;
         this.startTime = startTime;
         this.endTime = endTime;
         this.remark = remark;
+        this.accountType = accountType;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public long getId() {

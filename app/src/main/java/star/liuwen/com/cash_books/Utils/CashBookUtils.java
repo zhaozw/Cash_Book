@@ -18,7 +18,7 @@ public class CashBookUtils {
      * 在首选项中保存用户信息
      *
      * @param context
-     * @param user
+     * @param model
      */
     public static void saveMoneyPlan(Context context, SaveMoneyPlanModel model) {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, PREFS_MODE);

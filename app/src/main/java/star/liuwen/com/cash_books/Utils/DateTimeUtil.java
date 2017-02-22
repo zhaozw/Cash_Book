@@ -1,6 +1,7 @@
 package star.liuwen.com.cash_books.Utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -91,18 +92,14 @@ public class DateTimeUtil {
         return format.format(date);
     }
 
-    public static Calendar CALENDAR = Calendar.getInstance();
 
-    /**
-     * 格式化时间
-     *
-     * @param timeMillis
-     * @return yyyy-MM-dd
-     */
-    public static String formatDataToYMD(long timeMillis) {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        CALENDAR.setTimeInMillis(timeMillis);
-        return formatter.format(CALENDAR.getTime());
+    public static long LoadDay(String a1, String b1) throws ParseException {
+
+        Date A1 = new SimpleDateFormat("yyyy-MM-dd").parse(a1);
+        Date B1 = new SimpleDateFormat("yyyy-MM-dd").parse(b1);
+        return (B1.getTime() - A1.getTime()) / (24 * 60 * 60 * 1000);
     }
+
+
 }
 
